@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const kBackgroundColor = Color(0xFFE5E5E5);
+const kBackgroundColor = Color(0xFFF0F0F0);
 const kPrimaryColor = Color(0xFFFF6E4E);
 const kSuccessColor = Color(0xFF5EA732);
 const kErrorColor = Color(0xFFDB3022);
-const kLightGreyColor = Color(0xFFF0F0F0);
 const kHintTextColor = Color(0xFF989898);
 const kDefaultPadding = 20.00;
 
@@ -12,6 +11,7 @@ ThemeData themeData = ThemeData(
   scaffoldBackgroundColor: kBackgroundColor,
   appBarTheme: AppBarTheme(
     elevation: 0,
+    backgroundColor: Colors.transparent,
     actionsIconTheme: IconThemeData(color: Colors.black),
     iconTheme: IconThemeData(color: Colors.black),
   ),
@@ -20,7 +20,7 @@ ThemeData themeData = ThemeData(
 // Form field
 InputDecoration inputDecoration = InputDecoration(
   isDense: true,
-  fillColor: kLightGreyColor,
+  fillColor: kBackgroundColor,
   filled: true,
   hintStyle: TextStyle(
     color: kHintTextColor,
@@ -33,6 +33,16 @@ InputDecoration inputDecoration = InputDecoration(
     fontSize: 12,
   ),
   contentPadding: EdgeInsets.all(10),
+);
+
+InputDecoration cardInputDecoration = InputDecoration(
+  enabledBorder: InputBorder.none,
+  isDense: true,
+  focusedBorder:
+      UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+  labelStyle: TextStyle(color: Colors.grey),
+  filled: true,
+  fillColor: Colors.white,
 );
 
 OutlineInputBorder outlineInputBorder = OutlineInputBorder(

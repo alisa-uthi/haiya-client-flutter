@@ -28,8 +28,7 @@ class CustomBtn extends StatelessWidget {
         decoration: BoxDecoration(
             color: boxColor,
             borderRadius: BorderRadius.circular(kDefaultPadding),
-            border:
-                isBorder! ? Border.all(color: Colors.black, width: 2) : null),
+            border: isBorder! ? Border.all(color: Colors.black87) : null),
         child: Center(
           child: Text(
             text,
