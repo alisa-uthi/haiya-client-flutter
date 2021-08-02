@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:haiya_client/shared/services/auth_service.dart';
+import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
+import 'package:haiya_client/shared/widgets/custom_card.dart';
+import 'package:haiya_client/shared/widgets/form_fields.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../../../constants.dart';
 import 'gender_radio.dart';
@@ -20,8 +24,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String? _email,
       _password,
       _confirmPass,
-      _ctzNum,
-      _title,
+      _title = 'Mr.',
       _firstName,
       _lastName,
       _gender,
@@ -38,9 +41,25 @@ class _SignUpFormState extends State<SignUpForm> {
       _addrDistrict,
       _addrProvince,
       _addrPostalCode;
+  List<String> _selectedCongential = [];
+  List<String> _selectedDrugAllergy = [];
   final ValueNotifier<String> _dob = ValueNotifier('');
-  AuthService _authService = new AuthService();
+
+  static AuthService _authService = new AuthService();
+  static ConstantService _constantService = new ConstantService();
+  static FormFields _formFields = new FormFields();
+
   final _formKey = GlobalKey<FormState>();
+
+  List<MultiSelectItem<String>> _congentialDiseaseItems = _constantService
+      .congentialDiseaseOptions()
+      .map((disease) => MultiSelectItem<String>(disease, disease))
+      .toList();
+
+  List<MultiSelectItem<String>> _drugAllergyItems = _constantService
+      .drugAllergyOptions()
+      .map((drugAllergy) => MultiSelectItem<String>(drugAllergy, drugAllergy))
+      .toList();
 
   void _handleDatePicker() {
     DatePicker.showDatePicker(context,
@@ -56,20 +75,124 @@ class _SignUpFormState extends State<SignUpForm> {
     }, currentTime: DateTime.now(), locale: LocaleType.en);
   }
 
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPassHidden = !_isPassHidden;
+    });
+  }
+
+  void _toggleConfirmPasswordVisibility() {
+    setState(() {
+      _isConfirmPassHidden = !_isConfirmPassHidden;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          _buildTextField("Title", _title),
+          // Title
+          _formFields.buildTitleField(
+            "Title",
+            _title,
+            (value) => setState(() => _title = value),
+          ),
           SizedBox(height: kDefaultPadding / 1.5),
-          _buildTextField("First Name", _firstName),
+
+          // First Name
+          _formFields.buildTextRequiredField(
+            "First Name",
+            _firstName,
+            (value) => setState(() => _firstName = value),
+          ),
           SizedBox(height: kDefaultPadding / 1.5),
-          _buildTextField("Last Name", _lastName),
+
+          // Last Name
+          _formFields.buildTextRequiredField(
+            "Last Name",
+            _lastName,
+            (value) => setState(() => _lastName = value),
+          ),
           SizedBox(height: kDefaultPadding / 1.5),
-          _buildPhoneField("Phone Number", _phone),
+
+          // Address
+          CustomCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(kDefaultPadding / 2),
+                  child: Text(
+                    "Address",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                _formFields.buildTextField(
+                  "Room",
+                  _addrRoom,
+                  (value) => setState(() => _addrRoom = value),
+                ),
+                _formFields.buildTextField(
+                  "Floor",
+                  _addrFloor,
+                  (value) => setState(() => _addrFloor = value),
+                ),
+                _formFields.buildTextRequiredField(
+                  "Address Number",
+                  _addrNo,
+                  (value) => setState(() => _addrNo = value),
+                ),
+                _formFields.buildTextField(
+                  "Moo",
+                  _addrMoo,
+                  (value) => setState(() => _addrMoo = value),
+                ),
+                _formFields.buildTextField(
+                  "Soi",
+                  _addrSoi,
+                  (value) => setState(() => _addrSoi = value),
+                ),
+                _formFields.buildTextRequiredField(
+                  "Road",
+                  _addrRoad,
+                  (value) => setState(() => _addrRoad = value),
+                ),
+                _formFields.buildTextRequiredField(
+                  "Subdistrict",
+                  _addrSubDistrict,
+                  (value) => setState(() => _addrSubDistrict = value),
+                ),
+                _formFields.buildTextRequiredField(
+                  "District",
+                  _addrDistrict,
+                  (value) => setState(() => _addrDistrict = value),
+                ),
+                _formFields.buildTextRequiredField(
+                  "Province",
+                  _addrProvince,
+                  (value) => setState(() => _addrProvince = value),
+                ),
+                _formFields.buildTextRequiredField(
+                  "Postal Code",
+                  _addrPostalCode,
+                  (value) => setState(() => _addrPostalCode = value),
+                ),
+              ],
+            ),
+          ),
           SizedBox(height: kDefaultPadding / 1.5),
+
+          // Phone Number
+          _formFields.buildPhoneField(
+            "Phone Number",
+            _phone,
+            (value) => setState(() => _phone = value.toString()),
+          ),
+          SizedBox(height: kDefaultPadding / 1.5),
+
+          // Gender and Date of birth
           Row(
             children: [
               Expanded(
@@ -78,24 +201,85 @@ class _SignUpFormState extends State<SignUpForm> {
                 ),
               ),
               SizedBox(width: kDefaultPadding / 1.5),
-              Expanded(child: _buildDobField(_dob, () => _handleDatePicker())),
+              Expanded(
+                  child: _formFields.buildDobField(
+                      _dob, () => _handleDatePicker())),
             ],
           ),
           SizedBox(height: kDefaultPadding / 1.5),
+
+          // Weight and Height
           Row(
             children: [
-              Expanded(child: _buildWeightHeightField("Weight", _weight)),
+              Expanded(
+                child: _formFields.buildWeightHeightField("Weight", _weight,
+                    (value) => setState(() => _weight = value.toString())),
+              ),
               SizedBox(width: kDefaultPadding / 1.5),
-              Expanded(child: _buildWeightHeightField("Height", _weight)),
+              Expanded(
+                child: _formFields.buildWeightHeightField("Height", _height,
+                    (value) => setState(() => _height = value.toString())),
+              ),
             ],
           ),
           SizedBox(height: kDefaultPadding / 1.5),
-          _buildEmailField("Email", _email),
+
+          // Email
+          _formFields.buildEmailField(
+            "Email",
+            _email,
+            (value) => setState(() => _email = value),
+          ),
           SizedBox(height: kDefaultPadding / 1.5),
-          _buildPasswordField("Password", _password),
+
+          // Password
+          _formFields.buildPasswordField(
+              "Password",
+              _password,
+              (value) => setState(() => _password = value),
+              _isPassHidden,
+              _togglePasswordVisibility),
           SizedBox(height: kDefaultPadding / 1.5),
-          _buildConfirmPasswordField("Confirm", _confirmPass),
+
+          // Confirm Password
+          _formFields.buildConfirmPasswordField(
+              "Confirm",
+              _confirmPass,
+              (value) => setState(() => _confirmPass = value),
+              _password,
+              _isConfirmPassHidden,
+              _toggleConfirmPasswordVisibility),
           SizedBox(height: kDefaultPadding),
+
+          // Congential Disease
+          _formFields.buildMultiSelectField(
+            "Congential Disease",
+            _selectedCongential,
+            _congentialDiseaseItems,
+            (values) {
+              setState(() => _selectedCongential = values);
+            },
+            (item) {
+              setState(() => _selectedCongential.remove(item));
+            },
+          ),
+          SizedBox(height: kDefaultPadding / 1.5),
+
+          // Drug Allergy
+          _formFields.buildMultiSelectField(
+            "Drug Allergy",
+            _selectedDrugAllergy,
+            _drugAllergyItems,
+            (values) {
+              setState(() => _selectedDrugAllergy = values);
+            },
+            (item) {
+              setState(() => _selectedDrugAllergy.remove(item));
+            },
+          ),
+          SizedBox(height: kDefaultPadding),
+
+          // Term of Services and Agreement
           GestureDetector(
             // TODO: Link to terms conditions
             onTap: () {},
@@ -124,248 +308,51 @@ class _SignUpFormState extends State<SignUpForm> {
             ],
           ),
           SizedBox(height: kDefaultPadding / 1.5),
+
+          // Submit Button
           CustomBtn(
             text: "CONFIRM",
             boxColor: kSuccessColor,
-            onPressed: () {}, // TODO: Add call api and navigator
             textColor: Colors.white,
+            onPressed: () => {
+              WidgetsBinding.instance!.addPostFrameCallback((_) {
+                if (_formKey.currentState!.validate() &&
+                    _dob.value != '' &&
+                    _isAgreeOnTerms) {
+                  // TODO: Add call api and navigator
+                  print("Submmit");
+                  print("""${_email} ,
+      ${_password} ,
+      ${_confirmPass} ,
+      ${_title} ,
+      ${_firstName} ,
+      ${_lastName} ,
+      ${_gender} ,
+      ${_height} ,
+      ${_weight} ,
+      ${_phone} ,
+      ${_addrRoom} ,
+      ${_addrFloor} ,
+      ${_addrNo} ,
+      ${_addrMoo} ,
+      ${_addrSoi} ,
+      ${_addrRoad} ,
+      ${_addrSubDistrict} ,
+      ${_addrDistrict} ,
+      ${_addrProvince} ,
+      ${_addrPostalCode} ,
+      DOB: ${_dob.value} 
+      Congen: ${_selectedCongential} ,
+      Drug Allergy: ${_selectedDrugAllergy}
+      """);
+                  // Navigator.pushNamed(context, SignInScreen.routeName);
+                }
+              })
+            },
           ),
           SizedBox(height: kDefaultPadding / 1.5),
         ],
       ),
     );
-  }
-
-  Widget _buildTextField(String label, String? variable) {
-    return Container(
-      padding: const EdgeInsets.all(kDefaultPadding / 3),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kDefaultPadding / 3),
-        color: Colors.white,
-      ),
-      child: TextFormField(
-        textInputAction: TextInputAction.next,
-        decoration: cardInputDecoration.copyWith(labelText: label),
-        onChanged: (value) => setState(() => variable = value),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return kFieldNullError + label;
-          }
-          return null;
-        },
-      ),
-    );
-  }
-
-  Widget _buildPhoneField(String label, String? variable) {
-    return Container(
-      padding: const EdgeInsets.all(kDefaultPadding / 3),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kDefaultPadding / 3),
-        color: Colors.white,
-      ),
-      child: TextFormField(
-        keyboardType: TextInputType.phone,
-        textInputAction: TextInputAction.next,
-        decoration: cardInputDecoration.copyWith(labelText: label),
-        onChanged: (value) => setState(() => variable = value.toString()),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return kFieldNullError + label;
-          }
-          if (value.length != 10) {
-            return "Please enter valid phone number";
-          }
-          return null;
-        },
-      ),
-    );
-  }
-
-  Widget _buildDobField(ValueNotifier dob, Function onTap) {
-    return ValueListenableBuilder(
-      valueListenable: dob,
-      builder: (context, value, child) {
-        return GestureDetector(
-          onTap: () => onTap(),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kDefaultPadding / 3),
-              color: Colors.white,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: kDefaultPadding,
-                    top: kDefaultPadding / 2,
-                  ),
-                  child: Text(
-                    "Date of Birth",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-                SizedBox(height: kDefaultPadding / 2.5),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: kDefaultPadding / 2,
-                    horizontal: kDefaultPadding,
-                  ),
-                  child: dob.value == ''
-                      ? Text(
-                          "Select Date of Birth",
-                          style: TextStyle(color: kHintTextColor),
-                        )
-                      : Text(dob.value),
-                )
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildWeightHeightField(String label, String? variable) {
-    return Container(
-      padding: const EdgeInsets.all(kDefaultPadding / 3),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kDefaultPadding / 3),
-        color: Colors.white,
-      ),
-      child: TextFormField(
-        keyboardType: TextInputType.number,
-        textInputAction: TextInputAction.next,
-        decoration: cardInputDecoration.copyWith(
-          labelText: label,
-          suffixText: label == 'Weight' ? "kg" : "cm",
-        ),
-        onChanged: (value) => setState(() => variable = value.toString()),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return kFieldNullError + label;
-          }
-          return null;
-        },
-      ),
-    );
-  }
-
-  Widget _buildEmailField(String label, String? variable) {
-    return Container(
-      padding: const EdgeInsets.all(kDefaultPadding / 3),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kDefaultPadding / 3),
-        color: Colors.white,
-      ),
-      child: TextFormField(
-        keyboardType: TextInputType.emailAddress,
-        textInputAction: TextInputAction.next,
-        decoration: cardInputDecoration.copyWith(labelText: label),
-        onChanged: (value) => setState(() => variable = value),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return kFieldNullError + label;
-          }
-          if (!emailPattern.hasMatch(value)) {
-            return kInvalidEmailError;
-          }
-          return null;
-        },
-      ),
-    );
-  }
-
-  Widget _buildPasswordField(String label, String? variable) {
-    return Container(
-      padding: const EdgeInsets.all(kDefaultPadding / 3),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kDefaultPadding / 3),
-        color: Colors.white,
-      ),
-      child: TextFormField(
-        obscureText: _isPassHidden,
-        keyboardType: TextInputType.visiblePassword,
-        textInputAction: TextInputAction.next,
-        decoration: cardInputDecoration.copyWith(
-          labelText: label,
-          suffixIcon: IconButton(
-            onPressed: _togglePasswordVisibility,
-            icon: _isPassHidden
-                ? Icon(
-                    Icons.visibility_off,
-                    color: Colors.grey,
-                  )
-                : Icon(
-                    Icons.visibility,
-                    color: Colors.grey,
-                  ),
-          ),
-        ),
-        onChanged: (value) => setState(() => variable = value),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return kFieldNullError + label;
-          }
-          if (value.length < 8) {
-            return kShortPassError;
-          }
-          return null;
-        },
-      ),
-    );
-  }
-
-  Widget _buildConfirmPasswordField(String label, String? variable) {
-    return Container(
-      padding: const EdgeInsets.all(kDefaultPadding / 3),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kDefaultPadding / 3),
-        color: Colors.white,
-      ),
-      child: TextFormField(
-        obscureText: _isConfirmPassHidden,
-        keyboardType: TextInputType.visiblePassword,
-        textInputAction: TextInputAction.next,
-        decoration: cardInputDecoration.copyWith(
-          labelText: label,
-          suffixIcon: IconButton(
-            onPressed: _toggleConfirmPasswordVisibility,
-            icon: _isConfirmPassHidden
-                ? Icon(
-                    Icons.visibility_off,
-                    color: Colors.grey,
-                  )
-                : Icon(
-                    Icons.visibility,
-                    color: Colors.grey,
-                  ),
-          ),
-        ),
-        onChanged: (value) => setState(() => variable = value),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return kFieldNullError + label;
-          }
-          if (_password != value) {
-            return kMatchPassError;
-          }
-          return null;
-        },
-      ),
-    );
-  }
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      _isPassHidden = !_isPassHidden;
-    });
-  }
-
-  void _toggleConfirmPasswordVisibility() {
-    setState(() {
-      _isConfirmPassHidden = !_isConfirmPassHidden;
-    });
   }
 }

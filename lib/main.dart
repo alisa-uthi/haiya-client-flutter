@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'constants.dart';
@@ -7,7 +8,12 @@ import 'routes.dart';
 import 'screens/splash/splash_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      // Provider<UserDetail>(create: (_) => UserDetail(),)
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -43,12 +49,6 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 16, color: Colors.black),
         ),
       ),
-      // builder: (context, child) {
-      //   return ScrollConfiguration(
-      //     behavior: ScrollBehaviorConfiguration(),
-      //     child: child,
-      //   );
-      // },
       home: SplashScreen(),
     );
   }

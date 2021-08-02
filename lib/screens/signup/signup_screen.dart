@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/signup/widgets/signup_form.dart';
+import 'package:haiya_client/shared/widgets/avartar_image.dart';
 
 class SignUpScreen extends StatelessWidget {
   static final routeName = '/signup';
@@ -15,12 +16,6 @@ class SignUpScreen extends StatelessWidget {
           "Sign up",
           style: TextStyle(color: Colors.black),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: kDefaultPadding),
-            child: Icon(Icons.camera_alt),
-          ),
-        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(kDefaultPadding),
@@ -33,7 +28,10 @@ class SignUpScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(height: kDefaultPadding),
-              SignUpForm()
+              AvartarImage(),
+              SizedBox(height: kDefaultPadding),
+              SignUpForm(),
+              SizedBox(height: kDefaultPadding),
             ],
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/screens/signin/signin_screen.dart';
 import 'package:haiya_client/shared/services/auth_service.dart';
-import 'package:haiya_client/shared/widgets/account_form_field.dart';
+import 'package:haiya_client/shared/widgets/form_fields.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 
 import '../../../constants.dart';
@@ -23,16 +23,16 @@ class _SignInFormState extends State<SignInForm> {
       key: _formKey,
       child: Column(
         children: [
-          AccountFields.buildEmailField(
-            context,
-            (value) => setState(() => _email = value),
-          ),
-          SizedBox(height: kDefaultPadding),
-          AccountFields.buildPasswordField(
-            context,
-            (value) => setState(() => _password = value),
-            false,
-          ),
+          // AccountFields.buildEmailField(
+          //   context,
+          //   (value) => setState(() => _email = value),
+          // ),
+          // SizedBox(height: kDefaultPadding),
+          // AccountFields.buildPasswordField(
+          //   context,
+          //   (value) => setState(() => _password = value),
+          //   false,
+          // ),
           SizedBox(height: kDefaultPadding * 2),
           CustomBtn(
             text: "Sign in",
