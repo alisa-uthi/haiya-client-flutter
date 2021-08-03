@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
@@ -16,7 +15,7 @@ class FormFields {
           isExpanded: true,
           hint: Text(
             label,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: kGreyColor),
           ),
           items: <String>['Mr.', 'Mrs.', 'Ms.', 'Miss.'].map((String value) {
             return DropdownMenuItem<String>(
@@ -100,7 +99,7 @@ class FormFields {
                   ),
                   child: Text(
                     "Date of Birth",
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: kGreyColor),
                   ),
                 ),
                 SizedBox(height: kDefaultPadding / 2.5),
@@ -112,7 +111,7 @@ class FormFields {
                   child: dob.value == ''
                       ? Text(
                           "Select Date of Birth",
-                          style: TextStyle(color: kHintTextColor),
+                          style: TextStyle(color: kGreyColor),
                         )
                       : Text(dob.value),
                 ),
@@ -184,11 +183,11 @@ class FormFields {
             icon: _isHidden
                 ? Icon(
                     Icons.visibility_off,
-                    color: Colors.grey,
+                    color: kGreyColor,
                   )
                 : Icon(
                     Icons.visibility,
-                    color: Colors.grey,
+                    color: kGreyColor,
                   ),
           ),
         ),
@@ -226,11 +225,11 @@ class FormFields {
             icon: _isHidden
                 ? Icon(
                     Icons.visibility_off,
-                    color: Colors.grey,
+                    color: kGreyColor,
                   )
                 : Icon(
                     Icons.visibility,
-                    color: Colors.grey,
+                    color: kGreyColor,
                   ),
           ),
         ),
@@ -259,7 +258,7 @@ class FormFields {
       child: MultiSelectBottomSheetField<String>(
         buttonIcon: Icon(
           Icons.add_rounded,
-          color: Colors.grey,
+          color: kGreyColor,
         ),
         initialChildSize: 0.7,
         maxChildSize: 0.95,
@@ -267,7 +266,7 @@ class FormFields {
           padding: const EdgeInsets.only(left: kDefaultPadding / 2),
           child: Text(label),
         ),
-        buttonText: Text(label, style: TextStyle(color: Colors.grey)),
+        buttonText: Text(label, style: TextStyle(color: kGreyColor)),
         items: items,
         selectedColor: kPrimaryColor,
         searchable: true,

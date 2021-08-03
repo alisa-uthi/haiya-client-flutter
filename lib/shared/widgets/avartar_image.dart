@@ -1,10 +1,7 @@
 import 'dart:io';
 import 'package:haiya_client/constants.dart';
-import 'package:path/path.dart';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 
 class AvartarImage extends StatefulWidget {
   const AvartarImage({

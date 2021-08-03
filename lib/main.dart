@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'constants.dart';
@@ -8,12 +7,7 @@ import 'routes.dart';
 import 'screens/splash/splash_screen.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      // Provider<UserDetail>(create: (_) => UserDetail(),)
-    ],
-    child: MyApp(),
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

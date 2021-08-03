@@ -58,14 +58,14 @@ class SignInScreen extends StatelessWidget {
       Expanded(
         child: Divider(
           thickness: 2,
-          color: Colors.grey[400],
+          color: kGreyColor,
         ),
       ),
       SizedBox(width: 5),
       Text(
         "Or",
         style: TextStyle(
-          color: Colors.grey[400],
+          color: kGreyColor,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -73,7 +73,7 @@ class SignInScreen extends StatelessWidget {
       Expanded(
         child: Divider(
           thickness: 2,
-          color: Colors.grey[400],
+          color: kGreyColor,
         ),
       ),
     ]);

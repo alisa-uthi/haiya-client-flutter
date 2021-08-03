@@ -4,7 +4,7 @@ const kBackgroundColor = Color(0xFFF0F0F0);
 const kPrimaryColor = Color(0xFFFF6E4E);
 const kSuccessColor = Color(0xFF5EA732);
 const kErrorColor = Color(0xFFDB3022);
-const kHintTextColor = Color(0xFF989898);
+const kGreyColor = Color(0xFF989898);
 const kDefaultPadding = 20.00;
 
 ThemeData themeData = ThemeData(
@@ -23,7 +23,7 @@ InputDecoration inputDecoration = InputDecoration(
   fillColor: kBackgroundColor,
   filled: true,
   hintStyle: TextStyle(
-    color: kHintTextColor,
+    color: kGreyColor,
   ),
   focusedBorder: outlineInputBorder,
   enabledBorder: outlineInputBorder,
@@ -39,8 +39,8 @@ InputDecoration cardInputDecoration = InputDecoration(
   enabledBorder: InputBorder.none,
   isDense: true,
   focusedBorder:
-      UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-  labelStyle: TextStyle(color: Colors.grey),
+      UnderlineInputBorder(borderSide: BorderSide(color: kGreyColor)),
+  labelStyle: TextStyle(color: kGreyColor),
   filled: true,
   fillColor: Colors.white,
 );

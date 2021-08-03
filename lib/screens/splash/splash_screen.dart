@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/authOption/auth_option_screen.dart';
-import 'package:haiya_client/screens/signin/signin_screen.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 
 class SplashScreen extends StatefulWidget {

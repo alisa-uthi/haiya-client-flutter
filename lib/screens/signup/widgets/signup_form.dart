@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:haiya_client/screens/term_agreement/term_agreement_screen.dart';
+import 'package:haiya_client/screens/verify_otp/verify_otp_screen.dart';
 import 'package:haiya_client/shared/services/auth_service.dart';
 import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
@@ -126,7 +128,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   padding: const EdgeInsets.all(kDefaultPadding / 2),
                   child: Text(
                     "Address",
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: kGreyColor),
                   ),
                 ),
                 _formFields.buildTextField(
@@ -281,8 +283,9 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // Term of Services and Agreement
           GestureDetector(
-            // TODO: Link to terms conditions
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, TermAgreementScreen.routeName);
+            },
             child: Text(
               "Term of Services and Agreement",
               style: TextStyle(
@@ -315,39 +318,41 @@ class _SignUpFormState extends State<SignUpForm> {
             boxColor: kSuccessColor,
             textColor: Colors.white,
             onPressed: () => {
-              WidgetsBinding.instance!.addPostFrameCallback((_) {
-                if (_formKey.currentState!.validate() &&
-                    _dob.value != '' &&
-                    _isAgreeOnTerms) {
-                  // TODO: Add call api and navigator
-                  print("Submmit");
-                  print("""${_email} ,
-      ${_password} ,
-      ${_confirmPass} ,
-      ${_title} ,
-      ${_firstName} ,
-      ${_lastName} ,
-      ${_gender} ,
-      ${_height} ,
-      ${_weight} ,
-      ${_phone} ,
-      ${_addrRoom} ,
-      ${_addrFloor} ,
-      ${_addrNo} ,
-      ${_addrMoo} ,
-      ${_addrSoi} ,
-      ${_addrRoad} ,
-      ${_addrSubDistrict} ,
-      ${_addrDistrict} ,
-      ${_addrProvince} ,
-      ${_addrPostalCode} ,
-      DOB: ${_dob.value} 
-      Congen: ${_selectedCongential} ,
-      Drug Allergy: ${_selectedDrugAllergy}
-      """);
-                  // Navigator.pushNamed(context, SignInScreen.routeName);
-                }
-              })
+              Navigator.pushNamed(context, VerifyOtpScreen.routeName)
+              //         WidgetsBinding.instance!.addPostFrameCallback((_) {
+              //           if (_formKey.currentState!.validate() &&
+              //               _dob.value != '' &&
+              //               _isAgreeOnTerms) {
+              //             // TODO: Add call api and navigator
+              //             print("Submmit");
+              //             print("""${_email} ,
+              // ${_password} ,
+              // ${_confirmPass} ,
+              // ${_title} ,
+              // ${_firstName} ,
+              // ${_lastName} ,
+              // ${_gender} ,
+              // ${_height} ,
+              // ${_weight} ,
+              // ${_phone} ,
+              // ${_addrRoom} ,
+              // ${_addrFloor} ,
+              // ${_addrNo} ,
+              // ${_addrMoo} ,
+              // ${_addrSoi} ,
+              // ${_addrRoad} ,
+              // ${_addrSubDistrict} ,
+              // ${_addrDistrict} ,
+              // ${_addrProvince} ,
+              // ${_addrPostalCode} ,
+              // DOB: ${_dob.value}
+              // Congen: ${_selectedCongential} ,
+              // Drug Allergy: ${_selectedDrugAllergy}
+              // """);
+              // Navigator.pushNamed(context, SignInScreen.routeName);
+              // }
+              // },
+              // ),
             },
           ),
           SizedBox(height: kDefaultPadding / 1.5),

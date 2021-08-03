@@ -39,7 +39,7 @@ class _GenderRadioState extends State<GenderRadio> {
             ),
             child: Text(
               "Gender",
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: kGreyColor),
             ),
           ),
           Row(
