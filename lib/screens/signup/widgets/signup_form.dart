@@ -106,7 +106,6 @@ class _SignUpFormState extends State<SignUpForm> {
           // First Name
           _formFields.buildTextRequiredField(
             "First Name",
-            _firstName,
             (value) => setState(() => _firstName = value),
           ),
           SizedBox(height: kDefaultPadding / 1.5),
@@ -114,7 +113,6 @@ class _SignUpFormState extends State<SignUpForm> {
           // Last Name
           _formFields.buildTextRequiredField(
             "Last Name",
-            _lastName,
             (value) => setState(() => _lastName = value),
           ),
           SizedBox(height: kDefaultPadding / 1.5),
@@ -133,52 +131,42 @@ class _SignUpFormState extends State<SignUpForm> {
                 ),
                 _formFields.buildTextField(
                   "Room",
-                  _addrRoom,
                   (value) => setState(() => _addrRoom = value),
                 ),
                 _formFields.buildTextField(
                   "Floor",
-                  _addrFloor,
                   (value) => setState(() => _addrFloor = value),
                 ),
                 _formFields.buildTextRequiredField(
                   "Address Number",
-                  _addrNo,
                   (value) => setState(() => _addrNo = value),
                 ),
                 _formFields.buildTextField(
                   "Moo",
-                  _addrMoo,
                   (value) => setState(() => _addrMoo = value),
                 ),
                 _formFields.buildTextField(
                   "Soi",
-                  _addrSoi,
                   (value) => setState(() => _addrSoi = value),
                 ),
                 _formFields.buildTextRequiredField(
                   "Road",
-                  _addrRoad,
                   (value) => setState(() => _addrRoad = value),
                 ),
                 _formFields.buildTextRequiredField(
                   "Subdistrict",
-                  _addrSubDistrict,
                   (value) => setState(() => _addrSubDistrict = value),
                 ),
                 _formFields.buildTextRequiredField(
                   "District",
-                  _addrDistrict,
                   (value) => setState(() => _addrDistrict = value),
                 ),
                 _formFields.buildTextRequiredField(
                   "Province",
-                  _addrProvince,
                   (value) => setState(() => _addrProvince = value),
                 ),
                 _formFields.buildTextRequiredField(
                   "Postal Code",
-                  _addrPostalCode,
                   (value) => setState(() => _addrPostalCode = value),
                 ),
               ],
@@ -189,7 +177,6 @@ class _SignUpFormState extends State<SignUpForm> {
           // Phone Number
           _formFields.buildPhoneField(
             "Phone Number",
-            _phone,
             (value) => setState(() => _phone = value.toString()),
           ),
           SizedBox(height: kDefaultPadding / 1.5),
@@ -214,13 +201,17 @@ class _SignUpFormState extends State<SignUpForm> {
           Row(
             children: [
               Expanded(
-                child: _formFields.buildWeightHeightField("Weight", _weight,
-                    (value) => setState(() => _weight = value.toString())),
+                child: _formFields.buildWeightHeightField(
+                  "Weight",
+                  (value) => setState(() => _weight = value.toString()),
+                ),
               ),
               SizedBox(width: kDefaultPadding / 1.5),
               Expanded(
-                child: _formFields.buildWeightHeightField("Height", _height,
-                    (value) => setState(() => _height = value.toString())),
+                child: _formFields.buildWeightHeightField(
+                  "Height",
+                  (value) => setState(() => _height = value.toString()),
+                ),
               ),
             ],
           ),
@@ -229,7 +220,6 @@ class _SignUpFormState extends State<SignUpForm> {
           // Email
           _formFields.buildEmailField(
             "Email",
-            _email,
             (value) => setState(() => _email = value),
           ),
           SizedBox(height: kDefaultPadding / 1.5),
@@ -237,7 +227,6 @@ class _SignUpFormState extends State<SignUpForm> {
           // Password
           _formFields.buildPasswordField(
               "Password",
-              _password,
               (value) => setState(() => _password = value),
               _isPassHidden,
               _togglePasswordVisibility),
@@ -246,7 +235,6 @@ class _SignUpFormState extends State<SignUpForm> {
           // Confirm Password
           _formFields.buildConfirmPasswordField(
               "Confirm",
-              _confirmPass,
               (value) => setState(() => _confirmPass = value),
               _password,
               _isConfirmPassHidden,
@@ -256,7 +244,6 @@ class _SignUpFormState extends State<SignUpForm> {
           // Congential Disease
           _formFields.buildMultiSelectField(
             "Congential Disease",
-            _selectedCongential,
             _congentialDiseaseItems,
             (values) {
               setState(() => _selectedCongential = values);
@@ -270,7 +257,6 @@ class _SignUpFormState extends State<SignUpForm> {
           // Drug Allergy
           _formFields.buildMultiSelectField(
             "Drug Allergy",
-            _selectedDrugAllergy,
             _drugAllergyItems,
             (values) {
               setState(() => _selectedDrugAllergy = values);
