@@ -11,16 +11,16 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Spacer(),
               HeaderText(text: "Login"),
               SizedBox(height: kDefaultPadding),
               SignInForm(),
-              SizedBox(height: kDefaultPadding),
             ],
           ),
         ),
