@@ -29,8 +29,7 @@ class FormFields {
     );
   }
 
-  Widget buildTextField(
-      String label, String? variable, Function(String?)? onChange) {
+  Widget buildTextField(String label, Function(String?)? onChange) {
     return CustomCard(
       child: TextFormField(
         textInputAction: TextInputAction.next,
@@ -40,8 +39,7 @@ class FormFields {
     );
   }
 
-  Widget buildTextRequiredField(
-      String label, String? variable, Function(String?)? onChange) {
+  Widget buildTextRequiredField(String label, Function(String?)? onChange) {
     return CustomCard(
       child: TextFormField(
         textInputAction: TextInputAction.next,
@@ -57,8 +55,7 @@ class FormFields {
     );
   }
 
-  Widget buildPhoneField(
-      String label, String? variable, Function(String?)? onChange) {
+  Widget buildPhoneField(String label, Function(String?)? onChange) {
     return CustomCard(
       child: TextFormField(
         keyboardType: TextInputType.phone,
@@ -123,8 +120,7 @@ class FormFields {
     );
   }
 
-  Widget buildWeightHeightField(
-      String label, String? variable, Function(String?)? onChange) {
+  Widget buildWeightHeightField(String label, Function(String?)? onChange) {
     return CustomCard(
       child: TextFormField(
         keyboardType: TextInputType.number,
@@ -144,8 +140,7 @@ class FormFields {
     );
   }
 
-  Widget buildEmailField(
-      String label, String? variable, Function(String?)? onChange) {
+  Widget buildEmailField(String label, Function(String?)? onChange) {
     return CustomCard(
       child: TextFormField(
         keyboardType: TextInputType.emailAddress,
@@ -165,12 +160,8 @@ class FormFields {
     );
   }
 
-  Widget buildPasswordField(
-      String label,
-      String? variable,
-      Function(String?)? onChange,
-      bool _isHidden,
-      Function() toggleVisibility) {
+  Widget buildPasswordField(String label, Function(String?)? onChange,
+      bool _isHidden, Function() toggleVisibility) {
     return CustomCard(
       child: TextFormField(
         obscureText: _isHidden,
@@ -207,7 +198,6 @@ class FormFields {
 
   Widget buildConfirmPasswordField(
     String label,
-    String? variable,
     Function(String?)? onChange,
     String? password,
     bool _isHidden,
@@ -249,7 +239,6 @@ class FormFields {
 
   Widget buildMultiSelectField(
     String label,
-    List<String> variable,
     List<MultiSelectItem<String>> items,
     Function(List<String>) onConfirm,
     Function(String) onChipRemove,
