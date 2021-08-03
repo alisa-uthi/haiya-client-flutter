@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/shared/services/auth_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
+import 'package:haiya_client/shared/widgets/form_fields.dart';
 
 import '../../../constants.dart';
 
@@ -13,6 +14,7 @@ class _SignInFormState extends State<SignInForm> {
   String _email = '';
   String _password = '';
   AuthService _authService = new AuthService();
+  FormFields _formFields = new FormFields();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -21,12 +23,12 @@ class _SignInFormState extends State<SignInForm> {
       key: _formKey,
       child: Column(
         children: [
-          // AccountFields.buildEmailField(
+          // _formFields.buildEmailField(
           //   context,
           //   (value) => setState(() => _email = value),
           // ),
           // SizedBox(height: kDefaultPadding),
-          // AccountFields.buildPasswordField(
+          // _formFields.buildPasswordField(
           //   context,
           //   (value) => setState(() => _password = value),
           //   false,
