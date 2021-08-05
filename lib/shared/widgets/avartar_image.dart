@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:haiya_client/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AvartarImage extends StatefulWidget {
@@ -15,6 +16,7 @@ class AvartarImage extends StatefulWidget {
 class _AvartarImageState extends State<AvartarImage> {
   File? _image;
   final picker = ImagePicker();
+  UserService _userService = new UserService();
 
   @override
   void initState() {
@@ -40,7 +42,7 @@ class _AvartarImageState extends State<AvartarImage> {
     // Check for valid file
     if (_image == null) return;
 
-    // TODO: Call Api
+    _userService.updateProfileImage(_image!.path);
   }
 
   Future loadImage() async {

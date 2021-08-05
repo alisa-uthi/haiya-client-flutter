@@ -48,18 +48,17 @@ class _SignUpFormState extends State<SignUpForm> {
   final ValueNotifier<String> _dob = ValueNotifier('');
 
   static AuthService _authService = new AuthService();
-  static ConstantService _constantService = new ConstantService();
   static FormFields _formFields = new FormFields();
 
   final _formKey = GlobalKey<FormState>();
 
-  List<MultiSelectItem<String>> _congentialDiseaseItems = _constantService
-      .congentialDiseaseOptions()
-      .map((disease) => MultiSelectItem<String>(disease, disease))
-      .toList();
+  List<MultiSelectItem<String>> _congentialDiseaseItems =
+      ConstantService.dummyCongentialDiseaseOptions()
+          .map((disease) => MultiSelectItem<String>(disease, disease))
+          .toList();
 
-  List<MultiSelectItem<String>> _drugAllergyItems = _constantService
-      .drugAllergyOptions()
+  List<MultiSelectItem<String>> _drugAllergyItems = ConstantService
+          .dummyDrugAllergyOptions()
       .map((drugAllergy) => MultiSelectItem<String>(drugAllergy, drugAllergy))
       .toList();
 

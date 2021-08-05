@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:haiya_client/shared/models/user_detail.dart';
+import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
@@ -54,7 +55,7 @@ class AuthService {
       ${congentialDisease!.length.toString()},
       ${drugAllergy!.length.toString()},
     """);
-    return currentUser;
+    return ConstantService.dummyCurrentUser();
     // var signupResponse = await http.post(
     //   Uri.parse('$basedUri/auth/signup'),
     //   headers: {
