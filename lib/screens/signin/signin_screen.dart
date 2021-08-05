@@ -1,81 +1,30 @@
 import 'package:flutter/material.dart';
-
-import '../../constants.dart';
-import 'widgets/signin_form.dart';
+import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/signin/widgets/signin_form.dart';
+import 'package:haiya_client/shared/widgets/header_text.dart';
 
 class SignInScreen extends StatelessWidget {
   static final routeName = '/signin';
 
+  const SignInScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: kDefaultPadding,
-          vertical: kDefaultPadding * 1.5,
-        ),
-        width: double.infinity,
-        child: SingleChildScrollView(
+      appBar: AppBar(),
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(kDefaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Image.asset(
-                  'assets/images/haiya_logo.png',
-                  width: 200,
-                  height: 200,
-                ),
-              ),
-              Text(
-                "Sign In",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              HeaderText(text: "Login"),
               SizedBox(height: kDefaultPadding),
               SignInForm(),
-              SizedBox(height: kDefaultPadding),
-              buildDividerWithText(),
-              SizedBox(height: kDefaultPadding),
-              // CustomBtn(
-              //   boxColor: kLightGreyColor,
-              //   text: "Sign up",
-              //   onPressed: () {
-              //     Navigator.pushNamed(context, SignUpScreen.routeName);
-              //   },
-              // ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  Row buildDividerWithText() {
-    return Row(children: <Widget>[
-      Expanded(
-        child: Divider(
-          thickness: 2,
-          color: kGreyColor,
-        ),
-      ),
-      SizedBox(width: 5),
-      Text(
-        "Or",
-        style: TextStyle(
-          color: kGreyColor,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      SizedBox(width: 5),
-      Expanded(
-        child: Divider(
-          thickness: 2,
-          color: kGreyColor,
-        ),
-      ),
-    ]);
   }
 }
