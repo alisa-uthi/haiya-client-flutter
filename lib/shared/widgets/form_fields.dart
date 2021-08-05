@@ -169,6 +169,8 @@ class FormFields {
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(
           labelText: label,
+          hintText: "Password must be at least 8 characters",
+          hintStyle: TextStyle(color: kGreyColor),
           suffixIcon: IconButton(
             onPressed: toggleVisibility,
             icon: _isHidden
