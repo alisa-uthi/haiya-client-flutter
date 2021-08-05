@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp/flutter_otp.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/signup_success/signup_success_screen.dart';
+import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';
@@ -39,7 +40,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
 
   void _sendOtp() {
     _otp.sendOtp(
-      '804488048', //TODO: Change to dynamic phone number
+      currentUser.phone.substring(1),
       null,
       1000,
       9999,
@@ -69,7 +70,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 child: Column(
                   children: [
                     Text("The OTP has been sent to"),
-                    Text("08X-XXX-XXXX"), //TODO: Change to dynamic phone number
+                    Text(currentUser
+                        .phone), //TODO: Change to dynamic phone number
                   ],
                 ),
               ),

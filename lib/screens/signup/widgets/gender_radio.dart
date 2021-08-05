@@ -49,7 +49,7 @@ class _GenderRadioState extends State<GenderRadio> {
                 value: GenderOption.male,
                 groupValue: _genderOption,
                 onChanged: (GenderOption? value) =>
-                    _handleGenderChange(value, "Male"),
+                    _handleGenderChange(value, "M"),
               ),
               Text(
                 "M",
@@ -60,7 +60,7 @@ class _GenderRadioState extends State<GenderRadio> {
                 value: GenderOption.female,
                 groupValue: _genderOption,
                 onChanged: (GenderOption? value) =>
-                    _handleGenderChange(value, "Female"),
+                    _handleGenderChange(value, "F"),
               ),
               Text(
                 "F",
@@ -71,7 +71,7 @@ class _GenderRadioState extends State<GenderRadio> {
                 value: GenderOption.other,
                 groupValue: _genderOption,
                 onChanged: (GenderOption? value) =>
-                    _handleGenderChange(value, "Other"),
+                    _handleGenderChange(value, "O"),
               ),
               Text(
                 "-",

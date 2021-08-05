@@ -29,7 +29,7 @@ class _SignUpFormState extends State<SignUpForm> {
       _title = 'Mr.',
       _firstName,
       _lastName,
-      _gender,
+      _gender = 'M',
       _height,
       _weight,
       _phone,
@@ -234,7 +234,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // Confirm Password
           _formFields.buildConfirmPasswordField(
-              "Confirm",
+              "Confirm Password",
               (value) => setState(() => _confirmPass = value),
               _password,
               _isConfirmPassHidden,
@@ -304,41 +304,37 @@ class _SignUpFormState extends State<SignUpForm> {
             boxColor: kSuccessColor,
             textColor: Colors.white,
             onPressed: () => {
-              Navigator.pushNamed(context, VerifyOtpScreen.routeName)
-              //         WidgetsBinding.instance!.addPostFrameCallback((_) {
-              //           if (_formKey.currentState!.validate() &&
-              //               _dob.value != '' &&
-              //               _isAgreeOnTerms) {
-              //             // TODO: Add call api and navigator
-              //             print("Submmit");
-              //             print("""${_email} ,
-              // ${_password} ,
-              // ${_confirmPass} ,
-              // ${_title} ,
-              // ${_firstName} ,
-              // ${_lastName} ,
-              // ${_gender} ,
-              // ${_height} ,
-              // ${_weight} ,
-              // ${_phone} ,
-              // ${_addrRoom} ,
-              // ${_addrFloor} ,
-              // ${_addrNo} ,
-              // ${_addrMoo} ,
-              // ${_addrSoi} ,
-              // ${_addrRoad} ,
-              // ${_addrSubDistrict} ,
-              // ${_addrDistrict} ,
-              // ${_addrProvince} ,
-              // ${_addrPostalCode} ,
-              // DOB: ${_dob.value}
-              // Congen: ${_selectedCongential} ,
-              // Drug Allergy: ${_selectedDrugAllergy}
-              // """);
-              // Navigator.pushNamed(context, SignInScreen.routeName);
-              // }
-              // },
-              // ),
+              if (_formKey.currentState!.validate() &&
+                  _dob.value != '' &&
+                  _isAgreeOnTerms)
+                {
+                  print("Submmit"),
+                  _authService.signUp(
+                    _email,
+                    _password,
+                    _title,
+                    _firstName,
+                    _lastName,
+                    _gender,
+                    _height,
+                    _weight,
+                    _phone,
+                    _addrRoom,
+                    _addrFloor,
+                    _addrNo,
+                    _addrMoo,
+                    _addrSoi,
+                    _addrRoad,
+                    _addrSubDistrict,
+                    _addrDistrict,
+                    _addrProvince,
+                    _addrPostalCode,
+                    _dob.value,
+                    _selectedCongential,
+                    _selectedDrugAllergy,
+                  ),
+                  Navigator.pushNamed(context, VerifyOtpScreen.routeName)
+                }
             },
           ),
           SizedBox(height: kDefaultPadding / 1.5),
