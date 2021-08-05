@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/home/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
@@ -28,6 +29,24 @@ class _BottomNavBarState extends State<BottomNavBar> {
     setState(() {
       _selectedIndex = index;
     });
+    String gotoScreen = HomeScreen.routeName;
+
+    switch (_selectedIndex) {
+      case 0:
+        gotoScreen = HomeScreen.routeName;
+        break;
+      case 1:
+        gotoScreen = HomeScreen.routeName;
+        break;
+      case 2:
+        gotoScreen = HomeScreen.routeName;
+        break;
+      case 3:
+        gotoScreen = HomeScreen.routeName;
+        break;
+    }
+
+    Navigator.pushNamed(context, gotoScreen);
   }
 
   @override
