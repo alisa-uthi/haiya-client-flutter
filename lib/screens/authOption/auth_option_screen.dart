@@ -21,13 +21,14 @@ class AuthOptionScreen extends StatelessWidget {
               Spacer(),
               Image.asset(
                 'assets/images/haiya_logo.png',
-                width: 270,
-                height: 270,
+                width: 200,
+                height: 200,
               ),
               Text(
                 'HAIYA',
                 style: Theme.of(context).textTheme.headline1,
               ),
+              SizedBox(height: kDefaultPadding / 2),
               Text(
                 "Thailand's First Online Pharmacy",
                 style: Theme.of(context).textTheme.bodyText1,
@@ -37,23 +38,26 @@ class AuthOptionScreen extends StatelessWidget {
                 text: "SIGN IN",
                 boxColor: kSuccessColor,
                 onPressed: () {
-                  Navigator.pushReplacementNamed(
-                      context, SignInScreen.routeName);
+                  Navigator.pushNamed(context, SignInScreen.routeName);
                 },
                 textColor: Colors.white,
               ),
               _buildDividerWithText(),
               CustomBtn(
                 text: "SIGN UP",
-                boxColor: kBackgroundColor,
+                boxColor: Colors.transparent,
                 onPressed: () {
-                  Navigator.pushReplacementNamed(
-                      context, SignUpScreen.routeName);
+                  Navigator.pushNamed(context, SignUpScreen.routeName);
                 },
                 textColor: Colors.black,
                 isBorder: true,
               ),
               Spacer(),
+              Text(
+                "HaiYa Company Limited ®",
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              SizedBox(height: kDefaultPadding / 2),
             ],
           ),
         ),
