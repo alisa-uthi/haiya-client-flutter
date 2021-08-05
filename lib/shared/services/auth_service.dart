@@ -130,4 +130,10 @@ class AuthService {
   ) async {
     print("Submit signin: " + email + " " + password);
   }
+
+  Future<dynamic> forgotPassword(
+    String email,
+  ) async {
+    print("Submit forgot password: " + email);
+  }
 }

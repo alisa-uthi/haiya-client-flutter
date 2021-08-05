@@ -13,7 +13,7 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  String? _email, _password;
+  String _email = '', _password = '';
   bool _isPassHidden = true;
 
   AuthService _authService = new AuthService();
@@ -35,12 +35,12 @@ class _SignInFormState extends State<SignInForm> {
         children: [
           _formFields.buildEmailField(
             "Email",
-            (value) => setState(() => _email = value),
+            (value) => setState(() => _email = value!),
           ),
           SizedBox(height: kDefaultPadding),
           _formFields.buildPasswordField(
               "Password",
-              (value) => setState(() => _password = value),
+              (value) => setState(() => _password = value!),
               _isPassHidden,
               _togglePasswordVisibility),
           SizedBox(height: kDefaultPadding),
@@ -60,12 +60,10 @@ class _SignInFormState extends State<SignInForm> {
             boxColor: kPrimaryColor,
             textColor: Colors.white,
             onPressed: () {
-              // WidgetsBinding.instance!.addPostFrameCallback((_) {
-              //   if (_formKey.currentState!.validate()) {
-              //     _authService.signIn(_email!, _password!);
-              Navigator.pushNamed(context, HomeScreen.routeName);
-              //   }
-              // });
+              if (_formKey.currentState!.validate()) {
+                _authService.signIn(_email, _password);
+                Navigator.pushNamed(context, HomeScreen.routeName);
+              }
             },
           ),
         ],
