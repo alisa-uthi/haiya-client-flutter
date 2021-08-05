@@ -3,6 +3,7 @@ import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/home/widgets/category_section.dart';
 import 'package:haiya_client/screens/home/widgets/nearest_phamacy_list.dart';
 import 'package:haiya_client/screens/home/widgets/recommended_products.dart';
+import 'package:haiya_client/screens/nearest_pharmacy/nearest_phamacy_screen.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
 import 'package:haiya_client/shared/widgets/title_section.dart';
 
@@ -27,7 +28,12 @@ class HomeScreen extends StatelessWidget {
                 TitleSection(
                   title: 'Nearest Pharmacy',
                   moreText: "See more",
-                  onMoreTap: () {},
+                  onMoreTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      NearestPharmacyScreen.routeName,
+                    );
+                  },
                 ),
                 SizedBox(height: kDefaultPadding),
                 NearestPharmacyList(),

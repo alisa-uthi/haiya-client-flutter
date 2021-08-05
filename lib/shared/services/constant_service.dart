@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:haiya_client/shared/models/address.dart';
 import 'package:haiya_client/shared/models/catalog.dart';
+import 'package:haiya_client/shared/models/operation_time.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
 import 'package:haiya_client/shared/models/productCategory.dart';
@@ -333,6 +335,12 @@ class ConstantService {
         addrLongitude: 109.8172248,
       ),
       products: dummyProducts(),
+      distanceFromCurrentLoc: '1.00 km',
+      operationTime: OperationTime(
+        openHr: '09.00 AM',
+        closeHr: '11.00 PM',
+        isOpen: true,
+      ),
     );
   }
 
@@ -358,6 +366,12 @@ class ConstantService {
           addrLongitude: 116.8172248,
         ),
         products: dummyProducts(),
+        distanceFromCurrentLoc: '1.00 km',
+        operationTime: OperationTime(
+          openHr: '08.00 AM',
+          closeHr: '09.00 PM',
+          isOpen: true,
+        ),
       ),
       Pharmacy(
         id: 2,
@@ -379,6 +393,12 @@ class ConstantService {
           addrLongitude: 109.8172248,
         ),
         products: dummyProducts(),
+        distanceFromCurrentLoc: '1.50 km',
+        operationTime: OperationTime(
+          openHr: '08.00 AM',
+          closeHr: '09.00 PM',
+          isOpen: false,
+        ),
       ),
     ];
   }
