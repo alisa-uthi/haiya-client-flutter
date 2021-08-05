@@ -1,3 +1,5 @@
+import 'address.dart';
+
 class UserDetail {
   final int id;
   final String userId;
@@ -11,19 +13,10 @@ class UserDetail {
   final int weight;
   final String phone;
   final String dob;
-  final String? addrRoom;
-  final int? addrFloor;
-  final String? addrNo;
-  final int? addrMoo;
-  final String? addrSoi;
-  final String? addrRoad;
-  final String? addrSubDistrict;
-  final String? addrDistrict;
-  final String? addrProvince;
-  final int? addrPostalCode;
   final String? image;
-  List<String>? congentialDisease;
-  List<String>? drugAllergy;
+  final List<String>? congentialDisease;
+  final List<String>? drugAllergy;
+  final Address? address;
 
   UserDetail({
     required this.id,
@@ -38,19 +31,10 @@ class UserDetail {
     required this.weight,
     required this.phone,
     required this.dob,
-    this.addrRoom,
-    this.addrFloor,
-    this.addrNo,
-    this.addrMoo,
-    this.addrSoi,
-    this.addrRoad,
-    this.addrSubDistrict,
-    this.addrDistrict,
-    this.addrProvince,
-    this.addrPostalCode,
     this.image,
     this.congentialDisease,
     this.drugAllergy,
+    this.address,
   });
 
   factory UserDetail.fromJson(Map<String, dynamic> json) {
@@ -68,37 +52,6 @@ class UserDetail {
       weight: json['Psn_Weight'],
       phone: json['Psn_Phone'],
       image: json['Psn_Image'],
-      addrDistrict: json['Addr_District'],
-      addrNo: json['Addr_AddrNo'],
-      addrPostalCode: json['Addr_Postalcode'],
-      addrProvince: json['Addr_Province'],
-      addrRoad: json['Addr_Road'],
-      addrSubDistrict: json['Addr_Subdistrict'],
-      addrFloor: json['Addr_Floor'],
-      addrMoo: json['Addr_Moo'],
-      addrRoom: json['Addr_Room'],
-      addrSoi: json['Addr_Soi'],
     );
   }
 }
-
-UserDetail currentUser = UserDetail(
-  id: 1,
-  userId: 'PSN00001',
-  firstName: "Benimaru",
-  lastName: "Shinmon",
-  gender: "Male",
-  phone: "0804488048",
-  dob: "1999-02-24",
-  addrDistrict: 'district',
-  addrNo: '123/23',
-  addrPostalCode: 123123,
-  addrProvince: 'bkk',
-  addrRoad: 'road',
-  addrSubDistrict: 'subdistrict',
-  height: 155,
-  email: 'example@example.com',
-  password: '',
-  title: 'Mr.',
-  weight: 155,
-);
