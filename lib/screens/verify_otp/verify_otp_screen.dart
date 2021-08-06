@@ -22,23 +22,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   UserDetail currentUser = ConstantService.dummyCurrentUser();
   int _enteredOtp = 0;
   bool _isCorrectOtp = false;
-  // int _otpDuration = 30;
   FlutterOtp _otp = FlutterOtp();
-
-  // void startTimer() {
-  //   const onSec = Duration(seconds: 1);
-  //   Timer.periodic(onSec, (timer) {
-  //     if (_otpDuration == 0) {
-  //       if (mounted) {
-  //         setState(() => timer.cancel());
-  //       }
-  //     } else {
-  //       if (mounted) {
-  //         setState(() => _otpDuration--);
-  //       }
-  //     }
-  //   });
-  // }
 
   void _sendOtp() {
     _otp.sendOtp(
@@ -53,8 +37,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   @override
   void initState() {
     super.initState();
-    _sendOtp();
-    // startTimer();
+    // _sendOtp();   //TODO: Remove this comment
   }
 
   @override
@@ -72,15 +55,13 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 child: Column(
                   children: [
                     Text("The OTP has been sent to"),
-                    Text(currentUser
-                        .phone), //TODO: Change to dynamic phone number
+                    //TODO: Change to dynamic phone number
+                    Text(currentUser.phone),
                   ],
                 ),
               ),
               SizedBox(height: kDefaultPadding),
               _buildOtpField(),
-              // SizedBox(height: kDefaultPadding),
-              // _buildOtpTimer(),
               Spacer(),
               _buildConfirmButton(context),
               SizedBox(height: kDefaultPadding * 1.5),
@@ -93,27 +74,13 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     );
   }
 
-  // Widget _buildOtpTimer() {
-  //   return Center(
-  //     child: Text(
-  //       "Send OTP again in 00:${_otpDuration < 10 ? '0' : ''}$_otpDuration seconds",
-  //     ),
-  //   );
-  // }
-
   Widget _buildResendOtp() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("Not getting OTP"),
         GestureDetector(
-          onTap: () {
-            _sendOtp();
-            // setState(() {
-            //   _otpDuration = 30;
-            // });
-            // startTimer();
-          },
+          onTap: () => _sendOtp(),
           child: Text(
             "Resend",
             style: TextStyle(decoration: TextDecoration.underline),
@@ -130,12 +97,12 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
       onPressed: () {
         //TODO: Implement
         setState(() => _isCorrectOtp = _otp.resultChecker(_enteredOtp));
-        if (_isCorrectOtp) {
-          Navigator.pushReplacementNamed(
-            context,
-            SignupSuccessScreen.routeName,
-          );
-        } else {}
+        // if (_isCorrectOtp) {
+        Navigator.pushReplacementNamed(
+          context,
+          SignupSuccessScreen.routeName,
+        );
+        // } else {}
       },
       textColor: Colors.white,
     );

@@ -83,21 +83,13 @@ class ConstantService {
             """Take at least 30 min before the 1st food/drink/medication of the day and on the same day each mth. 
                 Take with a full glass (180-240 mL) of plain water while in an upright position. Do not lie down for at least 30 min after taking. Swallow whole, do not chew/crush/suck.""",
         qtyUnit: 10,
-        detail: """ 
-          Osteoporosis
-
-          Osteoporosis due to corticosteroids
-
-          Osteoporosis due to corticosteroids; Prophylaxis
-
+        detail: """ Osteoporosis due to corticosteroids
           Paget's disease
-
           Postmenopausal osteoporosis
-
           Postmenopausal osteoporosis; Prophylaxis
           """,
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "ICT Pharmacy",
           productId: 1,
           lot: 1,
           availQty: 10,
@@ -122,11 +114,10 @@ class ConstantService {
             """Take at least 30 min before the 1st food/drink/medication of the day and on the same day each mth. 
                 Take with a full glass (180-240 mL) of plain water while in an upright position. Do not lie down for at least 30 min after taking. Swallow whole, do not chew/crush/suck.""",
         qtyUnit: 10,
-        detail: """ 
-          It is used as an adjunct therapy to diet and exercise to help improve the glycemic control.
-          """,
+        detail:
+            """ It is used as an adjunct therapy to diet and exercise to help improve the glycemic control.""",
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "Kimmy Pharmacy",
           productId: 2,
           lot: 1,
           availQty: 10,
@@ -150,12 +141,11 @@ class ConstantService {
             """Take at least 30 min before the 1st food/drink/medication of the day and on the same day each mth. 
                 Take with a full glass (180-240 mL) of plain water while in an upright position. Do not lie down for at least 30 min after taking. Swallow whole, do not chew/crush/suck.""",
         qtyUnit: 10,
-        detail: """ 
-          1.Angina and hypertension
+        detail: """ 1.Angina and hypertension
           2.Pulmonary hypertension
         """,
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "ICT Pharmacy",
           productId: 3,
           lot: 1,
           availQty: 10,
@@ -180,11 +170,9 @@ class ConstantService {
             """Take at least 30 min before the 1st food/drink/medication of the day and on the same day each mth. 
                 Take with a full glass (180-240 mL) of plain water while in an upright position. Do not lie down for at least 30 min after taking. Swallow whole, do not chew/crush/suck.""",
         qtyUnit: 10,
-        detail: """ 
-          Treatment of prevention of hypokalemia
-        """,
+        detail: """ Treatment of prevention of hypokalemia""",
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "Kimmy Pharmacy",
           productId: 4,
           lot: 1,
           availQty: 10,
@@ -203,7 +191,7 @@ class ConstantService {
         qtyUnit: 30,
         detail: "Multivitamin-multimineral food supplement for adults under 50",
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "Kimmy Pharmacy",
           productId: 5,
           lot: 1,
           availQty: 10,
@@ -224,7 +212,7 @@ class ConstantService {
         detail:
             "Food Supplement with vitamins and minerals for adults, with sugar & sweeteners",
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "ICT Pharmacy",
           productId: 6,
           lot: 1,
           availQty: 10,
@@ -238,13 +226,13 @@ class ConstantService {
         tradeName: 'DIOR Capture Totale Super Potent Face Serum 50ml',
         companyName: 'LVMH',
         presReq: 'N',
-        category: [ProductCategory(productId: 7, category: 'Cosmetic')],
+        category: [ProductCategory(productId: 7, category: 'Cosmeceutical')],
         image: [ProductImage(productId: 7, image: 'image path')],
         qtyUnit: 180,
         detail:
             "The serum's formula incorporates a next-generation hyaluronic acid",
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "Kimmy Pharmacy",
           productId: 7,
           lot: 1,
           availQty: 10,
@@ -258,13 +246,13 @@ class ConstantService {
         tradeName: 'Farmologie Moisturiser Pink Grapefruit 400ml',
         companyName: 'Farmologie',
         presReq: 'N',
-        category: [ProductCategory(productId: 8, category: 'Cosmetic')],
+        category: [ProductCategory(productId: 8, category: 'Cosmeceutical')],
         image: [ProductImage(productId: 8, image: 'image path')],
         qtyUnit: 180,
         detail:
             "Moisturise with confidence! This deeply hydrating and fast-absorbing moisturiser by Farmologie soothes and nourishes your skin.",
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "ICT Pharmacy",
           productId: 8,
           lot: 1,
           availQty: 10,
@@ -283,7 +271,7 @@ class ConstantService {
         qtyUnit: 180,
         detail: "Paternity DNA Test Kit",
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "Kimmy Pharmacy",
           productId: 9,
           lot: 1,
           availQty: 10,
@@ -303,7 +291,7 @@ class ConstantService {
         qtyUnit: 180,
         detail: "Protective Face Mask",
         catalog: Catalog(
-          pharmacyId: 2,
+          pharmacyName: "ICT Pharmacy",
           productId: 10,
           lot: 1,
           availQty: 10,

@@ -25,6 +25,6 @@ class _RecommendedProductsSectionState
 
   @override
   Widget build(BuildContext context) {
-    return ProductList(products: _products);
+    return ProductList(products: _products, itemCount: 6);
   }
 }

@@ -1,5 +1,5 @@
 class Catalog {
-  final int pharmacyId;
+  final String pharmacyName;
   final int productId;
   final int lot;
   final int availQty;
@@ -7,7 +7,7 @@ class Catalog {
   final String exp;
 
   Catalog({
-    required this.pharmacyId,
+    required this.pharmacyName,
     required this.productId,
     required this.lot,
     required this.availQty,

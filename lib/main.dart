@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:haiya_client/screens/home/home_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'constants.dart';
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 16, color: Colors.black),
         ),
       ),
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }
