@@ -9,15 +9,17 @@ class ProductList extends StatelessWidget {
   const ProductList({
     Key? key,
     required this.products,
+    required this.itemCount,
   }) : super(key: key);
 
   final List<Product> products;
+  final int itemCount;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      itemCount: 6,
+      itemCount: itemCount,
       physics: NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

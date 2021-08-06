@@ -11,7 +11,7 @@ ThemeData themeData = ThemeData(
   scaffoldBackgroundColor: kBackgroundColor,
   appBarTheme: AppBarTheme(
     elevation: 0,
-    backgroundColor: Colors.transparent,
+    backgroundColor: Colors.white,
     actionsIconTheme: IconThemeData(color: Colors.black),
     iconTheme: IconThemeData(color: Colors.black),
   ),

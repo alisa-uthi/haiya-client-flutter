@@ -29,52 +29,83 @@ class _BottomNavBarState extends State<BottomNavBar> {
     setState(() {
       _selectedIndex = index;
     });
-    String gotoScreen = HomeScreen.routeName;
+    Widget gotoScreen = HomeScreen();
 
     switch (_selectedIndex) {
       case 0:
-        gotoScreen = HomeScreen.routeName;
+        gotoScreen = HomeScreen();
         break;
       case 1:
-        gotoScreen = HomeScreen.routeName;
+        gotoScreen = HomeScreen();
         break;
       case 2:
-        gotoScreen = HomeScreen.routeName;
+        gotoScreen = HomeScreen();
         break;
       case 3:
-        gotoScreen = HomeScreen.routeName;
+        gotoScreen = HomeScreen();
         break;
     }
 
-    Navigator.pushNamed(context, gotoScreen);
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => gotoScreen,
+        transitionDuration: Duration(seconds: 0),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(kDefaultPadding * 2),
+          topRight: Radius.circular(kDefaultPadding * 2),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_bag),
-          label: 'Cart',
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: kGreyColor.withOpacity(0.5),
+            blurRadius: 15,
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(kDefaultPadding * 2),
+          topRight: Radius.circular(kDefaultPadding * 2),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: 'Notification',
+        child: BottomNavigationBar(
+          elevation: 10,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.white,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag),
+              label: 'Cart',
+              backgroundColor: Colors.white,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications),
+              label: 'Notification',
+              backgroundColor: Colors.white,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Account',
+              backgroundColor: Colors.white,
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          unselectedItemColor: kGreyColor,
+          showUnselectedLabels: true,
+          selectedItemColor: kPrimaryColor,
+          onTap: _onItemTapped,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Account',
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      unselectedItemColor: kGreyColor,
-      showUnselectedLabels: true,
-      selectedItemColor: kPrimaryColor,
-      onTap: _onItemTapped,
+      ),
     );
   }
 }

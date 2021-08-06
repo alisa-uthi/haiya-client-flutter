@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/product_list/product_list_screen.dart';
 
 class CategorySection extends StatefulWidget {
   CategorySection({Key? key}) : super(key: key);
@@ -48,6 +49,12 @@ class _CategorySectionState extends State<CategorySection> {
     return GestureDetector(
       onTap: () {
         setState(() => _selectedIndex = index);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductListScreen(category: categoryName),
+          ),
+        );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 3),
@@ -58,11 +65,11 @@ class _CategorySectionState extends State<CategorySection> {
               padding: const EdgeInsets.all(kDefaultPadding / 1.5),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: _selectedIndex == index ? kPrimaryColor : Colors.white,
+                color: kPrimaryColor,
               ),
               child: Icon(
                 icon,
-                color: _selectedIndex == index ? Colors.white : Colors.black38,
+                color: Colors.white,
                 size: 30,
               ),
             ),
@@ -70,7 +77,7 @@ class _CategorySectionState extends State<CategorySection> {
             Text(
               categoryName,
               style: TextStyle(
-                color: _selectedIndex == index ? kPrimaryColor : Colors.black,
+                color: kPrimaryColor,
               ),
               overflow: TextOverflow.clip,
             ),
