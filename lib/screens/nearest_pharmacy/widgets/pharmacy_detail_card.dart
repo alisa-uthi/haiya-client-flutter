@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/product_list/product_list_screen.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 
@@ -17,7 +18,16 @@ class PharmacyDetailCard extends StatelessWidget {
     return GestureDetector(
       onTap: pharmacy.operationTime.isOpen
           ? () {
-              // TODO: Navi,gate to product page
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (buider, animation1, animation2) =>
+                      ProductListScreen(
+                    category: 'Drug',
+                    pharmacy: pharmacy.id,
+                  ),
+                ),
+              );
             }
           : () {},
       child: Container(

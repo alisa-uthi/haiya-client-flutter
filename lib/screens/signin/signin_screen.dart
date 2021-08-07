@@ -13,15 +13,17 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(kDefaultPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeaderText(text: "Login"),
-              SizedBox(height: kDefaultPadding),
-              SignInForm(),
-            ],
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                HeaderText(text: "Login"),
+                SizedBox(height: kDefaultPadding),
+                SignInForm(),
+              ],
+            ),
           ),
         ),
       ),
