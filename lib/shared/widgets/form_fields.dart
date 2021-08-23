@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/congenital_form/congenital_form_screen.dart';
+import 'package:haiya_client/screens/drug_allery_form/drug_allergy_form_screen.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
@@ -235,6 +237,80 @@ class FormFields {
           }
           return null;
         },
+      ),
+    );
+  }
+
+  Widget buildDrugAllergyField(BuildContext context) {
+    return CustomCard(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: kDefaultPadding / 2),
+            child: Text(
+              "Drug Allergy",
+              style: TextStyle(
+                fontSize: 14,
+                color: kGreyColor,
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) =>
+                      DrugAllergyFormScreen(),
+                  transitionDuration: Duration(seconds: 0),
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.arrow_forward,
+              size: 20,
+              color: kGreyColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildCongenitalDiseaseField(BuildContext context) {
+    return CustomCard(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: kDefaultPadding / 2),
+            child: Text(
+              "Congenital Disease",
+              style: TextStyle(
+                fontSize: 14,
+                color: kGreyColor,
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) =>
+                      CongenitalFormScreen(),
+                  transitionDuration: Duration(seconds: 0),
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.arrow_forward,
+              size: 20,
+              color: kGreyColor,
+            ),
+          ),
+        ],
       ),
     );
   }

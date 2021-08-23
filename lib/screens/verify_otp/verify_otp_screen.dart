@@ -43,7 +43,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.transparent),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(kDefaultPadding),

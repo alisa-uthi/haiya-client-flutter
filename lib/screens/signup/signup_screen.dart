@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/signup/widgets/signup_form.dart';
-import 'package:haiya_client/shared/widgets/avartar_image.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -12,7 +11,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.transparent),
       body: Container(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: SingleChildScrollView(
@@ -23,10 +22,8 @@ class SignUpScreen extends StatelessWidget {
                 HeaderText(text: "Sign up"),
                 Text(
                   "Please insert patient’s information",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
-                SizedBox(height: kDefaultPadding),
-                AvartarImage(),
                 SizedBox(height: kDefaultPadding),
                 SignUpForm(),
                 SizedBox(height: kDefaultPadding),

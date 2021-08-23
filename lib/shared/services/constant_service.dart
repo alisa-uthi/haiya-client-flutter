@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:haiya_client/shared/models/address.dart';
 import 'package:haiya_client/shared/models/catalog.dart';
 import 'package:haiya_client/shared/models/operation_time.dart';
@@ -13,9 +12,8 @@ class ConstantService {
   static UserDetail dummyCurrentUser() {
     return UserDetail(
       id: 1,
-      userId: 'PSN00001',
-      firstName: "Benimaru",
-      lastName: "Shinmon",
+      firstname: "Benimaru",
+      lastname: "Shinmon",
       gender: "Male",
       phone: "0804488048",
       dob: "1999-02-24",
@@ -24,7 +22,7 @@ class ConstantService {
       password: '',
       title: 'Mr.',
       weight: 155,
-      address: dummyUserAddress(),
+      address: [dummyUserAddress()],
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/signin/signin_screen.dart';
 import 'package:haiya_client/screens/signup/signup_screen.dart';
+import 'package:haiya_client/screens/term_agreement/term_agreement_screen.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 
 class AuthOptionScreen extends StatelessWidget {
@@ -47,7 +48,7 @@ class AuthOptionScreen extends StatelessWidget {
                 text: "SIGN UP",
                 boxColor: Colors.transparent,
                 onPressed: () {
-                  Navigator.pushNamed(context, SignUpScreen.routeName);
+                  Navigator.pushNamed(context, TermAgreementScreen.routeName);
                 },
                 textColor: Colors.black,
                 isBorder: true,
