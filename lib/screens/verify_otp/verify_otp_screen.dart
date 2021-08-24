@@ -19,7 +19,6 @@ class VerifyOtpScreen extends StatefulWidget {
 }
 
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
-  UserDetail currentUser = ConstantService.dummyCurrentUser();
   int _enteredOtp = 0;
   bool _isCorrectOtp = false;
   FlutterOtp _otp = FlutterOtp();
@@ -96,7 +95,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
       boxColor: kSuccessColor,
       onPressed: () {
         //TODO: Implement
-        setState(() => _isCorrectOtp = _otp.resultChecker(_enteredOtp));
+        // setState(() => _isCorrectOtp = _otp.resultChecker(_enteredOtp));
         // if (_isCorrectOtp) {
         Navigator.pushReplacementNamed(
           context,

@@ -5,10 +5,11 @@ import 'package:http/http.dart' as http;
 class AuthService {
   var basedUri = 'http://10.0.2.2:8080/api/user/auth';
 
-  Future<UserDetail?> signUp() async {
+  Future<bool> signUp() async {
     var drugAllergy = [];
     var congenitalDisease = [];
 
+    // Convert List<DrugAllery> to normal array of objects
     if (tempUser.drugAllergy!.length > 0) {
       for (int i = 0; i < tempUser.drugAllergy!.length; i++) {
         var obj = {
@@ -20,6 +21,7 @@ class AuthService {
       }
     }
 
+    // Convert List<DrugAllery> to normal array of objects
     if (tempUser.congenitalDisease!.length > 0) {
       for (int i = 0; i < tempUser.congenitalDisease!.length; i++) {
         var obj = {
@@ -31,6 +33,7 @@ class AuthService {
       }
     }
 
+    // Call Api
     var response = await http.post(
       Uri.parse('$basedUri/signup/'),
       headers: {
@@ -53,36 +56,60 @@ class AuthService {
       }),
     );
 
+    // Handle response
     if (response.statusCode >= 200 && response.statusCode < 205) {
+      // Convert response body to UserDetail object
       Map<String, dynamic> body = jsonDecode(response.body);
       currentUser = UserDetail.fromJson(body['data']);
 
       // Reset user info when sign up
-      // tempUser = new UserDetail(
-      //     id: 0,
-      //     email: '',
-      //     password: '',
-      //     title: 'Mr.',
-      //     firstname: '',
-      //     lastname: '',
-      //     gender: 'M',
-      //     height: 0,
-      //     weight: 0,
-      //     phone: '',
-      //     dob: '',
-      //     congenitalDisease: [],
-      //     drugAllergy: []);
+      tempUser = new UserDetail(
+        id: 0,
+        email: '',
+        password: '',
+        title: 'Mr.',
+        firstname: '',
+        lastname: '',
+        gender: 'M',
+        height: 0,
+        weight: 0,
+        phone: '',
+        dob: '',
+        congenitalDisease: [],
+        drugAllergy: [],
+      );
 
-      return currentUser;
+      return true;
     }
-    return null;
+
+    return false;
   }
 
-  Future<dynamic> signIn(
+  Future<bool> signIn(
     String email,
     String password,
   ) async {
-    print("Submit signin: " + email + " " + password);
+    // Call Api
+    var response = await http.post(
+      Uri.parse('$basedUri/signin/'),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonEncode({
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      // Convert response body to UserDetail object
+      Map<String, dynamic> body = jsonDecode(response.body);
+      currentUser = UserDetail.fromJson(body['user']);
+
+      return true;
+    }
+    return false;
   }
 
   Future<dynamic> forgotPassword(

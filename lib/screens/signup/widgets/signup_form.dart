@@ -209,11 +209,17 @@ class _SignUpFormState extends State<SignUpForm> {
             boxColor: _isFormEmpty() ? kGreyColor : kSuccessColor,
             textColor: Colors.white,
             onPressed: () async {
-              var response;
               if (_formKey.currentState!.validate() && _dob.value != '') {
-                response = await _authService.signUp();
-                if (response != null) {
+                bool isSuccess = await _authService.signUp();
+                if (isSuccess) {
                   Navigator.pushNamed(context, VerifyOtpScreen.routeName);
+                } else {
+                  final snackBar = SnackBar(
+                    padding: const EdgeInsets.all(kDefaultPadding / 2),
+                    content: Text('Invalid information. Please try again.'),
+                  );
+
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
               }
             },

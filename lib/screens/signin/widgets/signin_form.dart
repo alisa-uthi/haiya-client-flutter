@@ -59,10 +59,23 @@ class _SignInFormState extends State<SignInForm> {
             text: "LOGIN",
             boxColor: kPrimaryColor,
             textColor: Colors.white,
-            onPressed: () {
+            onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                _authService.signIn(_email, _password);
-                Navigator.pushNamed(context, HomeScreen.routeName);
+                bool isSignin = await _authService.signIn(_email, _password);
+                if (isSignin) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    HomeScreen.routeName,
+                    (route) => false,
+                  );
+                } else {
+                  final snackBar = SnackBar(
+                    padding: const EdgeInsets.all(kDefaultPadding / 2),
+                    content: Text('Invalid credentials. Please try again.'),
+                  );
+
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
               }
             },
           ),
