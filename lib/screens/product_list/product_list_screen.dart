@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/product.dart';
 import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
@@ -11,7 +12,7 @@ import 'widgets/header_section.dart';
 
 class ProductListScreen extends StatefulWidget {
   static final routeName = '/products';
-  final String category;
+  final Category category;
   final int? pharmacy;
 
   const ProductListScreen({
@@ -33,7 +34,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       title: Text(
-        widget.category,
+        widget.category.name,
         style: TextStyle(color: Colors.black),
       ),
       centerTitle: true,
@@ -68,14 +69,14 @@ class _ProductListScreenState extends State<ProductListScreen> {
         _filteredResult = _allProducts
             .where((product) => product.category[0].category
                 .toLowerCase()
-                .contains(widget.category.toLowerCase()))
+                .contains(widget.category.name.toLowerCase()))
             .toList();
       } else {
         // If user select nearest pharmacy, products will be based on pharmacy
         _filteredResult = _allProducts.where((product) {
           return product.category[0].category
               .toLowerCase()
-              .contains(widget.category.toLowerCase());
+              .contains(widget.category.name.toLowerCase());
         }).toList();
       }
       //////////////////////////////////////////////
@@ -93,6 +94,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavBar(index: 0),
@@ -101,7 +107,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              HeaderSection(categoryName: widget.category),
+              HeaderSection(category: widget.category),
               Container(
                 padding: const EdgeInsets.all(kDefaultPadding),
                 child: Column(

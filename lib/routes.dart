@@ -14,6 +14,7 @@ import 'screens/signup_success/signup_success_screen.dart';
 import 'screens/splash/splash_screen.dart';
 import 'screens/term_agreement/term_agreement_screen.dart';
 import 'screens/verify_otp/verify_otp_screen.dart';
+import 'shared/models/category.dart';
 
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
@@ -28,6 +29,7 @@ final Map<String, WidgetBuilder> routes = {
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   NearestPharmacyScreen.routeName: (context) => NearestPharmacyScreen(),
-  ProductListScreen.routeName: (context) => ProductListScreen(category: ''),
+  ProductListScreen.routeName: (context) =>
+      ProductListScreen(category: Category(id: -1, name: '')),
   ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
 };

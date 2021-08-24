@@ -85,10 +85,7 @@ class AuthService {
     return false;
   }
 
-  Future<bool> signIn(
-    String email,
-    String password,
-  ) async {
+  Future<bool> signIn(String email, String password) async {
     // Call Api
     var response = await http.post(
       Uri.parse('$basedUri/signin/'),
@@ -119,9 +116,7 @@ class AuthService {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },
-      body: jsonEncode({
-        'email': email,
-      }),
+      body: jsonEncode({'email': email}),
     );
 
     // Handle response

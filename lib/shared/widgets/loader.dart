@@ -7,6 +7,7 @@ class Loader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: kDefaultPadding),
           Center(
@@ -15,6 +16,11 @@ class Loader extends StatelessWidget {
               backgroundColor: kPrimaryColor,
               color: kBackgroundColor,
             ),
+          ),
+          SizedBox(height: kDefaultPadding / 2),
+          Text(
+            "Loading...",
+            style: TextStyle(color: kPrimaryColor),
           ),
         ],
       ),

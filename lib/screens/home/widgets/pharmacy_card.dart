@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/screens/product_list/product_list_screen.dart';
+import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 
@@ -21,7 +22,7 @@ class PharmacyCard extends StatelessWidget {
           context,
           PageRouteBuilder(
             pageBuilder: (buider, animation1, animation2) => ProductListScreen(
-              category: 'Drug',
+              category: Category(id: 1, name: 'Drug'),
               pharmacy: pharmacy.id,
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/screens/product_list/product_list_screen.dart';
+import 'package:haiya_client/shared/models/category.dart';
 
 import '../../../constants.dart';
 
@@ -9,19 +10,24 @@ class CategoryList extends StatefulWidget {
     required this.selectedCategory,
   }) : super(key: key);
 
-  final String selectedCategory;
+  final Category selectedCategory;
 
   @override
   _CategoryListState createState() => _CategoryListState();
 }
 
 class _CategoryListState extends State<CategoryList> {
-  String _selectedCategory = 'Drug';
+  late Category _selectedCategory;
 
   @override
   void initState() {
     super.initState();
     _selectedCategory = widget.selectedCategory;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -35,14 +41,7 @@ class _CategoryListState extends State<CategoryList> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  List<String> categories = [
-                    'Drug',
-                    'Supplementary',
-                    'Cosmeceutical',
-                    'Equipment',
-                  ];
-
-                  return _buildCategoryOption(categories[index]);
+                  return _buildCategoryOption(allCategories[index]);
                 }),
           ),
         ),
@@ -50,16 +49,16 @@ class _CategoryListState extends State<CategoryList> {
     );
   }
 
-  Widget _buildCategoryOption(String categoryName) {
+  Widget _buildCategoryOption(Category category) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _selectedCategory = categoryName;
+          _selectedCategory = category;
           Navigator.pushReplacement(
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation1, animation2) =>
-                  ProductListScreen(category: categoryName),
+                  ProductListScreen(category: category),
               transitionDuration: Duration(seconds: 0),
             ),
           );
@@ -68,12 +67,12 @@ class _CategoryListState extends State<CategoryList> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(kDefaultPadding),
-          color: _selectedCategory == categoryName ? kPrimaryColor : kGreyColor,
+          color: _selectedCategory == category ? kPrimaryColor : kGreyColor,
         ),
         padding: const EdgeInsets.all(kDefaultPadding / 2),
         margin: const EdgeInsets.only(right: kDefaultPadding / 2),
         child: Text(
-          categoryName,
+          category.name,
           style: TextStyle(color: Colors.white),
         ),
       ),

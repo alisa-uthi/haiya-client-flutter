@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/shared/models/category.dart';
 
 import '../../../constants.dart';
 import 'category_list.dart';
@@ -6,10 +7,10 @@ import 'category_list.dart';
 class HeaderSection extends StatelessWidget {
   const HeaderSection({
     Key? key,
-    required this.categoryName,
+    required this.category,
   }) : super(key: key);
 
-  final String categoryName;
+  final Category category;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class HeaderSection extends StatelessWidget {
       child: Column(
         children: [
           CategoryList(
-            selectedCategory: categoryName,
+            selectedCategory: category,
           ),
           // SizedBox(height: kDefaultPadding / 2),
           // FilterSection(), TODO: Implement filter
