@@ -3,6 +3,7 @@ import 'package:haiya_client/screens/forgot_password/forgot_password_screen.dart
 import 'package:haiya_client/screens/home/home_screen.dart';
 import 'package:haiya_client/shared/services/auth_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
+import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
 import 'package:haiya_client/shared/widgets/form_fields.dart';
 
 import '../../../constants.dart';
@@ -26,6 +27,24 @@ class _SignInFormState extends State<SignInForm> {
     });
   }
 
+  void onPressLogin(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      bool isSignin = await _authService.signIn(_email, _password);
+      if (isSignin) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          HomeScreen.routeName,
+          (route) => false,
+        );
+      } else {
+        CustomSnackBar.buildSnackbar(
+          context,
+          'Invalid credentials. Please try again.',
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -33,6 +52,7 @@ class _SignInFormState extends State<SignInForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          // Email and password fields
           _formFields.buildEmailField(
             "Email",
             (value) => setState(() => _email = value!),
@@ -44,6 +64,8 @@ class _SignInFormState extends State<SignInForm> {
               _isPassHidden,
               _togglePasswordVisibility),
           SizedBox(height: kDefaultPadding),
+
+          // Forgot password
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
@@ -55,29 +77,13 @@ class _SignInFormState extends State<SignInForm> {
             ),
           ),
           SizedBox(height: kDefaultPadding * 3),
+
+          // Login button
           CustomBtn(
             text: "LOGIN",
             boxColor: kPrimaryColor,
             textColor: Colors.white,
-            onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                bool isSignin = await _authService.signIn(_email, _password);
-                if (isSignin) {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    HomeScreen.routeName,
-                    (route) => false,
-                  );
-                } else {
-                  final snackBar = SnackBar(
-                    padding: const EdgeInsets.all(kDefaultPadding / 2),
-                    content: Text('Invalid credentials. Please try again.'),
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              }
-            },
+            onPressed: () => onPressLogin(context),
           ),
         ],
       ),

@@ -112,9 +112,22 @@ class AuthService {
     return false;
   }
 
-  Future<dynamic> forgotPassword(
-    String email,
-  ) async {
-    print("Submit forgot password: " + email);
+  Future<bool> forgotPassword(String email) async {
+    // Call Api
+    var response = await http.post(
+      Uri.parse('$basedUri/request-reset-password/'),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonEncode({
+        'email': email,
+      }),
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      return true;
+    }
+    return false;
   }
 }

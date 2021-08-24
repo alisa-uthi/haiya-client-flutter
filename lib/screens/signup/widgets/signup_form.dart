@@ -9,6 +9,7 @@ import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/services/auth_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
+import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
 import 'package:haiya_client/shared/widgets/form_fields.dart';
 
 import '../../../constants.dart';
@@ -32,7 +33,6 @@ class _SignUpFormState extends State<SignUpForm> {
       _gender = tempUser.gender,
       _phone = tempUser.phone;
   int? _height = tempUser.height, _weight = tempUser.weight;
-  List<DrugAllergy>? _drugAllergy = tempUser.drugAllergy;
   final ValueNotifier<String> _dob = ValueNotifier('');
 
   static AuthService _authService = new AuthService();
@@ -70,6 +70,37 @@ class _SignUpFormState extends State<SignUpForm> {
     setState(() {
       _isConfirmPassHidden = !_isConfirmPassHidden;
     });
+  }
+
+  bool _isFormEmpty() {
+    if (_firstName != '' &&
+        _lastName != '' &&
+        _dob.value != '' &&
+        _height != null &&
+        _weight != null &&
+        _phone != '' &&
+        _email != '' &&
+        _password != '' &&
+        _confirmPass != '' &&
+        _confirmPass != null) {
+      return false;
+    }
+    return true;
+  }
+
+  void onSubmit(BuildContext context) async {
+    if (_formKey.currentState!.validate() && _dob.value != '') {
+      bool isSuccess = await _authService.signUp();
+
+      if (isSuccess) {
+        Navigator.pushNamed(context, VerifyOtpScreen.routeName);
+      } else {
+        CustomSnackBar.buildSnackbar(
+          context,
+          'Invalid information. Please try again.',
+        );
+      }
+    }
   }
 
   @override
@@ -208,41 +239,11 @@ class _SignUpFormState extends State<SignUpForm> {
             text: "CONFIRM",
             boxColor: _isFormEmpty() ? kGreyColor : kSuccessColor,
             textColor: Colors.white,
-            onPressed: () async {
-              if (_formKey.currentState!.validate() && _dob.value != '') {
-                bool isSuccess = await _authService.signUp();
-                if (isSuccess) {
-                  Navigator.pushNamed(context, VerifyOtpScreen.routeName);
-                } else {
-                  final snackBar = SnackBar(
-                    padding: const EdgeInsets.all(kDefaultPadding / 2),
-                    content: Text('Invalid information. Please try again.'),
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              }
-            },
+            onPressed: () => onSubmit(context),
           ),
           SizedBox(height: kDefaultPadding / 1.5),
         ],
       ),
     );
-  }
-
-  _isFormEmpty() {
-    if (_firstName != '' &&
-        _lastName != '' &&
-        _dob.value != '' &&
-        _height != null &&
-        _weight != null &&
-        _phone != '' &&
-        _email != '' &&
-        _password != '' &&
-        _confirmPass != '' &&
-        _confirmPass != null) {
-      return false;
-    }
-    return true;
   }
 }
