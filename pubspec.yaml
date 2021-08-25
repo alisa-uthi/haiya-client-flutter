@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -30,13 +30,13 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   image_picker: ^0.8.2
   google_maps_flutter: ^2.0.6
-  geolocator: ^7.4.0  # To get the current location
-  geocoding: ^2.0.0 # To translate the latitude, longtitude to address 
+  geolocator: ^7.4.0 # To get the current location
+  geocoding: ^2.0.0 # To translate the latitude, longtitude to address
   multi_select_flutter: ^4.0.0
   provider: ^5.0.0
   flutter_otp: ^0.3.2
   flutter_search_bar: ^2.1.0
-
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -47,7 +47,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

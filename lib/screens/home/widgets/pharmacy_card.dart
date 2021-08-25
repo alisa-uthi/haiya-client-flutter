@@ -22,7 +22,7 @@ class PharmacyCard extends StatelessWidget {
           context,
           PageRouteBuilder(
             pageBuilder: (buider, animation1, animation2) => ProductListScreen(
-              category: Category(id: 1, name: 'Drug'),
+              category: allCategories[0],
               pharmacy: pharmacy.id,
             ),
           ),
@@ -33,10 +33,10 @@ class PharmacyCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Image.asset(
-                'assets/images/haiya_logo.png', // TODO: Change picture
-                width: 120,
-                height: 120,
+              child: Image.network(
+                pharmacy.image,
+                width: 150,
+                height: 100,
               ),
             ),
             Spacer(),
@@ -46,9 +46,9 @@ class PharmacyCard extends StatelessWidget {
             ),
             SizedBox(height: kDefaultPadding / 2),
             Text(
-              pharmacy.address.toString(),
+              pharmacy.address!.location,
               style: Theme.of(context).textTheme.caption,
-              overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.clip,
               maxLines: 3,
             ),
             SizedBox(height: kDefaultPadding / 2),

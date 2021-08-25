@@ -1,42 +1,28 @@
 class Address {
-  final int id;
-  final String addrId;
-  final String? addrRoom;
-  final int? addrFloor;
-  final String addrNo;
-  final int? addrMoo;
-  final String? addrSoi;
-  final String addrRoad;
-  final String addrSubDistrict;
-  final String addrDistrict;
-  final String addrProvince;
-  final int addrPostalCode;
-  final double addrLongitude;
-  final double addrLatitude;
+  int id;
+  String name;
+  String location;
+  String? additionalInfo;
+  double? latitude;
+  double? longitude;
 
   Address({
     required this.id,
-    required this.addrId,
-    this.addrRoom,
-    this.addrFloor,
-    required this.addrNo,
-    this.addrMoo,
-    this.addrSoi,
-    required this.addrRoad,
-    required this.addrSubDistrict,
-    required this.addrDistrict,
-    required this.addrProvince,
-    required this.addrPostalCode,
-    required this.addrLatitude,
-    required this.addrLongitude,
+    required this.name,
+    required this.location,
+    this.additionalInfo,
+    this.latitude,
+    this.longitude,
   });
 
-  @override
-  String toString() {
-    String room = this.addrRoom == null ? '' : 'Room ${this.addrRoom}, ';
-    String floor = this.addrFloor == null ? '' : 'Floor ${this.addrFloor}, ';
-    String moo = this.addrMoo == null ? '' : 'Moo ${this.addrMoo}, ';
-    String soi = this.addrSoi == null ? '' : 'Soi ${this.addrSoi}, ';
-    return '$room$floor${this.addrNo}, $moo$soi${this.addrRoad}, ${this.addrSubDistrict}, ${this.addrDistrict}, ${this.addrProvince}, ${this.addrPostalCode}';
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(
+      id: json['ID'],
+      name: json['Addr_Name'],
+      location: json['Addr_Location'],
+      additionalInfo: json['Addr_AdditionalInfo'],
+      latitude: double.parse(json['Addr_Latitude']),
+      longitude: double.parse(json['Addr_Longitude']),
+    );
   }
 }

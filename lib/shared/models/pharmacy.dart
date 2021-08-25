@@ -1,32 +1,44 @@
-import 'package:haiya_client/shared/models/operation_time.dart';
-import 'package:haiya_client/shared/models/product.dart';
-
 import 'address.dart';
+import 'operation_time.dart';
 
 class Pharmacy {
   final int id;
-  final String pharmacyId;
   final String name;
-  final String email;
+  final String? email;
   final String phone;
   final String image;
-  final Address address;
-  final List<Product>? products;
-  final String?
-      distanceFromCurrentLoc; //TODO: Get this from backend, calculate the current loc and loc of pharmacy
-  final OperationTime
-      operationTime; // TODO: Get this from backend. If it is matched with the Date.now(), retrieve info and send it back here.
+  final String? ratingScore;
+  final Address? address;
+  final double? distanceFromCurrentLoc;
+  final List<OperationTime>? operationTime;
 
   Pharmacy({
     required this.id,
-    required this.pharmacyId,
     required this.name,
-    required this.email,
+    this.email,
     required this.phone,
     required this.image,
-    required this.address,
-    this.products,
+    this.ratingScore,
+    this.address,
     this.distanceFromCurrentLoc,
-    required this.operationTime,
+    this.operationTime,
   });
+
+  factory Pharmacy.fromJson(Map<String, dynamic> json) {
+    return Pharmacy(
+      id: json['ID'],
+      name: json['Pcy_Name'],
+      email: json['Pcy_Email'],
+      phone: json['Pcy_Phone'],
+      image: json['Pcy_Image'],
+      ratingScore: json['Rating_Score'],
+      distanceFromCurrentLoc: json['Distance'],
+      address: Address.fromJson(json['Pcy_Address']),
+      operationTime: (json['Pcy_OperationTimes'] as List)
+          .map((i) => OperationTime.fromJson(i))
+          .toList(),
+    );
+  }
 }
+
+List<Pharmacy> nearestPharmacies = [];

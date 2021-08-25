@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<dynamic> _fetchData() async {
     await _getUserLocation();
     await _getCategories();
+    await _getNearestPharmacies();
     setState(() => _isLoading = false);
   }
 
@@ -53,6 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _getCategories() async {
     await _inventoryService.getAllProductCategories();
+  }
+
+  _getNearestPharmacies() async {
+    InventoryService _inventoryService = new InventoryService();
+    await _inventoryService.getNearestPharmacies();
   }
 
   @override

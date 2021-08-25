@@ -6,26 +6,8 @@ import 'package:haiya_client/shared/models/product.dart';
 import 'package:haiya_client/shared/models/productCategory.dart';
 import 'package:haiya_client/shared/models/productGenericName.dart';
 import 'package:haiya_client/shared/models/productImage.dart';
-import 'package:haiya_client/shared/models/user_detail.dart';
 
 class ConstantService {
-  static UserDetail dummyCurrentUser() {
-    return UserDetail(
-      id: 1,
-      firstname: "Benimaru",
-      lastname: "Shinmon",
-      gender: "Male",
-      phone: "0804488048",
-      dob: "1999-02-24",
-      height: 155,
-      email: 'example@example.com',
-      password: '',
-      title: 'Mr.',
-      weight: 155,
-      address: [dummyUserAddress()],
-    );
-  }
-
   static List<String> dummyDrugAllergyOptions() {
     return [
       "Penicillin",
@@ -46,21 +28,6 @@ class ConstantService {
       "Cystic fibrosis",
       "Heart conditions",
     ];
-  }
-
-  static Address dummyUserAddress() {
-    return Address(
-      id: 1,
-      addrId: 'Addr000001',
-      addrDistrict: 'district',
-      addrNo: '123/23',
-      addrPostalCode: 10120,
-      addrProvince: 'bkk',
-      addrRoad: 'road',
-      addrSubDistrict: 'subdistrict',
-      addrLatitude: 1.28210155,
-      addrLongitude: 103.8172248,
-    );
   }
 
   static List<Product> dummyProducts() {
@@ -295,95 +262,6 @@ class ConstantService {
           availQty: 10,
           price: 120,
           exp: '2026-03-22',
-        ),
-      ),
-    ];
-  }
-
-  static Pharmacy dummySelectedPharmacy() {
-    return Pharmacy(
-      id: 2,
-      pharmacyId: 'PCY0000014',
-      name: 'ICT Pharmacy',
-      email: 'ictpharma2021@gmail.com',
-      phone: '0802849832',
-      image: "C://image/pharmax",
-      address: Address(
-        id: 2,
-        addrId: 'Addr000002',
-        addrDistrict: 'ICT Pharmacy District',
-        addrNo: '134/29',
-        addrPostalCode: 14803,
-        addrProvince: 'bkk',
-        addrRoad: 'ICT Pharmacy Road',
-        addrSubDistrict: 'ICT Pharmacy Subdistrict',
-        addrLatitude: 3.28210155,
-        addrLongitude: 109.8172248,
-      ),
-      products: dummyProducts(),
-      distanceFromCurrentLoc: '1.00 km',
-      operationTime: OperationTime(
-        openHr: '09.00 AM',
-        closeHr: '11.00 PM',
-        isOpen: true,
-      ),
-    );
-  }
-
-  static List<Pharmacy> dummyPharmacies() {
-    return [
-      Pharmacy(
-        id: 1,
-        pharmacyId: 'PCY0000013',
-        name: 'Kimmy Pharmacy',
-        email: 'kimmypharma2021@gmail.com',
-        phone: '0851345824',
-        image: "C://image/pharmax",
-        address: Address(
-          id: 3,
-          addrId: 'Addr000003',
-          addrDistrict: 'Kimmy Pharmacy District',
-          addrNo: '134/29',
-          addrPostalCode: 14803,
-          addrProvince: 'bkk',
-          addrRoad: 'Kimmy Pharmacy Road',
-          addrSubDistrict: 'Kimmy Pharmacy Subdistrict',
-          addrLatitude: 8.28210155,
-          addrLongitude: 116.8172248,
-        ),
-        products: dummyProducts(),
-        distanceFromCurrentLoc: '1.00 km',
-        operationTime: OperationTime(
-          openHr: '08.00 AM',
-          closeHr: '09.00 PM',
-          isOpen: true,
-        ),
-      ),
-      Pharmacy(
-        id: 2,
-        pharmacyId: 'PCY0000014',
-        name: 'ICT Pharmacy',
-        email: 'ictpharma2021@gmail.com',
-        phone: '0802849832',
-        image: "C://image/pharmax",
-        address: Address(
-          id: 2,
-          addrId: 'Addr000002',
-          addrDistrict: 'ICT Pharmacy District',
-          addrNo: '134/29',
-          addrPostalCode: 14803,
-          addrProvince: 'bkk',
-          addrRoad: 'ICT Pharmacy Road',
-          addrSubDistrict: 'ICT Pharmacy Subdistrict',
-          addrLatitude: 3.28210155,
-          addrLongitude: 109.8172248,
-        ),
-        products: dummyProducts(),
-        distanceFromCurrentLoc: '1.50 km',
-        operationTime: OperationTime(
-          openHr: '08.00 AM',
-          closeHr: '09.00 PM',
-          isOpen: false,
         ),
       ),
     ];

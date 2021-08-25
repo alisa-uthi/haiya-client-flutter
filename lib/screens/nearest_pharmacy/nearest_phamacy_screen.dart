@@ -3,7 +3,6 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/nearest_pharmacy/widgets/pharmacy_detail_card.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
-import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
 
 class NearestPharmacyScreen extends StatefulWidget {
@@ -15,7 +14,6 @@ class NearestPharmacyScreen extends StatefulWidget {
 
 class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
   String _searchText = '';
-  List<Pharmacy> _nearestPharmacies = [];
   List<Pharmacy> _filteredResult = [];
   late SearchBar searchBar;
 
@@ -34,7 +32,7 @@ class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
     setState(
       () => {
         _searchText = value,
-        _filteredResult = _nearestPharmacies
+        _filteredResult = nearestPharmacies
             .where((phar) =>
                 phar.name.toLowerCase().contains(_searchText.toLowerCase()))
             .toList()
@@ -44,14 +42,13 @@ class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
 
   void clearText() {
     setState(
-      () => {_searchText = '', _filteredResult = _nearestPharmacies},
+      () => {_searchText = '', _filteredResult = nearestPharmacies},
     );
   }
 
   void initState() {
     setState(() {
-      _nearestPharmacies = ConstantService.dummyPharmacies();
-      _filteredResult = _nearestPharmacies;
+      _filteredResult = nearestPharmacies;
     });
 
     searchBar = new SearchBar(
@@ -66,6 +63,11 @@ class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavBar(index: 0),
@@ -73,18 +75,23 @@ class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(kDefaultPadding),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ...List.generate(
-                  _filteredResult.length,
-                  (index) {
-                    return PharmacyDetailCard(pharmacy: _filteredResult[index]);
-                  },
-                ).toList(),
-              ],
-            ),
-          ),
+          child: _filteredResult.length != 0
+              ? SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ...List.generate(
+                        _filteredResult.length,
+                        (index) {
+                          return PharmacyDetailCard(
+                              pharmacy: _filteredResult[index]);
+                        },
+                      ).toList(),
+                    ],
+                  ),
+                )
+              : Center(
+                  child: Text("No Result Found."),
+                ),
         ),
       ),
     );
