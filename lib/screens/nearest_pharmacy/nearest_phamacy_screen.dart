@@ -83,7 +83,8 @@ class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
                         _filteredResult.length,
                         (index) {
                           return PharmacyDetailCard(
-                              pharmacy: _filteredResult[index]);
+                            pharmacy: _filteredResult[index],
+                          );
                         },
                       ).toList(),
                     ],

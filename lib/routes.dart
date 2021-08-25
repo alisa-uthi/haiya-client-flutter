@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/operation_times/operation_times_screen.dart';
 
 import 'screens/authOption/auth_option_screen.dart';
 import 'screens/congenital_form/congenital_form_screen.dart';
@@ -29,6 +30,8 @@ final Map<String, WidgetBuilder> routes = {
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   NearestPharmacyScreen.routeName: (context) => NearestPharmacyScreen(),
+  OperationTimesScreen.routeName: (context) =>
+      OperationTimesScreen(pharmacy: null),
   ProductListScreen.routeName: (context) =>
       ProductListScreen(category: Category(id: -1, name: '')),
   ProductDetailScreen.routeName: (context) => ProductDetailScreen(),

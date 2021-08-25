@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/operation_times/operation_times_screen.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 import 'package:intl/intl.dart';
 import 'package:haiya_client/shared/models/operation_time.dart';
@@ -35,6 +36,13 @@ class _PharmacyDetailCardState extends State<PharmacyDetailCard> {
         .firstWhere((element) => element.optDay == weekday);
   }
 
+  String _getTimePeriodUnit(String time) {
+    if (int.parse(time.substring(0, 2)) < 12) {
+      return 'AM';
+    }
+    return 'PM';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -57,7 +65,7 @@ class _PharmacyDetailCardState extends State<PharmacyDetailCard> {
                       PageRouteBuilder(
                         pageBuilder: (buider, animation1, animation2) =>
                             ProductListScreen(
-                          category: Category(id: 1, name: 'Drug'),
+                          category: allCategories[0],
                           pharmacy: widget.pharmacy.id,
                         ),
                       ),
@@ -132,33 +140,44 @@ class _PharmacyDetailCardState extends State<PharmacyDetailCard> {
   }
 
   Widget _buildOperationTime() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Icon(
-          Icons.access_time_filled,
-          size: 30,
-          color: !_isOpen ? kGreyColor.withOpacity(0.5) : Colors.black,
-        ),
-        SizedBox(width: kDefaultPadding / 2),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              getCurrentOperationTime().openHr,
-              style: TextStyle(
-                color: !_isOpen ? kGreyColor.withOpacity(0.5) : Colors.black,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (buider, animation1, animation2) =>
+                OperationTimesScreen(pharmacy: widget.pharmacy),
+          ),
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Icon(
+            Icons.access_time_filled,
+            size: 30,
+            color: !_isOpen ? kGreyColor.withOpacity(0.5) : Colors.black,
+          ),
+          SizedBox(width: kDefaultPadding / 2),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                '${getCurrentOperationTime().openHr} ${_getTimePeriodUnit(getCurrentOperationTime().openHr)}',
+                style: TextStyle(
+                  color: !_isOpen ? kGreyColor.withOpacity(0.5) : Colors.black,
+                ),
               ),
-            ),
-            Text(
-              getCurrentOperationTime().closeHr,
-              style: TextStyle(
-                color: !_isOpen ? kGreyColor.withOpacity(0.5) : Colors.black,
+              Text(
+                '${getCurrentOperationTime().closeHr} ${_getTimePeriodUnit(getCurrentOperationTime().closeHr)}',
+                style: TextStyle(
+                  color: !_isOpen ? kGreyColor.withOpacity(0.5) : Colors.black,
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
