@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:haiya_client/screens/congenital_form/congenital_form_screen.dart';
-import 'package:haiya_client/screens/term_agreement/term_agreement_screen.dart';
 import 'package:haiya_client/screens/verify_otp/verify_otp_screen.dart';
-import 'package:haiya_client/shared/models/congenital_disease.dart';
-import 'package:haiya_client/shared/models/drug_allergy.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/services/auth_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
-import 'package:haiya_client/shared/widgets/custom_card.dart';
 import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
 import 'package:haiya_client/shared/widgets/form_fields.dart';
 

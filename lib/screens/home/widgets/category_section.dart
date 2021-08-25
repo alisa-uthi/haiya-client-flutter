@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/product_list/product_list_screen.dart';
 import 'package:haiya_client/shared/models/category.dart';
-import 'package:haiya_client/shared/widgets/loader.dart';
 
 class CategorySection extends StatefulWidget {
   CategorySection({

@@ -1,7 +1,6 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:haiya_client/shared/models/user_detail.dart';
 
 class UserService {
   var basedUri = 'http://10.0.2.2:8080/api/user';

@@ -8,9 +8,13 @@ class HeaderSection extends StatelessWidget {
   const HeaderSection({
     Key? key,
     required this.category,
+    this.pharmacyId,
+    this.pharmacyName,
   }) : super(key: key);
 
   final Category category;
+  final int? pharmacyId;
+  final String? pharmacyName;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,8 @@ class HeaderSection extends StatelessWidget {
         children: [
           CategoryList(
             selectedCategory: category,
+            pharmacyId: pharmacyId,
+            pharmacyName: pharmacyName,
           ),
           // SizedBox(height: kDefaultPadding / 2),
           // FilterSection(), TODO: Implement filter

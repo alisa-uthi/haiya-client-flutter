@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/shared/models/product.dart';
-import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:haiya_client/shared/widgets/product_list.dart';
 
 class RecommendedProductsSection extends StatefulWidget {
@@ -19,7 +18,7 @@ class _RecommendedProductsSectionState
   void initState() {
     super.initState();
     setState(() {
-      _products = ConstantService.dummyProducts();
+      _products = [];
     });
   }
 

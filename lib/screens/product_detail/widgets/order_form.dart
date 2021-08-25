@@ -67,7 +67,7 @@ class _OrderFormState extends State<OrderForm> {
               ),
             ),
             Text(
-              "${widget.product.catalog.price * _quantity} THB",
+              "${widget.product.price * _quantity} THB",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

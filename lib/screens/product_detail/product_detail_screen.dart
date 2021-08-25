@@ -38,11 +38,11 @@ class ProductDetailScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: kDefaultPadding * 1.5),
-                Image.asset(
-                  'assets/images/haiya_logo.png',
+                Image.network(
+                  product!.image,
                   width: 150,
                   height: 150,
-                ), //TODO: Change image
+                ),
                 SizedBox(height: kDefaultPadding * 1.5),
                 DetailContainer(product: product),
               ],

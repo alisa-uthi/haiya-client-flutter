@@ -23,7 +23,8 @@ class PharmacyCard extends StatelessWidget {
           PageRouteBuilder(
             pageBuilder: (buider, animation1, animation2) => ProductListScreen(
               category: allCategories[0],
-              pharmacy: pharmacy.id,
+              pharmacyId: pharmacy.id,
+              pharmacyName: pharmacy.name,
             ),
           ),
         );

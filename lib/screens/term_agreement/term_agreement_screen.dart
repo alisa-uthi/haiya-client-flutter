@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/signup/signup_screen.dart';
-import 'package:haiya_client/shared/widgets/custom_alert_dialog.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';

@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:haiya_client/shared/models/address.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/operation_time.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
+import 'package:haiya_client/shared/models/product.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -74,5 +74,45 @@ class InventoryService {
           .map<Pharmacy>((json) => Pharmacy.fromJson(json))
           .toList();
     }
+  }
+
+  Future<List<Product>> getProductByCategory(int categoryId) async {
+    // Call Api
+    var response = await http.get(
+      Uri.parse('${basedUri}/product/category/${categoryId}'),
+    );
+
+    // Handle response
+    if (response.statusCode == 200) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      List<Product> products =
+          body['data'].map<Product>((json) => Product.fromJson(json)).toList();
+
+      return products;
+    }
+
+    return [];
+  }
+
+  Future<List<Product>> getProductByCategoryAndPharmacy(
+    int pharmacyId,
+    int categoryId,
+  ) async {
+    // Call Api
+    var response = await http.get(
+      Uri.parse(
+          '${basedUri}/product/catalog/${pharmacyId}/category/${categoryId}'),
+    );
+
+    // Handle response
+    if (response.statusCode == 200) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      List<Product> products =
+          body['data'].map<Product>((json) => Product.fromJson(json)).toList();
+
+      return products;
+    }
+
+    return [];
   }
 }

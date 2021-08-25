@@ -66,7 +66,8 @@ class _PharmacyDetailCardState extends State<PharmacyDetailCard> {
                         pageBuilder: (buider, animation1, animation2) =>
                             ProductListScreen(
                           category: allCategories[0],
-                          pharmacy: widget.pharmacy.id,
+                          pharmacyId: widget.pharmacy.id,
+                          pharmacyName: widget.pharmacy.name,
                         ),
                       ),
                     );

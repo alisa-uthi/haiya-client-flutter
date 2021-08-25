@@ -32,6 +32,7 @@ class _AllergyDropdownState extends State<AllergyDropdown> {
 
   @override
   void initState() {
+    super.initState();
     _drugAllergyItems = ConstantService.dummyDrugAllergyOptions();
     _severityLevels = ['Low', 'Medium', 'Severe', 'Very Severe'];
   }

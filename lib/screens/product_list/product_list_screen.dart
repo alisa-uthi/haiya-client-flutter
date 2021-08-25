@@ -3,22 +3,24 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/product.dart';
-import 'package:haiya_client/shared/services/constant_service.dart';
+import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
+import 'package:haiya_client/shared/widgets/loader.dart';
 import 'package:haiya_client/shared/widgets/product_list.dart';
 
-import 'widgets/category_list.dart';
 import 'widgets/header_section.dart';
 
 class ProductListScreen extends StatefulWidget {
   static final routeName = '/products';
   final Category category;
-  final int? pharmacy;
+  final int? pharmacyId;
+  final String? pharmacyName;
 
   const ProductListScreen({
     Key? key,
     required this.category,
-    this.pharmacy,
+    this.pharmacyId,
+    this.pharmacyName,
   }) : super(key: key);
 
   @override
@@ -27,22 +29,34 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   String _searchText = '';
-  List<Product> _allProducts = [];
+  bool _isLoading = true;
+  late List<Product> _allProducts;
   List<Product> _filteredResult = [];
   late SearchBar searchBar;
+  InventoryService _inventoryService = new InventoryService();
 
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      title: Text(
-        widget.category.name,
-        style: TextStyle(color: Colors.black),
-      ),
-      centerTitle: true,
-      actions: [searchBar.getSearchAction(context)],
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+
+    searchBar = new SearchBar(
+      inBar: false,
+      buildDefaultAppBar: _buildAppBar,
+      setState: setState,
+      onSubmitted: _onValueChanged,
+      onChanged: _onValueChanged,
+      onCleared: _clearText,
+      onClosed: _clearText,
     );
   }
 
-  void onValueChanged(String value) {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void _onValueChanged(String value) {
     setState(
       () => {
         _searchText = value,
@@ -55,47 +69,44 @@ class _ProductListScreenState extends State<ProductListScreen> {
     );
   }
 
-  void clearText() {
+  void _clearText() {
     setState(
-      () => {_searchText = '', _filteredResult = _allProducts},
+      () => {
+        _searchText = '',
+        _filteredResult = _allProducts,
+      },
     );
   }
 
-  void initState() {
+  Future<dynamic> _fetchData() async {
+    if (widget.pharmacyId != null) {
+      await _getProductByCategoryAndPharmacy();
+    } else {
+      await _getProductByCategory();
+    }
+
+    setState(() => _isLoading = false);
+  }
+
+  _getProductByCategoryAndPharmacy() async {
+    var products;
+    products = await _inventoryService.getProductByCategoryAndPharmacy(
+      widget.pharmacyId!,
+      widget.category.id,
+    );
     setState(() {
-      // TODO: All products should be based on category and pharmacy, so no need to where() again ////
-      _allProducts = ConstantService.dummyProducts();
-      if (widget.pharmacy == null) {
-        _filteredResult = _allProducts
-            .where((product) => product.category[0].category
-                .toLowerCase()
-                .contains(widget.category.name.toLowerCase()))
-            .toList();
-      } else {
-        // If user select nearest pharmacy, products will be based on pharmacy
-        _filteredResult = _allProducts.where((product) {
-          return product.category[0].category
-              .toLowerCase()
-              .contains(widget.category.name.toLowerCase());
-        }).toList();
-      }
-      //////////////////////////////////////////////
+      _allProducts = products;
+      _filteredResult = products;
     });
-
-    searchBar = new SearchBar(
-      inBar: false,
-      buildDefaultAppBar: _buildAppBar,
-      setState: setState,
-      onSubmitted: onValueChanged,
-      onChanged: onValueChanged,
-      onCleared: clearText,
-      onClosed: clearText,
-    );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  _getProductByCategory() async {
+    var products;
+    products = await _inventoryService.getProductByCategory(widget.category.id);
+    setState(() {
+      _allProducts = products;
+      _filteredResult = products;
+    });
   }
 
   @override
@@ -103,26 +114,46 @@ class _ProductListScreenState extends State<ProductListScreen> {
     return Scaffold(
       bottomNavigationBar: BottomNavBar(index: 0),
       appBar: searchBar.build(context),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              HeaderSection(category: widget.category),
-              Container(
-                padding: const EdgeInsets.all(kDefaultPadding),
+      body: !_isLoading
+          ? SafeArea(
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    ProductList(
-                      products: _filteredResult,
-                      itemCount: _filteredResult.length,
+                    HeaderSection(
+                      category: widget.category,
+                      pharmacyId: widget.pharmacyId,
+                      pharmacyName: widget.pharmacyName,
                     ),
+                    Container(
+                      padding: const EdgeInsets.all(kDefaultPadding),
+                      child: Column(
+                        children: [
+                          ProductList(
+                            products: _filteredResult,
+                            itemCount: _filteredResult.length,
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
+              ),
+            )
+          : Loader(),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text(
+        widget.pharmacyName == null
+            ? widget.category.name
+            : widget.pharmacyName!,
+        style: TextStyle(color: Colors.black),
+        overflow: TextOverflow.ellipsis,
       ),
+      centerTitle: true,
+      actions: [searchBar.getSearchAction(context)],
     );
   }
 }

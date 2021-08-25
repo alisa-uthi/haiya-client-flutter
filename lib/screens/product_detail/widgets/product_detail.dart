@@ -24,17 +24,19 @@ class ProductDetail extends StatelessWidget {
           overflow: TextOverflow.clip,
         ),
         SizedBox(height: kDefaultPadding / 2),
-        Text(
-          "${product!.catalog.pharmacyName}",
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
+        product!.pharmacyName != null
+            ? Text(
+                product!.pharmacyName!,
+                style: Theme.of(context).textTheme.bodyText1,
+              )
+            : Container(),
 
         // Generic Name
         SizedBox(height: kDefaultPadding * 2),
         product!.genericName != null
             ? RowDetail(
                 title: "Generic Name",
-                detail: product!.genericName![0].genericName,
+                detail: product!.genericName!,
               )
             : Container(),
         SizedBox(height: kDefaultPadding / 1.3),

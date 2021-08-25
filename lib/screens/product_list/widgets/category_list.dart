@@ -8,9 +8,13 @@ class CategoryList extends StatefulWidget {
   const CategoryList({
     Key? key,
     required this.selectedCategory,
+    this.pharmacyId,
+    this.pharmacyName,
   }) : super(key: key);
 
   final Category selectedCategory;
+  final int? pharmacyId;
+  final String? pharmacyName;
 
   @override
   _CategoryListState createState() => _CategoryListState();
@@ -58,7 +62,11 @@ class _CategoryListState extends State<CategoryList> {
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation1, animation2) =>
-                  ProductListScreen(category: category),
+                  ProductListScreen(
+                category: category,
+                pharmacyId: widget.pharmacyId,
+                pharmacyName: widget.pharmacyName,
+              ),
               transitionDuration: Duration(seconds: 0),
             ),
           );

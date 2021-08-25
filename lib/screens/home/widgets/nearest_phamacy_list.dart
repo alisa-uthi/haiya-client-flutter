@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/home/widgets/pharmacy_card.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
-import 'package:haiya_client/shared/services/inventory_service.dart';
 
 class NearestPharmacyList extends StatefulWidget {
   const NearestPharmacyList({Key? key}) : super(key: key);

@@ -4,7 +4,6 @@ import 'package:flutter_otp/flutter_otp.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/signup_success/signup_success_screen.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
-import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';

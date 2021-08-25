@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/models/operation_time.dart';
 
 import 'opt_detail_row.dart';

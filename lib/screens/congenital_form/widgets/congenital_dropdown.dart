@@ -33,6 +33,7 @@ class _CongenitalDropdownState extends State<CongenitalDropdown> {
 
   @override
   void initState() {
+    super.initState();
     _congentialDiseaseItems = ConstantService.dummyCongentialDiseaseOptions();
     _severityLevels = ['Low', 'Medium', 'Severe', 'Very Severe'];
   }
