@@ -4,7 +4,6 @@ import 'package:haiya_client/screens/product_list/product_list_screen.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../constants.dart';
 

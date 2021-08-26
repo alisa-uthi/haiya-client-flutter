@@ -8,6 +8,7 @@ class Pharmacy {
   final String phone;
   final String image;
   final String? ratingScore;
+  final int? addressId;
   final Address? address;
   final double? distanceFromCurrentLoc;
   final List<OperationTime>? operationTime;
@@ -19,6 +20,7 @@ class Pharmacy {
     required this.phone,
     required this.image,
     this.ratingScore,
+    this.addressId,
     this.address,
     this.distanceFromCurrentLoc,
     this.operationTime,
@@ -33,12 +35,18 @@ class Pharmacy {
       image: json['Pcy_Image'],
       ratingScore: json['Rating_Score'],
       distanceFromCurrentLoc: json['Distance'],
-      address: Address.fromJson(json['Pcy_Address']),
-      operationTime: (json['Pcy_OperationTimes'] as List)
-          .map((i) => OperationTime.fromJson(i))
-          .toList(),
+      addressId: json['Pcy_Addr_ID'],
+      address: json['Pcy_Address'] != null
+          ? Address.fromJson(json['Pcy_Address'])
+          : null,
+      operationTime: json['Pcy_OperationTimes'] != null
+          ? (json['Pcy_OperationTimes'] as List)
+              .map((i) => OperationTime.fromJson(i))
+              .toList()
+          : null,
     );
   }
 }
 
+List<Pharmacy> allPharmacies = [];
 List<Pharmacy> nearestPharmacies = [];

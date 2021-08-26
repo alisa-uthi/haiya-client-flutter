@@ -6,7 +6,7 @@ import 'screens/congenital_form/congenital_form_screen.dart';
 import 'screens/drug_allery_form/drug_allergy_form_screen.dart';
 import 'screens/forgot_password/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
-import 'screens/nearest_pharmacy/nearest_phamacy_screen.dart';
+import 'screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'screens/product_detail/product_detail_screen.dart';
 import 'screens/product_list/product_list_screen.dart';
 import 'screens/signin/signin_screen.dart';
@@ -29,7 +29,10 @@ final Map<String, WidgetBuilder> routes = {
   DrugAllergyFormScreen.routeName: (context) => DrugAllergyFormScreen(),
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
-  NearestPharmacyScreen.routeName: (context) => NearestPharmacyScreen(),
+  PharmacyDetailListScreen.routeName: (context) => PharmacyDetailListScreen(
+        title: '',
+        pharmacies: [],
+      ),
   OperationTimesScreen.routeName: (context) =>
       OperationTimesScreen(pharmacy: null),
   ProductListScreen.routeName: (context) =>

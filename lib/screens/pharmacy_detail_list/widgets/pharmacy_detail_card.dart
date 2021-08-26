@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
+import 'package:intl/intl.dart';
+
 import 'package:haiya_client/screens/operation_times/operation_times_screen.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
-import 'package:intl/intl.dart';
 import 'package:haiya_client/shared/models/operation_time.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/screens/product_list/product_list_screen.dart';
@@ -25,15 +27,48 @@ class _PharmacyDetailCardState extends State<PharmacyDetailCard> {
   InventoryService _inventoryService = new InventoryService();
   bool _isOpen = false;
   bool _isLoading = true;
+  OperationTime? _opt;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  @override
+  void didUpdateWidget(PharmacyDetailCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.pharmacy != oldWidget.pharmacy) {
+      _fetchData();
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Future<dynamic> _fetchData() async {
+    await _getCurrentOperationTime();
+    if (_opt != null) {
+      var result = _inventoryService.isPharmacyOpen(_opt!);
+      setState(() => _isOpen = result);
+    } else {
+      setState(() => _isOpen = false);
+    }
+    setState(() => _isLoading = false);
+  }
 
   String getCurrentWeekDay() {
     return DateFormat.E().format(DateTime.now());
   }
 
-  OperationTime getCurrentOperationTime() {
+  _getCurrentOperationTime() async {
     String weekday = getCurrentWeekDay();
-    return widget.pharmacy.operationTime!
-        .firstWhere((element) => element.optDay == weekday);
+    setState(() {
+      _opt = widget.pharmacy.operationTime!
+          .firstWhereOrNull((element) => element.optDay == weekday);
+    });
   }
 
   String _getTimePeriodUnit(String time) {
@@ -41,16 +76,6 @@ class _PharmacyDetailCardState extends State<PharmacyDetailCard> {
       return 'AM';
     }
     return 'PM';
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    var result = _inventoryService.isPharmacyOpen(getCurrentOperationTime());
-    setState(() => {
-          _isOpen = result,
-          _isLoading = false,
-        });
   }
 
   @override
@@ -110,10 +135,20 @@ class _PharmacyDetailCardState extends State<PharmacyDetailCard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // Rating Score
                       widget.pharmacy.ratingScore != null
                           ? _buildRatingScore()
                           : Container(),
-                      _buildOperationTime(),
+
+                      // Operation Time
+                      _opt != null
+                          ? _buildOperationTime()
+                          : Text(
+                              "Closed",
+                              style: TextStyle(
+                                color: kGreyColor.withOpacity(0.5),
+                              ),
+                            ),
                     ],
                   ),
                 ],
@@ -164,13 +199,13 @@ class _PharmacyDetailCardState extends State<PharmacyDetailCard> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '${getCurrentOperationTime().openHr} ${_getTimePeriodUnit(getCurrentOperationTime().openHr)}',
+                '${_opt!.openHr} ${_getTimePeriodUnit(_opt!.openHr)}',
                 style: TextStyle(
                   color: !_isOpen ? kGreyColor.withOpacity(0.5) : Colors.black,
                 ),
               ),
               Text(
-                '${getCurrentOperationTime().closeHr} ${_getTimePeriodUnit(getCurrentOperationTime().closeHr)}',
+                '${_opt!.closeHr} ${_getTimePeriodUnit(_opt!.closeHr)}',
                 style: TextStyle(
                   color: !_isOpen ? kGreyColor.withOpacity(0.5) : Colors.black,
                 ),

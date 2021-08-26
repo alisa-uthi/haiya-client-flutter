@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:haiya_client/constants.dart';
-import 'package:haiya_client/screens/nearest_pharmacy/widgets/pharmacy_detail_card.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
 
-class NearestPharmacyScreen extends StatefulWidget {
+import 'widgets/pharmacy_detail_card.dart';
+
+class PharmacyDetailListScreen extends StatefulWidget {
   static final routeName = '/nearest-pharmacy';
 
+  PharmacyDetailListScreen({
+    Key? key,
+    required this.title,
+    required this.pharmacies,
+  }) : super(key: key);
+
+  final String title;
+  final List<Pharmacy> pharmacies;
+
   @override
-  _NearestPharmacyScreenState createState() => _NearestPharmacyScreenState();
+  _PharmacyDetailListScreenState createState() =>
+      _PharmacyDetailListScreenState();
 }
 
-class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
+class _PharmacyDetailListScreenState extends State<PharmacyDetailListScreen> {
   String _searchText = '';
   List<Pharmacy> _filteredResult = [];
   late SearchBar searchBar;
@@ -20,7 +31,7 @@ class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       title: Text(
-        "Nearest Pharmacy",
+        widget.title,
         style: TextStyle(color: Colors.black),
       ),
       centerTitle: true,
@@ -30,25 +41,27 @@ class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
 
   void onValueChanged(String value) {
     setState(
-      () => {
-        _searchText = value,
-        _filteredResult = nearestPharmacies
+      () {
+        _searchText = value;
+        _filteredResult = widget.pharmacies
             .where((phar) =>
                 phar.name.toLowerCase().contains(_searchText.toLowerCase()))
-            .toList()
+            .toList();
       },
     );
   }
 
   void clearText() {
     setState(
-      () => {_searchText = '', _filteredResult = nearestPharmacies},
+      () => {_searchText = '', _filteredResult = widget.pharmacies},
     );
   }
 
+  @override
   void initState() {
+    super.initState();
     setState(() {
-      _filteredResult = nearestPharmacies;
+      _filteredResult = widget.pharmacies;
     });
 
     searchBar = new SearchBar(
@@ -56,6 +69,8 @@ class _NearestPharmacyScreenState extends State<NearestPharmacyScreen> {
       buildDefaultAppBar: _buildAppBar,
       setState: setState,
       onSubmitted: onValueChanged,
+      clearOnSubmit: false,
+      closeOnSubmit: false,
       onChanged: onValueChanged,
       onCleared: clearText,
       onClosed: clearText,

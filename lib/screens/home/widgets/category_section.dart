@@ -15,7 +15,7 @@ class CategorySection extends StatefulWidget {
 class _CategorySectionState extends State<CategorySection> {
   final List<String> _categoryLogo = [
     'assets/images/medicine.png',
-    'assets/images/medicine.png',
+    'assets/images/supplementary.png',
     'assets/images/equipment.png',
     'assets/images/cosmetic.png',
   ];

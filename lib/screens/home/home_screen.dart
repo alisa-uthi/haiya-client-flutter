@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
-import 'package:haiya_client/screens/home/widgets/category_section.dart';
-import 'package:haiya_client/screens/home/widgets/nearest_phamacy_list.dart';
-import 'package:haiya_client/screens/home/widgets/recommended_products.dart';
-import 'package:haiya_client/screens/nearest_pharmacy/nearest_phamacy_screen.dart';
+import 'package:haiya_client/screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
+import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
+import 'package:haiya_client/shared/widgets/pharmacy_list.dart';
 import 'package:haiya_client/shared/widgets/title_section.dart';
 
+import 'widgets/category_section.dart';
 import 'widgets/current_location_tap.dart';
+import 'widgets/nearest_phamacy_list.dart';
 
 class HomeScreen extends StatefulWidget {
   static final routeName = '/home';
@@ -43,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await _getUserLocation();
     await _getCategories();
     await _getNearestPharmacies();
+    await _getAllPharmacies();
     setState(() => _isLoading = false);
   }
 
@@ -56,8 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _getNearestPharmacies() async {
-    InventoryService _inventoryService = new InventoryService();
     await _inventoryService.getNearestPharmacies();
+  }
+
+  _getAllPharmacies() async {
+    await _inventoryService.getAllPharmacies();
   }
 
   @override
@@ -80,9 +85,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: 'Nearest Pharmacy',
                         moreText: "See more",
                         onMoreTap: () {
-                          Navigator.pushNamed(
+                          Navigator.push(
                             context,
-                            NearestPharmacyScreen.routeName,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  PharmacyDetailListScreen(
+                                title: 'Nearest Pharmacy',
+                                pharmacies: nearestPharmacies,
+                              ),
+                              transitionDuration: Duration(seconds: 0),
+                            ),
                           );
                         },
                       ),
@@ -90,12 +102,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       NearestPharmacyList(),
                       SizedBox(height: kDefaultPadding * 2),
                       TitleSection(
-                        title: 'Recommended Products',
-                        moreText: "",
-                        onMoreTap: () {},
+                        title: 'Pharmacy',
+                        moreText: 'See more',
+                        onMoreTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  PharmacyDetailListScreen(
+                                title: 'Pharmacy',
+                                pharmacies: allPharmacies,
+                              ),
+                              transitionDuration: Duration(seconds: 0),
+                            ),
+                          );
+                        },
                       ),
                       SizedBox(height: kDefaultPadding),
-                      // RecommendedProductsSection(),
+                      PharmacyList(pharmacies: allPharmacies, itemCount: 6),
+                      SizedBox(height: kDefaultPadding),
                     ],
                   ),
                 ),

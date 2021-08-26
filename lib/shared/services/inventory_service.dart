@@ -37,15 +37,28 @@ class InventoryService {
     return false;
   }
 
-  Future<void> getAllProductCategories() async {
+  Future<void> getAllPharmacies() async {
+    // Get current location coordinates
+    UserService userService = new UserService();
+    LatLng latlng = await userService.getCurrentCoordinates();
+
     // Call Api
-    var response = await http.get(Uri.parse('${basedUri}/category'));
+    var response = await http.post(
+      Uri.parse('${basedUri}/pharmacy/nearest'),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonEncode({
+        'latitude': latlng.latitude,
+        'longitude': latlng.longitude,
+      }),
+    );
 
     // Handle response
     if (response.statusCode == 200) {
       Map<String, dynamic> body = jsonDecode(response.body);
-      allCategories = body['data']
-          .map<Category>((json) => Category.fromJson(json))
+      allPharmacies = body['data']
+          .map<Pharmacy>((json) => Pharmacy.fromJson(json))
           .toList();
     }
   }
@@ -72,6 +85,19 @@ class InventoryService {
       Map<String, dynamic> body = jsonDecode(response.body);
       nearestPharmacies = body['data']
           .map<Pharmacy>((json) => Pharmacy.fromJson(json))
+          .toList();
+    }
+  }
+
+  Future<void> getAllProductCategories() async {
+    // Call Api
+    var response = await http.get(Uri.parse('${basedUri}/category'));
+
+    // Handle response
+    if (response.statusCode == 200) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      allCategories = body['data']
+          .map<Category>((json) => Category.fromJson(json))
           .toList();
     }
   }
