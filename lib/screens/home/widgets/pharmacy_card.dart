@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:haiya_client/screens/product_list/product_list_screen.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../constants.dart';
 
@@ -34,10 +36,11 @@ class PharmacyCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Image.network(
-                pharmacy.image,
+              child: CachedNetworkImage(
                 width: 150,
                 height: 100,
+                imageUrl: pharmacy.image,
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
             Spacer(),

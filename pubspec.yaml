@@ -29,6 +29,8 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_datetime_picker: ^1.5.1
   image_picker: ^0.8.2
+  cached_network_image: ^3.1.0
+  shimmer: ^2.0.0
   google_maps_flutter: ^2.0.6
   geolocator: ^7.4.0 # To get the current location
   geocoding: ^2.0.0 # To translate the latitude, longtitude to address

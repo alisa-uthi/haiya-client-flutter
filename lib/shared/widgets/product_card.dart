@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
+
 import 'package:haiya_client/screens/product_detail/product_detail_screen.dart';
 import 'package:haiya_client/shared/models/product.dart';
 import '../../constants.dart';
@@ -34,10 +37,11 @@ class _ProductCardState extends State<ProductCard> {
           children: [
             // Product Image
             Center(
-              child: Image.network(
-                widget.product.image,
+              child: CachedNetworkImage(
                 width: 120,
                 height: 120,
+                imageUrl: widget.product.image,
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
             Spacer(),
