@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
+
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
@@ -22,13 +24,28 @@ class _OrderFormState extends State<OrderForm> {
   String _note = '';
 
   void _addToCart() {
-    cart.add(new OrderLine(
-      productId: widget.product.id,
-      productName: widget.product.tradeName,
-      quantity: _quantity,
-      totalCost: widget.product.price * _quantity,
-      comment: _note,
-    ));
+    var product = widget.product;
+
+    // Check if the product is already in the cart
+    // If it is, add quantity
+    var existingProductInCart =
+        cart.firstWhereOrNull((item) => item.productName == product.tradeName);
+    if (existingProductInCart != null) {
+      int indexInCart = cart.indexOf(existingProductInCart);
+      if (indexInCart != -1) {
+        cart[indexInCart].quantity += _quantity;
+      }
+    } else {
+      cart.add(new OrderLine(
+        productId: product.id,
+        productName: product.tradeName,
+        productImage: product.image,
+        productPrice: product.price,
+        quantity: _quantity,
+        totalCost: product.price * _quantity,
+        comment: _note,
+      ));
+    }
     Navigator.pop(context);
   }
 

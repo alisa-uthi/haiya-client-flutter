@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/cart/cart_screen.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -36,7 +37,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         gotoScreen = HomeScreen();
         break;
       case 1:
-        gotoScreen = HomeScreen();
+        gotoScreen = CartScreen();
         break;
       case 2:
         gotoScreen = HomeScreen();

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/models/product.dart';
@@ -38,10 +39,11 @@ class ProductDetailScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: kDefaultPadding * 1.5),
-                Image.network(
-                  product!.image,
+                CachedNetworkImage(
                   width: 150,
                   height: 150,
+                  imageUrl: product!.image,
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
                 SizedBox(height: kDefaultPadding * 1.5),
                 DetailContainer(product: product),

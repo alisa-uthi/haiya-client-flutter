@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/cart/cart_screen.dart';
 
 import '../../constants.dart';
 
@@ -17,7 +18,15 @@ class ShoppingCartBtn extends StatelessWidget {
       ),
       width: 40,
       child: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) => CartScreen(),
+              transitionDuration: Duration(seconds: 0),
+            ),
+          );
+        },
         icon: Icon(
           Icons.shopping_bag_outlined,
           color: Colors.white,
