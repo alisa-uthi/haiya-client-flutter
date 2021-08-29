@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/shared/models/order_line.dart';
+import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
+import 'package:haiya_client/shared/widgets/custom_alert_dialog.dart';
 
 class OrderForm extends StatefulWidget {
   const OrderForm({
@@ -16,7 +19,50 @@ class OrderForm extends StatefulWidget {
 
 class _OrderFormState extends State<OrderForm> {
   int _quantity = 1;
-  String? _note;
+  String _note = '';
+
+  void _addToCart() {
+    cart.add(new OrderLine(
+      productId: widget.product.id,
+      productName: widget.product.tradeName,
+      quantity: _quantity,
+      totalCost: widget.product.price * _quantity,
+      comment: _note,
+    ));
+    Navigator.pop(context);
+  }
+
+  void _onAddClicked() async {
+    // Users are allowed to order from one pharmacy at a time
+    if (cart.length == 0) {
+      // Set selected pharmacy for the order
+      selectedPharmacy = widget.product.pharmacyName!;
+      _addToCart();
+    } else if (selectedPharmacy != widget.product.pharmacyName!) {
+      // Show dialog to warn user
+      setState(() {});
+      _showDialog();
+    } else {
+      _addToCart();
+    }
+  }
+
+  Future _showDialog() async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      CustomAlertDialog alert = CustomAlertDialog(
+        title: "New Order Confirmation",
+        content:
+            "If you want to order from different pharmacy, Items from the previous pharmacy will be cancelled.",
+        callBack: () => {
+          cart.clear(),
+          selectedPharmacy = widget.product.pharmacyName!,
+          _addToCart(),
+          Navigator.pop(context),
+        },
+      );
+      showDialog(context: context, builder: (BuildContext context) => alert);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +94,13 @@ class _OrderFormState extends State<OrderForm> {
   }
 
   Widget _buildAddToCartBtn() {
+    const whiteText = TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    );
+
     return GestureDetector(
-      onTap: () {},
+      onTap: _onAddClicked,
       child: Container(
         padding: const EdgeInsets.all(kDefaultPadding),
         decoration: BoxDecoration(
@@ -59,20 +110,8 @@ class _OrderFormState extends State<OrderForm> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Add to Cart",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              "${widget.product.price * _quantity} THB",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )
+            Text("Add to Cart", style: whiteText),
+            Text("${widget.product.price * _quantity} THB", style: whiteText)
           ],
         ),
       ),

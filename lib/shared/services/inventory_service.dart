@@ -44,7 +44,7 @@ class InventoryService {
 
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/pharmacy/nearest'),
+      Uri.parse('${basedUri}/pharmacy'),
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },

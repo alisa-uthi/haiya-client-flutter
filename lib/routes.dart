@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/operation_times/operation_times_screen.dart';
 
 import 'screens/authOption/auth_option_screen.dart';
+import 'screens/cart/cart_screen.dart';
 import 'screens/congenital_form/congenital_form_screen.dart';
 import 'screens/drug_allery_form/drug_allergy_form_screen.dart';
 import 'screens/forgot_password/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
+import 'screens/operation_times/operation_times_screen.dart';
 import 'screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'screens/product_detail/product_detail_screen.dart';
 import 'screens/product_list/product_list_screen.dart';
@@ -38,4 +39,5 @@ final Map<String, WidgetBuilder> routes = {
   ProductListScreen.routeName: (context) =>
       ProductListScreen(category: Category(id: -1, name: '')),
   ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
+  CartScreen.routeName: (context) => CartScreen(),
 };

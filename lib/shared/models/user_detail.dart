@@ -104,6 +104,16 @@ class UserDetail {
       weight: json['Psn_Weight'],
       phone: json['Psn_Phone'],
       image: json['Psn_Image'],
+      drugAllergy: json['Psn_DrugAllergy'] != null
+          ? (json['Psn_DrugAllergy'] as List)
+              .map((i) => DrugAllergy.fromJson(i))
+              .toList()
+          : null,
+      congenitalDisease: json['Psn_CongenitalDisease'] != null
+          ? (json['Psn_CongenitalDisease'] as List)
+              .map((i) => CongenitalDisease.fromJson(i))
+              .toList()
+          : null,
     );
   }
 

@@ -50,3 +50,4 @@ class Pharmacy {
 
 List<Pharmacy> allPharmacies = [];
 List<Pharmacy> nearestPharmacies = [];
+String selectedPharmacy = '';

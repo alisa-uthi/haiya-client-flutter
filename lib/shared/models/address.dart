@@ -26,3 +26,5 @@ class Address {
     );
   }
 }
+
+List<Address> userAddress = [];

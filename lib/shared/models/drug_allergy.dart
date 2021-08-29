@@ -15,4 +15,13 @@ class DrugAllergy {
   String toString() {
     return "${this.name}, ${this.reaction}, ${this.severity}";
   }
+
+  factory DrugAllergy.fromJson(Map<String, dynamic> json) {
+    return DrugAllergy(
+      id: json['ID'],
+      name: json['Dal_Name'],
+      reaction: json['Dal_Reaction'],
+      severity: json['Dal_Severity'],
+    );
+  }
 }

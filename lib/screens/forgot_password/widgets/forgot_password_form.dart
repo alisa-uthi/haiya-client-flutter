@@ -20,9 +20,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
 
   void sendRequest(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      print(_email);
       bool isRequestSuccess = await _authService.forgotPassword(_email);
-      print(isRequestSuccess);
       if (isRequestSuccess) {
         CustomSnackBar.buildSnackbar(
           context,

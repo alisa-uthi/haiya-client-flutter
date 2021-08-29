@@ -1,39 +1,38 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:haiya_client/constants.dart';
 
 class CustomAlertDialog extends StatelessWidget {
+  final String title;
+  final String content;
+  final VoidCallback callBack;
+
+  CustomAlertDialog({
+    Key? key,
+    required this.title,
+    required this.content,
+    required this.callBack,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
-      child: showAlertDialog(context),
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+      child: AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: <Widget>[
+          TextButton(
+            child: Text("Continue"),
+            onPressed: () => callBack(),
+          ),
+          TextButton(
+            child: Text("Cancel"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
     );
   }
-}
-
-showAlertDialog(BuildContext context) {
-  // Create button
-  Widget okButton = TextButton(
-    child: Text("OK"),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  );
-
-  // Create AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("Simple Alert"),
-    content: Text("This is an alert message."),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }
