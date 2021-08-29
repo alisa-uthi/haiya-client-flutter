@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'screens/authOption/auth_option_screen.dart';
 import 'screens/cart/cart_screen.dart';
 import 'screens/checkout_order/checkout_order_screen.dart';
+import 'screens/checkout_success/checkout_success_screen.dart';
 import 'screens/congenital_form/congenital_form_screen.dart';
 import 'screens/drug_allery_form/drug_allergy_form_screen.dart';
 import 'screens/forgot_password/forgot_password_screen.dart';
@@ -42,4 +43,5 @@ final Map<String, WidgetBuilder> routes = {
   ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
   CartScreen.routeName: (context) => CartScreen(),
   CheckoutOrderScreen.routeName: (context) => CheckoutOrderScreen(),
+  CheckoutSuccessScreen.routeName: (context) => CheckoutSuccessScreen(),
 };

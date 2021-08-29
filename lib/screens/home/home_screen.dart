@@ -35,11 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _fetchData();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   Future<dynamic> _fetchData() async {
     await _getUserLocation();
     await _getCategories();
@@ -63,6 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _getAllPharmacies() async {
     await _inventoryService.getAllPharmacies();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override

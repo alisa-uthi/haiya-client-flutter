@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/checkout_order/checkout_order_screen.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/title_with_price.dart';
@@ -25,7 +26,6 @@ class _CartContainerState extends State<CartContainer> {
   void computeTotalPrice() {
     int totalPrice = 0;
     for (var orderLine in cart) {
-      print(orderLine.totalCost);
       totalPrice += orderLine.totalCost;
     }
     setState(() => _orderTotalPrice = totalPrice);
@@ -56,14 +56,31 @@ class _CartContainerState extends State<CartContainer> {
             SizedBox(height: kDefaultPadding),
             Divider(color: Colors.white),
             SizedBox(height: kDefaultPadding / 2),
-            TitleWithPrice(title: 'Total', price: _orderTotalPrice),
+            TitleWithPrice(
+              title: 'Total',
+              price: _orderTotalPrice,
+              color: Colors.white,
+            ),
             SizedBox(height: kDefaultPadding),
-            TitleWithPrice(title: 'Delivery Fee', price: 30),
+            TitleWithPrice(
+              title: 'Delivery Fee',
+              price: 30,
+              color: Colors.white,
+            ),
             SizedBox(height: kDefaultPadding * 1.7),
             CustomBtn(
               text: "CHECKOUT",
               boxColor: kPrimaryColor,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        CheckoutOrderScreen(),
+                    transitionDuration: Duration(seconds: 0),
+                  ),
+                );
+              },
               textColor: Colors.white,
             ),
           ],
