@@ -5,6 +5,7 @@ class Address {
   String? additionalInfo;
   double? latitude;
   double? longitude;
+  String isDeliveryAddress;
 
   Address({
     required this.id,
@@ -13,6 +14,7 @@ class Address {
     this.additionalInfo,
     this.latitude,
     this.longitude,
+    required this.isDeliveryAddress,
   });
 
   factory Address.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class Address {
       additionalInfo: json['Addr_AdditionalInfo'],
       latitude: double.parse(json['Addr_Latitude']),
       longitude: double.parse(json['Addr_Longitude']),
+      isDeliveryAddress: json['IsDeliveryAddress'],
     );
   }
 }

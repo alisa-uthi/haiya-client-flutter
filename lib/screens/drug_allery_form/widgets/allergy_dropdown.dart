@@ -116,6 +116,7 @@ class _AllergyDropdownState extends State<AllergyDropdown> {
                         _currentAllergy.reaction = _reaction,
                       }),
                 },
+                null,
               ),
             ),
 

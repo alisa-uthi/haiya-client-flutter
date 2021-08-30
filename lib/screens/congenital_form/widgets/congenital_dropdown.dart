@@ -115,6 +115,7 @@ class _CongenitalDropdownState extends State<CongenitalDropdown> {
                         _currentDisease.reaction = _reaction,
                       }),
                 },
+                null,
               ),
             ),
 

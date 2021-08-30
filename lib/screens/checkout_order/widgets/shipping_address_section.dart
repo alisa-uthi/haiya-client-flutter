@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/shipping_address/shipping_address_screen.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 
 import '../../../constants.dart';
@@ -58,7 +59,16 @@ class _ShippingAddressSectionState extends State<ShippingAddressSection> {
                   children: [
                     Text("Use current location"),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                ShippingAddressScreen(),
+                            transitionDuration: Duration(seconds: 0),
+                          ),
+                        );
+                      },
                       child: Text(
                         "Change",
                         style: TextStyle(

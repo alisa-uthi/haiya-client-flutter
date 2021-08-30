@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/add_shipping_address/add_address_screen.dart';
 import 'screens/authOption/auth_option_screen.dart';
 import 'screens/cart/cart_screen.dart';
 import 'screens/checkout_order/checkout_order_screen.dart';
@@ -12,6 +13,7 @@ import 'screens/operation_times/operation_times_screen.dart';
 import 'screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'screens/product_detail/product_detail_screen.dart';
 import 'screens/product_list/product_list_screen.dart';
+import 'screens/shipping_address/shipping_address_screen.dart';
 import 'screens/signin/signin_screen.dart';
 import 'screens/signup/signup_screen.dart';
 import 'screens/signup_success/signup_success_screen.dart';
@@ -44,4 +46,6 @@ final Map<String, WidgetBuilder> routes = {
   CartScreen.routeName: (context) => CartScreen(),
   CheckoutOrderScreen.routeName: (context) => CheckoutOrderScreen(),
   CheckoutSuccessScreen.routeName: (context) => CheckoutSuccessScreen(),
+  ShippingAddressScreen.routeName: (context) => ShippingAddressScreen(),
+  AddAddressScreen.routeName: (context) => AddAddressScreen(),
 };

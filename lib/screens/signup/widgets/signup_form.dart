@@ -122,6 +122,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   _firstName = value,
                   tempUser.firstname = _firstName!,
                 }),
+            null,
           ),
           SizedBox(height: kDefaultPadding / 1.5),
 
@@ -132,6 +133,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   _lastName = value,
                   tempUser.lastname = _lastName!,
                 }),
+            null,
           ),
           SizedBox(height: kDefaultPadding / 1.5),
 

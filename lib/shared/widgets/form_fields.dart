@@ -41,9 +41,11 @@ class FormFields {
     );
   }
 
-  Widget buildTextRequiredField(String label, Function(String?)? onChange) {
+  Widget buildTextRequiredField(
+      String label, Function(String?)? onChange, String? initialValue) {
     return CustomCard(
       child: TextFormField(
+        initialValue: initialValue != null ? initialValue : '',
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(labelText: label),
         onChanged: onChange,
