@@ -68,8 +68,8 @@ class _AvartarImageState extends State<AvartarImage> {
         child: currentUser.image != null
             ? ClipOval(
                 child: CachedNetworkImage(
-                  width: 80,
-                  height: 80,
+                  width: 70,
+                  height: 70,
                   imageUrl: currentUser.image!,
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),

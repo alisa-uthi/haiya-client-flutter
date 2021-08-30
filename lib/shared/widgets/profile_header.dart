@@ -18,7 +18,6 @@ class ProfileHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         AvartarImage(isViewOnly: isViewOnly),
-        SizedBox(width: kDefaultPadding),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
