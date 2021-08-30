@@ -52,6 +52,7 @@ class _ShippingAddressFormState extends State<ShippingAddressForm> {
       );
 
       if (isAdded) {
+        await _userService.getAddressByUserId();
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
@@ -83,8 +84,8 @@ class _ShippingAddressFormState extends State<ShippingAddressForm> {
           // Address Name
           _formFields.buildTextRequiredField(
             "Address Name",
+            _addressName,
             (value) => setState(() => _addressName = value!),
-            null,
           ),
           SizedBox(height: kDefaultPadding / 2),
 
@@ -110,6 +111,7 @@ class _ShippingAddressFormState extends State<ShippingAddressForm> {
           SizedBox(height: kDefaultPadding / 2),
           _formFields.buildTextField(
             "Additional Detail",
+            _note,
             (value) => setState(() => _note = value!),
           ),
           SizedBox(height: kDefaultPadding * 2),

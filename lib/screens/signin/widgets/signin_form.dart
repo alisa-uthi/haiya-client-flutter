@@ -19,7 +19,7 @@ class _SignInFormState extends State<SignInForm> {
 
   AuthService _authService = new AuthService();
   FormFields _formFields = new FormFields();
-  final _formKey = GlobalKey<FormState>();
+  static GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -55,11 +55,13 @@ class _SignInFormState extends State<SignInForm> {
           // Email and password fields
           _formFields.buildEmailField(
             "Email",
+            _email,
             (value) => setState(() => _email = value!),
           ),
           SizedBox(height: kDefaultPadding),
           _formFields.buildPasswordField(
               "Password",
+              _password,
               (value) => setState(() => _password = value!),
               _isPassHidden,
               _togglePasswordVisibility),

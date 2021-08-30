@@ -76,8 +76,10 @@ class UserService {
     }
   }
 
-  Future<void> updateShippingAddressStatus(
-      {required int addressId, required bool isShippingAddress}) async {
+  Future<void> updateShippingAddressStatus({
+    required int addressId,
+    required bool isShippingAddress,
+  }) async {
     // Call Api
     var response = await http.patch(
       Uri.parse('${basedUri}/address/${addressId}'),
@@ -95,5 +97,114 @@ class UserService {
       userAddress.firstWhere((addr) => addr.id == addressId).isDeliveryAddress =
           isShippingAddress ? 'Y' : 'N';
     }
+  }
+
+  Future<bool> updatePersonalInfo() async {
+    // Call Api
+    bool isAllergyAdded = await addDrugAllergy();
+    bool isDiseaseAdded = await addCongenitalDisease();
+
+    var response = await http.put(
+      Uri.parse('$basedUri/profile/${currentUser.id}'),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonEncode({
+        'title': tempUser.title,
+        'firstname': tempUser.firstname,
+        'lastname': tempUser.lastname,
+        'dob': tempUser.dob,
+        'gender': tempUser.gender,
+        'height': tempUser.height,
+        'weight': tempUser.weight,
+        'email': tempUser.email,
+        'phone': tempUser.phone,
+      }),
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 &&
+        response.statusCode < 205 &&
+        isAllergyAdded &&
+        isDiseaseAdded) {
+      // Convert response body to UserDetail object
+      Map<String, dynamic> body = jsonDecode(response.body);
+      currentUser = UserDetail.fromJson(body['data']);
+
+      // Reset user info when sign up
+      tempUser = new UserDetail(
+        id: 0,
+        email: '',
+        password: '',
+        title: 'Mr.',
+        firstname: '',
+        lastname: '',
+        gender: 'M',
+        height: 0,
+        weight: 0,
+        phone: '',
+        dob: '',
+        drugAllergy: [],
+        congenitalDisease: [],
+        image: '',
+      );
+
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> addDrugAllergy() async {
+    if (tempUser.drugAllergy.length > 0) {
+      for (int i = 0; i < tempUser.drugAllergy.length; i++) {
+        var obj = {
+          'name': tempUser.drugAllergy[i].name!,
+          'reaction': tempUser.drugAllergy[i].reaction!,
+          'severity': tempUser.drugAllergy[i].severity!,
+        };
+
+        // Call Api
+        var response = await http.post(
+          Uri.parse('$basedUri/drug-allergy/user/${currentUser.id}'),
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body: jsonEncode(obj),
+        );
+
+        // Handle response
+        if (response.statusCode >= 300) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  Future<bool> addCongenitalDisease() async {
+    if (tempUser.congenitalDisease.length > 0) {
+      for (int i = 0; i < tempUser.congenitalDisease.length; i++) {
+        var obj = {
+          'name': tempUser.congenitalDisease[i].name!,
+          'reaction': tempUser.congenitalDisease[i].reaction!,
+          'severity': tempUser.congenitalDisease[i].severity!,
+        };
+
+        // Call Api
+        var response = await http.post(
+          Uri.parse('$basedUri/congenital-disease/user/${currentUser.id}'),
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body: jsonEncode(obj),
+        );
+
+        // Handle response
+        if (response.statusCode >= 300) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

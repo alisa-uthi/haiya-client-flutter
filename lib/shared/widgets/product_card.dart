@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shimmer/shimmer.dart';
 
 import 'package:haiya_client/screens/product_detail/product_detail_screen.dart';
 import 'package:haiya_client/shared/models/product.dart';

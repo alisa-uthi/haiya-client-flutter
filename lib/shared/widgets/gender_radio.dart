@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 
-import '../../../constants.dart';
+import '../../constants.dart';
 
 enum GenderOption { female, male, other }
 
 class GenderRadio extends StatefulWidget {
   final Function? callBack;
-  GenderRadio({this.callBack});
+  final String initialGenderOption;
+  GenderRadio({
+    this.callBack,
+    required this.initialGenderOption,
+  });
 
   @override
   _GenderRadioState createState() => _GenderRadioState();
@@ -14,6 +19,12 @@ class GenderRadio extends StatefulWidget {
 
 class _GenderRadioState extends State<GenderRadio> {
   GenderOption _genderOption = GenderOption.male;
+  @override
+  void initState() {
+    super.initState();
+    _genderOption = EnumToString.fromString(
+        GenderOption.values, widget.initialGenderOption)!;
+  }
 
   void _handleGenderChange(GenderOption? value, String gender) {
     widget.callBack!(gender);

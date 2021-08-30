@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/edit_personal_info/edit_personal_info_screen.dart';
 import 'package:haiya_client/shared/widgets/profile_header.dart';
 
 import '../../../constants.dart';
@@ -16,7 +17,16 @@ class EditProfileHeader extends StatelessWidget {
       children: [
         ProfileHeader(isViewOnly: true),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) =>
+                    EditPersonalInfoScreen(),
+                transitionDuration: Duration(seconds: 0),
+              ),
+            );
+          },
           child: Text(
             "EDIT",
             style: TextStyle(

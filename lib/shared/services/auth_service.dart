@@ -10,24 +10,24 @@ class AuthService {
     var congenitalDisease = [];
 
     // Convert List<DrugAllery> to normal array of objects
-    if (tempUser.drugAllergy!.length > 0) {
-      for (int i = 0; i < tempUser.drugAllergy!.length; i++) {
+    if (tempUser.drugAllergy.length > 0) {
+      for (int i = 0; i < tempUser.drugAllergy.length; i++) {
         var obj = {
-          'name': tempUser.drugAllergy![i].name!,
-          'reaction': tempUser.drugAllergy![i].reaction!,
-          'severity': tempUser.drugAllergy![i].severity!,
+          'name': tempUser.drugAllergy[i].name!,
+          'reaction': tempUser.drugAllergy[i].reaction!,
+          'severity': tempUser.drugAllergy[i].severity!,
         };
         drugAllergy.add(obj);
       }
     }
 
     // Convert List<DrugAllery> to normal array of objects
-    if (tempUser.congenitalDisease!.length > 0) {
-      for (int i = 0; i < tempUser.congenitalDisease!.length; i++) {
+    if (tempUser.congenitalDisease.length > 0) {
+      for (int i = 0; i < tempUser.congenitalDisease.length; i++) {
         var obj = {
-          'name': tempUser.congenitalDisease![i].name!,
-          'reaction': tempUser.congenitalDisease![i].reaction!,
-          'severity': tempUser.congenitalDisease![i].severity!,
+          'name': tempUser.congenitalDisease[i].name!,
+          'reaction': tempUser.congenitalDisease[i].reaction!,
+          'severity': tempUser.congenitalDisease[i].severity!,
         };
         congenitalDisease.add(obj);
       }
@@ -75,6 +75,7 @@ class AuthService {
         weight: 0,
         phone: '',
         dob: '',
+        image: '',
         congenitalDisease: [],
         drugAllergy: [],
       );

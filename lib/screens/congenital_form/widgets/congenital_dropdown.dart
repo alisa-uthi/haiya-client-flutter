@@ -109,13 +109,13 @@ class _CongenitalDropdownState extends State<CongenitalDropdown> {
               key: _formKey,
               child: _formFields.buildTextRequiredField(
                 "Reaction *",
+                _reaction,
                 (value) => {
                   setState(() => {
                         _reaction = value,
                         _currentDisease.reaction = _reaction,
                       }),
                 },
-                null,
               ),
             ),
 

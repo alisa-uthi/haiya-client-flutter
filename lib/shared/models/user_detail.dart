@@ -1,7 +1,5 @@
-import 'package:haiya_client/shared/models/congenital_disease.dart';
-import 'package:haiya_client/shared/models/drug_allergy.dart';
-
-import 'address.dart';
+import 'congenital_disease.dart';
+import 'drug_allergy.dart';
 
 class UserDetail {
   final int id;
@@ -15,10 +13,9 @@ class UserDetail {
   int weight;
   String phone;
   String dob;
-  String? image;
-  List<CongenitalDisease>? congenitalDisease;
-  List<DrugAllergy>? drugAllergy;
-  List<Address>? address;
+  String image;
+  List<CongenitalDisease> congenitalDisease;
+  List<DrugAllergy> drugAllergy;
 
   UserDetail({
     required this.id,
@@ -32,63 +29,62 @@ class UserDetail {
     required this.weight,
     required this.phone,
     required this.dob,
-    this.image,
-    this.congenitalDisease,
-    this.drugAllergy,
-    this.address,
+    required this.image,
+    required this.congenitalDisease,
+    required this.drugAllergy,
   });
 
-  set _title(String value) {
-    this.title = value;
-  }
+  // set _title(String value) {
+  //   this.title = value;
+  // }
 
-  set _firstname(String value) {
-    this.firstname = value;
-  }
+  // set _firstname(String value) {
+  //   this.firstname = value;
+  // }
 
-  set _lastname(String value) {
-    this.lastname = value;
-  }
+  // set _lastname(String value) {
+  //   this.lastname = value;
+  // }
 
-  set _gender(String value) {
-    this.gender = value;
-  }
+  // set _gender(String value) {
+  //   this.gender = value;
+  // }
 
-  set _dob(String value) {
-    this.dob = value;
-  }
+  // set _dob(String value) {
+  //   this.dob = value;
+  // }
 
-  set _weight(int value) {
-    this.weight = value;
-  }
+  // set _weight(int value) {
+  //   this.weight = value;
+  // }
 
-  set _height(int value) {
-    this.height = value;
-  }
+  // set _height(int value) {
+  //   this.height = value;
+  // }
 
-  set _phone(String value) {
-    this.phone = value;
-  }
+  // set _phone(String value) {
+  //   this.phone = value;
+  // }
 
-  set _email(String value) {
-    this.email = value;
-  }
+  // set _email(String value) {
+  //   this.email = value;
+  // }
 
-  set _password(String value) {
-    this.password = value;
-  }
+  // set _password(String value) {
+  //   this.password = value;
+  // }
 
-  set _congenitalDisease(List<CongenitalDisease> disease) {
-    this.congenitalDisease = disease;
-  }
+  // set _congenitalDisease(List<CongenitalDisease> disease) {
+  //   this.congenitalDisease = disease;
+  // }
 
-  set _drugAllergy(List<DrugAllergy> allergy) {
-    this.drugAllergy = allergy;
-  }
+  // set _drugAllergy(List<DrugAllergy> allergy) {
+  //   this.drugAllergy = allergy;
+  // }
 
-  set _address(List<Address> address) {
-    this.address = address;
-  }
+  // set _address(List<Address> address) {
+  //   this.address = address;
+  // }
 
   factory UserDetail.fromJson(Map<String, dynamic> json) {
     return UserDetail(
@@ -108,12 +104,12 @@ class UserDetail {
           ? (json['Psn_DrugAllergy'] as List)
               .map((i) => DrugAllergy.fromJson(i))
               .toList()
-          : null,
+          : [],
       congenitalDisease: json['Psn_CongenitalDisease'] != null
           ? (json['Psn_CongenitalDisease'] as List)
               .map((i) => CongenitalDisease.fromJson(i))
               .toList()
-          : null,
+          : [],
     );
   }
 
@@ -121,7 +117,8 @@ class UserDetail {
   String toString() {
     return """${this.id}, ${this.title}, ${this.firstname}, ${this.lastname}, ${this.dob}, 
     ${this.gender}, ${this.weight}, ${this.height}, ${this.phone},
-    ${this.email}, ${this.password}, ${this.image}""";
+    ${this.email}, ${this.password}, ${this.image} 
+    ${this.drugAllergy} ${this.congenitalDisease}""";
   }
 }
 
@@ -157,5 +154,4 @@ UserDetail currentUser = new UserDetail(
   image: '',
   congenitalDisease: [],
   drugAllergy: [],
-  address: [],
 );

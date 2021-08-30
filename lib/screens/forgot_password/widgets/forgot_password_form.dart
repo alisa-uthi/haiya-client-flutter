@@ -47,6 +47,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
         children: [
           _formFields.buildEmailField(
             "Email",
+            _email,
             (value) => setState(() => _email = value!),
           ),
           SizedBox(height: kDefaultPadding * 2),

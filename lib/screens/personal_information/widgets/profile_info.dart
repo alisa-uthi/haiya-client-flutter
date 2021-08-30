@@ -29,10 +29,10 @@ class ProfileInfo extends StatelessWidget {
               currentUser.height.toString(),
               currentUser.weight.toString()
             ]),
-            _buildTextList('Drug Allergies', currentUser.drugAllergy!),
+            _buildTextList('Drug Allergies', currentUser.drugAllergy),
             _buildTextList(
               'Congenital Disease',
-              currentUser.congenitalDisease!,
+              currentUser.congenitalDisease,
             ),
           ],
         ),
@@ -50,7 +50,7 @@ class ProfileInfo extends StatelessWidget {
           child: list.length != 0
               ? ListView.builder(
                   shrinkWrap: true,
-                  itemCount: currentUser.drugAllergy!.length,
+                  itemCount: list.length,
                   itemBuilder: (context, index) {
                     var item = list[index];
                     return _buildInfoText('- ${item.name!}');

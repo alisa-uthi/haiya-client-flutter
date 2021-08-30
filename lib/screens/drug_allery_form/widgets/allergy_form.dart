@@ -54,7 +54,7 @@ class _AllergyFormState extends State<AllergyForm> {
               text: "CONFIRM",
               boxColor: kSuccessColor,
               onPressed: () {
-                tempUser.drugAllergy = _drugAllergy;
+                tempUser.drugAllergy = _drugAllergy!;
                 Navigator.pop(context);
               },
               textColor: Colors.white,

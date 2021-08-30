@@ -22,38 +22,40 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: SafeArea(
-        child: ValueListenableBuilder(
-          valueListenable: _userAddress,
-          builder: (context, child, value) {
-            return Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: userAddress.length != 0
-                  ? SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: userAddress.length,
-                            itemBuilder: (builder, index) {
-                              var address = userAddress[index];
-                              return AddressCard(
-                                address: address,
-                                onChangedCheckbox: () =>
-                                    _userAddress.notifyListeners(),
-                              );
-                            },
-                          ),
-                          _buildAddButton(context),
-                        ],
-                      ),
-                    )
-                  : NoAddressSaved(),
-            );
-          },
-        ),
+      body: LayoutBuilder(
+        builder: (context, constraint) {
+          return SingleChildScrollView(
+            child: ValueListenableBuilder(
+              valueListenable: _userAddress,
+              builder: (context, child, value) {
+                return Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  child: userAddress.length != 0
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            ...List.generate(
+                              userAddress.length,
+                              (index) {
+                                var address = userAddress[index];
+
+                                return AddressCard(
+                                  address: address,
+                                  onChangedCheckbox: () =>
+                                      _userAddress.notifyListeners(),
+                                );
+                              },
+                            ),
+                            _buildAddButton(context),
+                          ],
+                        )
+                      : NoAddressSaved(),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

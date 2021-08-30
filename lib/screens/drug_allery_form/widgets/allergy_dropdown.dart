@@ -110,13 +110,13 @@ class _AllergyDropdownState extends State<AllergyDropdown> {
               key: _formKey,
               child: _formFields.buildTextRequiredField(
                 "Reaction *",
+                _reaction,
                 (value) => {
                   setState(() => {
                         _reaction = value,
                         _currentAllergy.reaction = _reaction,
                       }),
                 },
-                null,
               ),
             ),
 

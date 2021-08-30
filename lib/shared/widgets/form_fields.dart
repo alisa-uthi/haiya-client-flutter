@@ -31,9 +31,14 @@ class FormFields {
     );
   }
 
-  Widget buildTextField(String label, Function(String?)? onChange) {
+  Widget buildTextField(
+    String label,
+    String? variable,
+    Function(String?)? onChange,
+  ) {
     return CustomCard(
       child: TextFormField(
+        initialValue: variable,
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(labelText: label),
         onChanged: onChange,
@@ -42,10 +47,13 @@ class FormFields {
   }
 
   Widget buildTextRequiredField(
-      String label, Function(String?)? onChange, String? initialValue) {
+    String label,
+    String? variable,
+    Function(String?)? onChange,
+  ) {
     return CustomCard(
       child: TextFormField(
-        initialValue: initialValue != null ? initialValue : '',
+        initialValue: variable,
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(labelText: label),
         onChanged: onChange,
@@ -59,9 +67,11 @@ class FormFields {
     );
   }
 
-  Widget buildPhoneField(String label, Function(String?)? onChange) {
+  Widget buildPhoneField(
+      String label, String? variable, Function(String?)? onChange) {
     return CustomCard(
       child: TextFormField(
+        initialValue: variable,
         keyboardType: TextInputType.phone,
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(labelText: label),
@@ -124,9 +134,11 @@ class FormFields {
     );
   }
 
-  Widget buildWeightHeightField(String label, Function(String?)? onChange) {
+  Widget buildWeightHeightField(
+      String label, String? variable, Function(String?)? onChange) {
     return CustomCard(
       child: TextFormField(
+        initialValue: variable,
         keyboardType: TextInputType.number,
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(
@@ -144,9 +156,11 @@ class FormFields {
     );
   }
 
-  Widget buildEmailField(String label, Function(String?)? onChange) {
+  Widget buildEmailField(
+      String label, String? variable, Function(String?)? onChange) {
     return CustomCard(
       child: TextFormField(
+        initialValue: variable,
         keyboardType: TextInputType.emailAddress,
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(labelText: label),
@@ -164,10 +178,16 @@ class FormFields {
     );
   }
 
-  Widget buildPasswordField(String label, Function(String?)? onChange,
-      bool _isHidden, Function() toggleVisibility) {
+  Widget buildPasswordField(
+    String label,
+    String? variable,
+    Function(String?)? onChange,
+    bool _isHidden,
+    Function() toggleVisibility,
+  ) {
     return CustomCard(
       child: TextFormField(
+        initialValue: variable,
         obscureText: _isHidden,
         keyboardType: TextInputType.visiblePassword,
         textInputAction: TextInputAction.next,

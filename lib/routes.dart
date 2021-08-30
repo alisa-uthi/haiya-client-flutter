@@ -8,6 +8,7 @@ import 'screens/checkout_success/checkout_success_screen.dart';
 import 'screens/congenital_form/congenital_form_screen.dart';
 import 'screens/customer_service/customer_service_screen.dart';
 import 'screens/drug_allery_form/drug_allergy_form_screen.dart';
+import 'screens/edit_personal_info/edit_personal_info_screen.dart';
 import 'screens/forgot_password/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/operation_times/operation_times_screen.dart';
@@ -57,5 +58,6 @@ final Map<String, WidgetBuilder> routes = {
   SettingScreen.routeName: (context) => SettingScreen(),
   CustomerServiceScreen.routeName: (context) => CustomerServiceScreen(),
   PersonalInformationScreen.routeName: (context) => PersonalInformationScreen(),
+  EditPersonalInfoScreen.routeName: (context) => EditPersonalInfoScreen(),
   PurchaseHistoryScreen.routeName: (context) => PurchaseHistoryScreen(),
 };

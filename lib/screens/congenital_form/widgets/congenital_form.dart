@@ -54,7 +54,7 @@ class _CongenitalFormState extends State<CongenitalForm> {
               text: "CONFIRM",
               boxColor: kSuccessColor,
               onPressed: () {
-                tempUser.congenitalDisease = _congenitalDisease;
+                tempUser.congenitalDisease = _congenitalDisease!;
                 Navigator.pop(context);
               },
               textColor: Colors.white,
