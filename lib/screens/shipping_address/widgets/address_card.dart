@@ -10,17 +10,63 @@ class AddressCard extends StatefulWidget {
   const AddressCard({
     Key? key,
     required this.address,
+    required this.onChangedCheckbox,
   }) : super(key: key);
 
   final Address address;
+  final Function onChangedCheckbox;
 
   @override
   _AddressCardState createState() => _AddressCardState();
 }
 
 class _AddressCardState extends State<AddressCard> {
-  bool _isShippingAddress = false;
+  late bool _isShippingAddress;
   UserService _userService = new UserService();
+
+  @override
+  void initState() {
+    super.initState();
+    _isShippingAddress = widget.address.isDeliveryAddress == 'Y' ? true : false;
+  }
+
+  @override
+  void didUpdateWidget(AddressCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    setState(() => _isShippingAddress =
+        widget.address.isDeliveryAddress == 'Y' ? true : false);
+  }
+
+  void _onChangedCheckbox(value) async {
+    setState(() => _isShippingAddress = value!);
+
+    userAddress.forEach((addr) {
+      // Update isDeliveryAddress of non-selected address to be "N"
+      if (addr.id != widget.address.id) {
+        addr.isDeliveryAddress = 'N';
+      }
+      // Update isDeliveryAddress of selected address
+      else {
+        addr.isDeliveryAddress = value! ? 'Y' : 'N';
+      }
+    });
+
+    // Update to database only when isDeliveryAddress is "Y"
+    if (_isShippingAddress) {
+      await _userService.updateShippingAddressStatus(
+        addressId: widget.address.id,
+        isShippingAddress: _isShippingAddress,
+      );
+    }
+
+    // Notify parent component to rebuild the widget
+    widget.onChangedCheckbox();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +98,7 @@ class _AddressCardState extends State<AddressCard> {
         Checkbox(
           activeColor: Colors.black,
           value: _isShippingAddress,
-          onChanged: (value) async {
-            setState(() => _isShippingAddress = value!);
-            bool isUpdated = await _userService.updateShippingAddressStatus(
-              addressId: widget.address.id,
-              isShippingAddress: _isShippingAddress,
-            );
-            // TODO: do something
-          },
+          onChanged: (value) => _onChangedCheckbox(value),
         ),
         Text("Use as the shipping address"),
       ],

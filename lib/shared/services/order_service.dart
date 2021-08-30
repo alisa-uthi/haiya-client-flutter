@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
 
-import 'user_service.dart';
 import 'package:http/http.dart' as http;
 
 class OrderService {
@@ -15,10 +14,6 @@ class OrderService {
     required String comment,
     required String pharmacy,
   }) async {
-    // TODO: Get current location if user uses current location
-    UserService userService = new UserService();
-    String deliveryAddress = await userService.getCurrentLocation();
-
     // Convert List<OrderLine> to normal array of objects
     var orderLines = [];
     for (int i = 0; i < cart.length; i++) {

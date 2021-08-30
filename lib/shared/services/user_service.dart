@@ -76,7 +76,7 @@ class UserService {
     }
   }
 
-  Future<bool> updateShippingAddressStatus(
+  Future<void> updateShippingAddressStatus(
       {required int addressId, required bool isShippingAddress}) async {
     // Call Api
     var response = await http.patch(
@@ -85,6 +85,7 @@ class UserService {
         "Content-Type": "application/json; charset=utf-8",
       },
       body: jsonEncode({
+        'userId': currentUser.id,
         'isDeliveryAddress': isShippingAddress ? 'Y' : 'N',
       }),
     );
@@ -93,8 +94,6 @@ class UserService {
     if (response.statusCode == 200) {
       userAddress.firstWhere((addr) => addr.id == addressId).isDeliveryAddress =
           isShippingAddress ? 'Y' : 'N';
-      return true;
     }
-    return false;
   }
 }

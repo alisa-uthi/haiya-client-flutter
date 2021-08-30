@@ -7,35 +7,20 @@ import '../../../constants.dart';
 class ShippingAddressSection extends StatefulWidget {
   const ShippingAddressSection({
     Key? key,
+    required this.addressName,
     required this.deliveryAddress,
+    required this.onAddressChanged,
   }) : super(key: key);
 
+  final String addressName;
   final String deliveryAddress;
+  final Function onAddressChanged;
 
   @override
   _ShippingAddressSectionState createState() => _ShippingAddressSectionState();
 }
 
 class _ShippingAddressSectionState extends State<ShippingAddressSection> {
-  // TODO: Remove this
-  // UserService _userService = new UserService();
-  // String _location = '';
-  // bool _isLoading = true;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _fetchCurrentLocation();
-  // }
-
-  // Future<dynamic> _fetchCurrentLocation() async {
-  //   String result = await _userService.getCurrentLocation();
-  //   setState(() => {
-  //         _location = result,
-  //         _isLoading = false,
-  //       });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -57,7 +42,7 @@ class _ShippingAddressSectionState extends State<ShippingAddressSection> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Use current location"),
+                    Text(widget.addressName),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -67,7 +52,7 @@ class _ShippingAddressSectionState extends State<ShippingAddressSection> {
                                 ShippingAddressScreen(),
                             transitionDuration: Duration(seconds: 0),
                           ),
-                        );
+                        ).then((value) => widget.onAddressChanged());
                       },
                       child: Text(
                         "Change",
