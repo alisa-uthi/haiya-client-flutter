@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/cart/cart_screen.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
+import 'package:haiya_client/screens/profile_navigation/profile_navigation_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
@@ -43,7 +44,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         gotoScreen = HomeScreen();
         break;
       case 3:
-        gotoScreen = HomeScreen();
+        gotoScreen = ProfileNavigationScreen();
         break;
     }
 
@@ -66,7 +67,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: kGreyColor.withOpacity(0.5),
+            color: kGreyColor.withOpacity(0.25),
             blurRadius: 15,
           ),
         ],
