@@ -27,7 +27,7 @@ class Order {
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
       id: json['ID'],
-      deliveryAddress: json['Delivery_Address'],
+      deliveryAddress: json['Ord_DelAddr'],
       deliveryPrice: json['Ord_DelPrice'],
       paymentMethod: json['Ord_PayMethod'],
       payTimestamp: json['Ord_PayTimestamp'],

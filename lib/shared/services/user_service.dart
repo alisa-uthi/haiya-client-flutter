@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:haiya_client/shared/models/address.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -9,10 +11,6 @@ import 'package:haiya_client/shared/models/user_detail.dart';
 
 class UserService {
   var basedUri = 'http://10.0.2.2:8080/api/user';
-
-  Future<void> updateProfileImage(String filePath) async {
-    print("Update profile image: " + filePath);
-  }
 
   Future<LatLng> getCurrentCoordinates() async {
     Position currentPosition = await Geolocator.getCurrentPosition();
@@ -206,5 +204,44 @@ class UserService {
       }
     }
     return true;
+  }
+
+  Future<bool> updateProfileImage(File imageFile) async {
+    // Prepare image file
+    var uri = Uri.parse('${basedUri}/profile/${currentUser.id}/image');
+    var request = new http.MultipartRequest("PATCH", uri);
+    var stream = new http.ByteStream(imageFile.openRead());
+    stream.cast();
+    var length = await imageFile.length();
+
+    request.files.add(
+      http.MultipartFile(
+        'image',
+        stream,
+        length,
+        filename: '${currentUser.id}${currentUser.firstname}',
+        contentType: MediaType('image', 'jpeg'),
+      ),
+    );
+
+    // Call Api
+    var response = await request.send();
+
+    // Handle response
+    if (response.statusCode == 200) {
+      return await getProfileImage();
+    }
+    return false;
+  }
+
+  Future<bool> getProfileImage() async {
+    var response = await http
+        .get(Uri.parse('${basedUri}/profile/${currentUser.id}/image'));
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      currentUser.image = body['data']['Psn_Image'];
+      return true;
+    }
+    return false;
   }
 }

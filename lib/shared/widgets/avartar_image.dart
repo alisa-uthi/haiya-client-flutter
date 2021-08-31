@@ -4,6 +4,7 @@ import 'package:haiya_client/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
+import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AvartarImage extends StatefulWidget {
@@ -23,12 +24,6 @@ class _AvartarImageState extends State<AvartarImage> {
   final picker = ImagePicker();
   UserService _userService = new UserService();
 
-  @override
-  void initState() {
-    super.initState();
-    loadImage();
-  }
-
   Future selectImage() async {
     final pickedPhoto = await picker.pickImage(source: ImageSource.camera);
 
@@ -36,7 +31,10 @@ class _AvartarImageState extends State<AvartarImage> {
       if (pickedPhoto!.path.isNotEmpty) {
         _image = File(pickedPhoto.path);
       } else {
-        print('No image selected.');
+        CustomSnackBar.buildSnackbar(
+          context,
+          'No image selected.',
+        );
       }
     });
 
@@ -45,15 +43,21 @@ class _AvartarImageState extends State<AvartarImage> {
 
   Future saveImage() async {
     // Check for valid file
-    if (_image == null) return;
+    if (_image == null) {
+      CustomSnackBar.buildSnackbar(
+        context,
+        'Invalid file. Please select another image.',
+      );
+    }
 
-    _userService.updateProfileImage(_image!.path);
-  }
-
-  Future loadImage() async {
-    // setState(() {
-    //   _userImg = prefs.getString("userImage");
-    // });
+    // Upload image to the server
+    bool isUploaded = await _userService.updateProfileImage(_image!);
+    if (!isUploaded) {
+      CustomSnackBar.buildSnackbar(
+        context,
+        'Image size is too large.',
+      );
+    }
   }
 
   @override
@@ -61,34 +65,54 @@ class _AvartarImageState extends State<AvartarImage> {
     return GestureDetector(
       onTap: widget.isViewOnly ? () {} : () => selectImage(),
       child: CircleAvatar(
-        backgroundColor: kBackgroundColor,
-        // foregroundImage:
-        //     _image != null ? FileImage(File(_image!.path)) : null,
+        backgroundColor: Colors.transparent,
         radius: 50,
-        child: currentUser.image != ''
-            ? ClipOval(
-                child: CachedNetworkImage(
-                  width: 70,
-                  height: 70,
-                  imageUrl: currentUser.image,
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              )
-            : Container(
-                padding: const EdgeInsets.only(right: kDefaultPadding / 1.5),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    width: 3,
-                    color: Colors.black,
-                  ),
-                ),
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Colors.black,
-                  size: 50,
-                ),
-              ),
+        child: _image != null
+            ? _buildSelectedImage()
+            : currentUser.image != ''
+                ? _buildNetworkImage()
+                : _buildNoProfileImage(),
+      ),
+    );
+  }
+
+  Widget _buildNetworkImage() {
+    return ClipOval(
+      child: CachedNetworkImage(
+        width: 70,
+        height: 70,
+        imageUrl: currentUser.image,
+        fit: BoxFit.cover,
+        errorWidget: (context, url, error) => Icon(Icons.error),
+      ),
+    );
+  }
+
+  Widget _buildSelectedImage() {
+    return ClipOval(
+      child: Image.file(
+        _image!,
+        width: 70,
+        height: 70,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _buildNoProfileImage() {
+    return Container(
+      padding: const EdgeInsets.only(right: kDefaultPadding / 1.5),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          width: 3,
+          color: Colors.black,
+        ),
+      ),
+      child: Icon(
+        Icons.camera_alt,
+        color: Colors.black,
+        size: 50,
       ),
     );
   }
