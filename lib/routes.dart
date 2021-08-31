@@ -18,6 +18,7 @@ import 'screens/product_detail/product_detail_screen.dart';
 import 'screens/product_list/product_list_screen.dart';
 import 'screens/profile_navigation/profile_navigation_screen.dart';
 import 'screens/purchase_history/purchase_history_screen.dart';
+import 'screens/purchase_history_detail/purchase_history_detail_screen.dart';
 import 'screens/settings/setting_screen.dart';
 import 'screens/shipping_address/shipping_address_screen.dart';
 import 'screens/signin/signin_screen.dart';
@@ -60,4 +61,6 @@ final Map<String, WidgetBuilder> routes = {
   PersonalInformationScreen.routeName: (context) => PersonalInformationScreen(),
   EditPersonalInfoScreen.routeName: (context) => EditPersonalInfoScreen(),
   PurchaseHistoryScreen.routeName: (context) => PurchaseHistoryScreen(),
+  PurchaseHistoryDetailScreen.routeName: (context) =>
+      PurchaseHistoryDetailScreen(orderId: 0),
 };

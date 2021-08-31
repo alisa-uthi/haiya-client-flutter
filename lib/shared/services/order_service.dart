@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
 
@@ -47,5 +48,32 @@ class OrderService {
       return true;
     }
     return false;
+  }
+
+  Future<List<Order>> getPurchaseHistories() async {
+    // Call Api
+    var response =
+        await http.get(Uri.parse('${basedUri}/user/${currentUser.id}'));
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      return body['data'].map<Order>((json) => Order.fromJson(json)).toList();
+    }
+
+    return [];
+  }
+
+  Future<Order?> getPurchaseHistoryById(int id) async {
+    // Call Api
+    var response = await http.get(Uri.parse('${basedUri}/${id}'));
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      return Order.fromJson(body['data']);
+    }
+
+    return null;
   }
 }
