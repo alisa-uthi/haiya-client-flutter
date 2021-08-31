@@ -4,6 +4,8 @@ import 'package:haiya_client/screens/signin/signin_screen.dart';
 import 'package:haiya_client/screens/term_agreement/term_agreement_screen.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 
+import 'widgets/divider_with_text.dart';
+
 class AuthOptionScreen extends StatelessWidget {
   static final routeName = '/auth-option';
 
@@ -38,16 +40,30 @@ class AuthOptionScreen extends StatelessWidget {
                 text: "SIGN IN",
                 boxColor: kSuccessColor,
                 onPressed: () {
-                  Navigator.pushNamed(context, SignInScreen.routeName);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          SignInScreen(),
+                      transitionDuration: Duration(seconds: 0),
+                    ),
+                  );
                 },
                 textColor: Colors.white,
               ),
-              _buildDividerWithText(),
+              DividerWithText(),
               CustomBtn(
                 text: "SIGN UP",
                 boxColor: Colors.transparent,
                 onPressed: () {
-                  Navigator.pushNamed(context, TermAgreementScreen.routeName);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          TermAgreementScreen(),
+                      transitionDuration: Duration(seconds: 0),
+                    ),
+                  );
                 },
                 textColor: Colors.black,
                 isBorder: true,
@@ -62,35 +78,6 @@ class AuthOptionScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildDividerWithText() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
-      child: Row(children: <Widget>[
-        Expanded(
-          child: Divider(
-            thickness: 2,
-            color: kPrimaryColor,
-          ),
-        ),
-        SizedBox(width: kDefaultPadding / 2),
-        Text(
-          "OR",
-          style: TextStyle(
-            color: kPrimaryColor,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        SizedBox(width: kDefaultPadding / 2),
-        Expanded(
-          child: Divider(
-            thickness: 2,
-            color: kPrimaryColor,
-          ),
-        ),
-      ]),
     );
   }
 }

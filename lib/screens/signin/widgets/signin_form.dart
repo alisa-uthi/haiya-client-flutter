@@ -31,9 +31,12 @@ class _SignInFormState extends State<SignInForm> {
     if (_formKey.currentState!.validate()) {
       bool isSignin = await _authService.signIn(_email, _password);
       if (isSignin) {
-        Navigator.pushNamedAndRemoveUntil(
+        Navigator.pushAndRemoveUntil(
           context,
-          HomeScreen.routeName,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => HomeScreen(),
+            transitionDuration: Duration(seconds: 0),
+          ),
           (route) => false,
         );
       } else {

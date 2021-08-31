@@ -71,7 +71,16 @@ class _TermAgreementScreenState extends State<TermAgreementScreen> {
                 textColor: Colors.white,
                 onPressed: () => {
                   if (_isAgreeOnTerms)
-                    {Navigator.pushNamed(context, SignUpScreen.routeName)}
+                    {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) =>
+                              SignUpScreen(),
+                          transitionDuration: Duration(seconds: 0),
+                        ),
+                      )
+                    }
                 },
               ),
               SizedBox(height: kDefaultPadding / 1.5),

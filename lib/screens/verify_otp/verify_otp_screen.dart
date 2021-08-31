@@ -53,7 +53,6 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 child: Column(
                   children: [
                     Text("The OTP has been sent to"),
-                    //TODO: Change to dynamic phone number
                     Text(currentUser.phone),
                   ],
                 ),
@@ -96,9 +95,13 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
         //TODO: Implement
         // setState(() => _isCorrectOtp = _otp.resultChecker(_enteredOtp));
         // if (_isCorrectOtp) {
-        Navigator.pushReplacementNamed(
+        Navigator.pushReplacement(
           context,
-          SignupSuccessScreen.routeName,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) =>
+                SignupSuccessScreen(),
+            transitionDuration: Duration(seconds: 0),
+          ),
         );
         // } else {}
       },

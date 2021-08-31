@@ -88,7 +88,13 @@ class _SignUpFormState extends State<SignUpForm> {
       bool isSuccess = await _authService.signUp();
 
       if (isSuccess) {
-        Navigator.pushNamed(context, VerifyOtpScreen.routeName);
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => VerifyOtpScreen(),
+            transitionDuration: Duration(seconds: 0),
+          ),
+        );
       } else {
         CustomSnackBar.buildSnackbar(
           context,

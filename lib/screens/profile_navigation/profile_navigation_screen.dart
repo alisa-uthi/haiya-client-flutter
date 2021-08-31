@@ -38,9 +38,12 @@ class ProfileNavigationScreen extends StatelessWidget {
     cart = [];
     selectedPharmacy = '';
 
-    Navigator.pushNamedAndRemoveUntil(
+    Navigator.pushAndRemoveUntil(
       context,
-      SignInScreen.routeName,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => SignInScreen(),
+        transitionDuration: Duration(seconds: 0),
+      ),
       (route) => false,
     );
   }

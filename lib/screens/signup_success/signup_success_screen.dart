@@ -41,9 +41,13 @@ class SignupSuccessScreen extends StatelessWidget {
                 text: "CLICK HERE TO CONTINUE",
                 boxColor: kPrimaryColor,
                 onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(
+                  Navigator.pushAndRemoveUntil(
                     context,
-                    HomeScreen.routeName,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          HomeScreen(),
+                      transitionDuration: Duration(seconds: 0),
+                    ),
                     (route) => false,
                   );
                 },
