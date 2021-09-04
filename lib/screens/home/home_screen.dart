@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
+import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
@@ -37,9 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<dynamic> _fetchData() async {
     await _getUserLocation();
-    await _getCategories();
-    await _getNearestPharmacies();
-    await _getAllPharmacies();
+    if (allCategories.isEmpty) {
+      await _getCategories();
+    }
+    if (nearestPharmacies.isEmpty) {
+      await _getNearestPharmacies();
+    }
+    if (allPharmacies.isEmpty) {
+      await _getAllPharmacies();
+    }
     setState(() => _isLoading = false);
   }
 

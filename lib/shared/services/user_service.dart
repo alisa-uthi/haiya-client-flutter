@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:collection/collection.dart';
 import 'package:haiya_client/shared/models/address.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -18,6 +19,15 @@ class UserService {
   }
 
   Future<String> getCurrentLocation() async {
+    await getAddressByUserId();
+
+    if (userAddress.isNotEmpty) {
+      Address? address =
+          userAddress.firstWhereOrNull((addr) => addr.isDeliveryAddress == 'Y');
+      if (address != null) {
+        return address.location;
+      }
+    }
     LatLng latLng = await getCurrentCoordinates();
     List<Placemark> placemarks =
         await placemarkFromCoordinates(latLng.latitude, latLng.longitude);

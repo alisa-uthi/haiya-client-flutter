@@ -11,9 +11,9 @@ class NoAddressSaved extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        SizedBox(height: kDefaultPadding * 2),
         Text("No shipping address saved at this time."),
         SizedBox(height: kDefaultPadding),
         ElevatedButton(
