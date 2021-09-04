@@ -50,31 +50,44 @@ class ProfileNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavBar(index: 3),
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(kDefaultPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Account",
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              SizedBox(height: kDefaultPadding),
-              ProfileHeader(isViewOnly: true),
-              SizedBox(height: kDefaultPadding),
-              NavigationList(),
-              CustomBtn(
-                text: "LOGOUT",
-                boxColor: kPrimaryColor,
-                onPressed: () => _onLogout(context),
-                textColor: Colors.white,
-              ),
-              SizedBox(height: kDefaultPadding),
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) =>
+                ProfileNavigationScreen(),
+            transitionDuration: Duration(seconds: 0),
+          ),
+        );
+        return true;
+      },
+      child: Scaffold(
+        bottomNavigationBar: BottomNavBar(index: 3),
+        body: SafeArea(
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Account",
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                SizedBox(height: kDefaultPadding),
+                ProfileHeader(isViewOnly: true),
+                SizedBox(height: kDefaultPadding),
+                NavigationList(),
+                CustomBtn(
+                  text: "LOGOUT",
+                  boxColor: kPrimaryColor,
+                  onPressed: () => _onLogout(context),
+                  textColor: Colors.white,
+                ),
+                SizedBox(height: kDefaultPadding),
+              ],
+            ),
           ),
         ),
       ),

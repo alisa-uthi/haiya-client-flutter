@@ -29,6 +29,7 @@ class ProfileHeader extends StatelessWidget {
             Text(
               '${currentUser.email}',
               style: TextStyle(color: kGreyColor),
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

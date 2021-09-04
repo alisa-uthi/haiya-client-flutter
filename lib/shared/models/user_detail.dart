@@ -9,8 +9,8 @@ class UserDetail {
   String firstname;
   String lastname;
   String gender;
-  int height;
-  int weight;
+  int? height;
+  int? weight;
   String phone;
   String dob;
   String image;
@@ -33,58 +33,6 @@ class UserDetail {
     required this.congenitalDisease,
     required this.drugAllergy,
   });
-
-  // set _title(String value) {
-  //   this.title = value;
-  // }
-
-  // set _firstname(String value) {
-  //   this.firstname = value;
-  // }
-
-  // set _lastname(String value) {
-  //   this.lastname = value;
-  // }
-
-  // set _gender(String value) {
-  //   this.gender = value;
-  // }
-
-  // set _dob(String value) {
-  //   this.dob = value;
-  // }
-
-  // set _weight(int value) {
-  //   this.weight = value;
-  // }
-
-  // set _height(int value) {
-  //   this.height = value;
-  // }
-
-  // set _phone(String value) {
-  //   this.phone = value;
-  // }
-
-  // set _email(String value) {
-  //   this.email = value;
-  // }
-
-  // set _password(String value) {
-  //   this.password = value;
-  // }
-
-  // set _congenitalDisease(List<CongenitalDisease> disease) {
-  //   this.congenitalDisease = disease;
-  // }
-
-  // set _drugAllergy(List<DrugAllergy> allergy) {
-  //   this.drugAllergy = allergy;
-  // }
-
-  // set _address(List<Address> address) {
-  //   this.address = address;
-  // }
 
   factory UserDetail.fromJson(Map<String, dynamic> json) {
     return UserDetail(
@@ -130,8 +78,8 @@ UserDetail tempUser = new UserDetail(
   firstname: '',
   lastname: '',
   gender: 'M',
-  height: 0,
-  weight: 0,
+  height: null,
+  weight: null,
   phone: '',
   dob: '',
   image: '',

@@ -27,18 +27,20 @@ class _AvartarImageState extends State<AvartarImage> {
   Future selectImage() async {
     final pickedPhoto = await picker.pickImage(source: ImageSource.camera);
 
-    setState(() {
-      if (pickedPhoto!.path.isNotEmpty) {
-        _image = File(pickedPhoto.path);
-      } else {
-        CustomSnackBar.buildSnackbar(
-          context,
-          'No image selected.',
-        );
-      }
-    });
+    if (pickedPhoto != null) {
+      setState(() {
+        if (pickedPhoto.path.isNotEmpty) {
+          _image = File(pickedPhoto.path);
+        } else {
+          CustomSnackBar.buildSnackbar(
+            context,
+            'No image selected.',
+          );
+        }
+      });
 
-    saveImage();
+      saveImage();
+    }
   }
 
   Future saveImage() async {

@@ -28,7 +28,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
               ? "female"
               : "other",
       _phone = currentUser.phone;
-  int _height = currentUser.height, _weight = currentUser.weight;
+  int _height = currentUser.height!, _weight = currentUser.weight!;
   final ValueNotifier<String> _dob = ValueNotifier(currentUser.dob);
   final UserService _userService = new UserService();
   static FormFields _formFields = new FormFields();

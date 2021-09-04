@@ -35,7 +35,7 @@ class _PurchaseHistoryListState extends State<PurchaseHistoryList> {
   @override
   Widget build(BuildContext context) {
     return !_isLoading
-        ? _orders != null
+        ? _orders != null && _orders!.length != 0
             ? SingleChildScrollView(
                 child: Column(
                   children: [

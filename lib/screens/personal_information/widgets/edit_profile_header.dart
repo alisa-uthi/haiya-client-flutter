@@ -16,22 +16,24 @@ class EditProfileHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ProfileHeader(isViewOnly: true),
-        TextButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) =>
-                    EditPersonalInfoScreen(),
-                transitionDuration: Duration(seconds: 0),
+        Expanded(
+          child: TextButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) =>
+                      EditPersonalInfoScreen(),
+                  transitionDuration: Duration(seconds: 0),
+                ),
+              );
+            },
+            child: Text(
+              "EDIT",
+              style: TextStyle(
+                color: kPrimaryColor,
+                decoration: TextDecoration.underline,
               ),
-            );
-          },
-          child: Text(
-            "EDIT",
-            style: TextStyle(
-              color: kPrimaryColor,
-              decoration: TextDecoration.underline,
             ),
           ),
         ),
