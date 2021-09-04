@@ -25,9 +25,10 @@ class CurrentLocationTap extends StatelessWidget {
           ),
           Container(
             width: MediaQuery.of(context).size.width / 1.3,
+            padding: const EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
             child: Text(
               _location,
-              overflow: TextOverflow.clip,
+              overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
           ),
