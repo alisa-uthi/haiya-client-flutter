@@ -71,6 +71,36 @@ class UserService {
     return false;
   }
 
+  Future<bool> updateAddressById(
+      {required int id,
+      required String name,
+      required String location,
+      required String note,
+      required LatLng coordinate,
+      required String isDeliveryAddress}) async {
+    // Call Api
+    var response = await http.put(
+      Uri.parse('${basedUri}/address/${id}'),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonEncode({
+        'name': name,
+        'address': location,
+        'additionalNote': note,
+        'latitude': coordinate.latitude,
+        'longitude': coordinate.longitude,
+        'isDeliveryAddress': isDeliveryAddress,
+      }),
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      return true;
+    }
+    return false;
+  }
+
   Future<void> getAddressByUserId() async {
     // Call Api
     var response =

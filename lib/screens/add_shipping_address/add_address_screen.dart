@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:haiya_client/screens/add_shipping_address/widgets/shipping_address_form.dart';
+import 'package:haiya_client/shared/models/address.dart';
 
 import '../../constants.dart';
 import 'widgets/address_map.dart';
@@ -8,7 +9,11 @@ import 'widgets/address_map.dart';
 class AddAddressScreen extends StatefulWidget {
   static final routeName = '/add-shipping-address';
 
-  const AddAddressScreen({Key? key}) : super(key: key);
+  const AddAddressScreen({
+    Key? key,
+    this.address,
+  }) : super(key: key);
+  final Address? address;
 
   @override
   _AddAddressScreenState createState() => _AddAddressScreenState();
@@ -18,6 +23,19 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   bool _isLoading = true;
   ValueNotifier<String> _location = ValueNotifier('');
   LatLng? _latLng;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!mounted) return;
+    if (widget.address != null) {
+      setState(() {
+        _location.value = widget.address!.location;
+        _latLng =
+            new LatLng(widget.address!.latitude!, widget.address!.longitude!);
+      });
+    }
+  }
 
   void changeLocation(placemarks) {
     setState(() {
@@ -41,6 +59,11 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
@@ -48,10 +71,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              AddressMap(onChangeLocation: (placemarks, latLng) {
-                changeLocation(placemarks);
-                setState(() => _latLng = latLng);
-              }),
+              AddressMap(
+                initialPosition: _latLng != null ? _latLng : null,
+                onChangeLocation: (placemarks, latLng) {
+                  changeLocation(placemarks);
+                  setState(() => _latLng = latLng);
+                },
+              ),
               if (_isLoading == false)
                 Padding(
                   padding: const EdgeInsets.all(kDefaultPadding),
@@ -61,6 +87,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           valueListenable: _location,
                           builder: (context, value, child) {
                             return ShippingAddressForm(
+                              currentAddress: widget.address != null
+                                  ? widget.address!
+                                  : null,
                               location: _location.value,
                               coordinates: _latLng!,
                             );

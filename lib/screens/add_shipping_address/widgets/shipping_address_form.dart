@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/shipping_address/shipping_address_screen.dart';
+import 'package:haiya_client/shared/models/address.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
@@ -13,10 +14,12 @@ class ShippingAddressForm extends StatefulWidget {
     Key? key,
     required this.location,
     required this.coordinates,
+    this.currentAddress,
   }) : super(key: key);
 
   final String location;
   final LatLng coordinates;
+  final Address? currentAddress;
 
   @override
   _ShippingAddressFormState createState() => _ShippingAddressFormState();
@@ -31,6 +34,13 @@ class _ShippingAddressFormState extends State<ShippingAddressForm> {
   @override
   void initState() {
     super.initState();
+    if (!mounted) return;
+    if (widget.currentAddress != null) {
+      setState(() => {
+            _addressName = widget.currentAddress!.name,
+            _note = widget.currentAddress!.additionalInfo!,
+          });
+    }
     setState(() => _location = widget.location);
   }
 
@@ -44,14 +54,29 @@ class _ShippingAddressFormState extends State<ShippingAddressForm> {
 
   Future<void> _onSaveAddress() async {
     if (_formKey.currentState!.validate()) {
-      bool isAdded = await _userService.addNewAddress(
-        name: _addressName,
-        location: _location,
-        note: _note,
-        coordinate: widget.coordinates,
-      );
+      bool isUpdated = false;
 
-      if (isAdded) {
+      if (widget.currentAddress != null) {
+        // Update the current address
+        isUpdated = await _userService.updateAddressById(
+          id: widget.currentAddress!.id,
+          name: _addressName,
+          location: _location,
+          note: _note,
+          coordinate: widget.coordinates,
+          isDeliveryAddress: widget.currentAddress!.isDeliveryAddress,
+        );
+      } else {
+        // Add new address
+        isUpdated = await _userService.addNewAddress(
+          name: _addressName,
+          location: _location,
+          note: _note,
+          coordinate: widget.coordinates,
+        );
+      }
+
+      if (isUpdated) {
         await _userService.getAddressByUserId();
         Navigator.pushReplacement(
           context,
@@ -64,7 +89,7 @@ class _ShippingAddressFormState extends State<ShippingAddressForm> {
       } else {
         CustomSnackBar.buildSnackbar(
           context,
-          'Unable to add your address. Please try again.',
+          'Unable to update your address. Please try again.',
         );
       }
     }
@@ -95,15 +120,9 @@ class _ShippingAddressFormState extends State<ShippingAddressForm> {
               key: Key(widget.location),
               initialValue: widget.location,
               textInputAction: TextInputAction.next,
+              enabled: false,
               decoration:
                   cardInputDecoration.copyWith(labelText: 'Address Detail'),
-              onChanged: (value) => setState(() => _location = value),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return kFieldNullError + 'Address Detail';
-                }
-                return null;
-              },
             ),
           ),
 
