@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/product_list/product_list_screen.dart';
+import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
@@ -46,7 +48,26 @@ class _OrderFormState extends State<OrderForm> {
         comment: _note,
       ));
     }
-    Navigator.pop(context);
+    // Navigator.pop(context);
+    // Get category of the product
+    Category selectedCategory =
+        allCategories.firstWhere((cat) => cat.name == product.category);
+    print(selectedCategory.name +
+        " " +
+        product.pharmacyId.toString() +
+        " " +
+        product.pharmacyName!);
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => ProductListScreen(
+          category: selectedCategory,
+          pharmacyId: product.pharmacyId,
+          pharmacyName: product.pharmacyName,
+        ),
+        transitionDuration: Duration(seconds: 0),
+      ),
+    ).then((_) => setState(() {}));
   }
 
   void _onAddClicked() async {
