@@ -57,7 +57,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         pageBuilder: (context, animation1, animation2) => gotoScreen,
         transitionDuration: Duration(seconds: 0),
       ),
-    );
+    ).then((_) => setState(() {}));
   }
 
   @override
