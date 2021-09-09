@@ -3,6 +3,9 @@ import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/cart/cart_screen.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
 import 'package:haiya_client/screens/profile_navigation/profile_navigation_screen.dart';
+import 'package:haiya_client/shared/models/order_line.dart';
+
+import 'num_items_in_cart_noti.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
@@ -58,6 +61,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -79,29 +87,33 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         child: BottomNavigationBar(
           elevation: 10,
-          items: const <BottomNavigationBarItem>[
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
-              backgroundColor: Colors.white,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
+              icon: Stack(
+                children: [
+                  Icon(Icons.shopping_bag),
+                  if (cart.length != 0) NumItemsInCartNoti(),
+                ],
+              ),
               label: 'Cart',
-              backgroundColor: Colors.white,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.notifications),
               label: 'Notification',
-              backgroundColor: Colors.white,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Account',
-              backgroundColor: Colors.white,
             ),
           ],
           currentIndex: _selectedIndex,
+          backgroundColor: Colors.white,
+          iconSize: 35,
           unselectedItemColor: kGreyColor,
           showUnselectedLabels: true,
           selectedItemColor: kPrimaryColor,
