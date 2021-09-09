@@ -28,7 +28,7 @@ class _ProductCardState extends State<ProductCard> {
           MaterialPageRoute(
             builder: (_) => ProductDetailScreen(product: widget.product),
           ),
-        );
+        ).then((_) => setState(() {}));
       },
       child: CustomCard(
         child: Column(

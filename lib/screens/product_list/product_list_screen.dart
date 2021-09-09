@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/models/category.dart';
+import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
@@ -80,7 +81,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   Future<dynamic> _fetchData() async {
     if (widget.pharmacyId != null) {
-      await _getProductByCategoryAndPharmacy();
+      await _getProductByCategoryAndPharmacy(widget.pharmacyId!);
+    } else if (widget.pharmacyName != null) {
+      int tempPharmacyId = allPharmacies
+          .firstWhere((phar) => phar.name == widget.pharmacyName)
+          .id;
+      await _getProductByCategoryAndPharmacy(tempPharmacyId);
     } else {
       await _getProductByCategory();
     }
@@ -88,10 +94,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
     setState(() => _isLoading = false);
   }
 
-  _getProductByCategoryAndPharmacy() async {
+  _getProductByCategoryAndPharmacy(int pharmacyId) async {
     var products;
     products = await _inventoryService.getProductByCategoryAndPharmacy(
-      widget.pharmacyId!,
+      pharmacyId,
       widget.category.id,
     );
     setState(() {

@@ -69,7 +69,7 @@ class _CategoryListState extends State<CategoryList> {
               ),
               transitionDuration: Duration(seconds: 0),
             ),
-          );
+          ).then((_) => setState(() {}));
         });
       },
       child: Container(
