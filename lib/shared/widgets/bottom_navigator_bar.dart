@@ -85,41 +85,45 @@ class _BottomNavBarState extends State<BottomNavBar> {
           topLeft: Radius.circular(kDefaultPadding * 2),
           topRight: Radius.circular(kDefaultPadding * 2),
         ),
-        child: BottomNavigationBar(
-          elevation: 10,
-          type: BottomNavigationBarType.fixed,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Stack(
-                children: [
-                  Icon(Icons.shopping_bag),
-                  if (cart.length != 0) NumItemsInCartNoti(),
-                ],
-              ),
-              label: 'Cart',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              label: 'Notification',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Account',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          backgroundColor: Colors.white,
-          iconSize: 35,
-          unselectedItemColor: kGreyColor,
-          showUnselectedLabels: true,
-          selectedItemColor: kPrimaryColor,
-          onTap: _onItemTapped,
-        ),
+        child: _buildBottomNavBar(),
       ),
+    );
+  }
+
+  BottomNavigationBar _buildBottomNavBar() {
+    return BottomNavigationBar(
+      elevation: 10,
+      type: BottomNavigationBarType.fixed,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Stack(
+            children: [
+              Icon(Icons.shopping_bag),
+              if (cart.length != 0) NumItemsInCartNoti(),
+            ],
+          ),
+          label: 'Cart',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.notifications),
+          label: 'Notification',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Account',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      backgroundColor: Colors.white,
+      iconSize: 35,
+      unselectedItemColor: kGreyColor,
+      showUnselectedLabels: true,
+      selectedItemColor: kPrimaryColor,
+      onTap: _onItemTapped,
     );
   }
 }
