@@ -8,9 +8,11 @@ import 'package:haiya_client/shared/widgets/loader.dart';
 
 class AddressMap extends StatefulWidget {
   final Function onChangeLocation;
+  final LatLng? initialPosition;
 
   const AddressMap({
     Key? key,
+    this.initialPosition,
     required this.onChangeLocation,
   }) : super(key: key);
 
@@ -28,7 +30,15 @@ class _AddressMapState extends State<AddressMap> {
   @override
   void initState() {
     super.initState();
-    _fetchCurrentLocation();
+    if (widget.initialPosition != null && mounted) {
+      setState(() {
+        _initialPosition = widget.initialPosition;
+        _onAddMarkerButtonPressed(_initialPosition!);
+        _isLoading = false;
+      });
+    } else if (mounted) {
+      _fetchCurrentLocation();
+    }
   }
 
   Future<dynamic> _fetchCurrentLocation() async {

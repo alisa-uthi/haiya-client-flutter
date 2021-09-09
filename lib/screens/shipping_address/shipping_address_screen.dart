@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
-import 'package:haiya_client/screens/add_shipping_address/add_address_screen.dart';
 import 'package:haiya_client/shared/models/address.dart';
+import 'package:haiya_client/shared/widgets/custom_btn.dart';
 
+import 'widgets/add_address_button.dart';
 import 'widgets/address_card.dart';
 import 'widgets/no_address_saved.dart';
 
@@ -47,7 +48,17 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                 );
                               },
                             ),
-                            _buildAddButton(context),
+                            AddAddressButton(),
+                            SizedBox(height: kDefaultPadding * 2),
+                            CustomBtn(
+                              text: "CONFIRM",
+                              boxColor: kPrimaryColor,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              textColor: Colors.white,
+                            ),
+                            SizedBox(height: kDefaultPadding),
                           ],
                         )
                       : NoAddressSaved(),
@@ -56,29 +67,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _buildAddButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation1, animation2) =>
-                AddAddressScreen(),
-            transitionDuration: Duration(seconds: 0),
-          ),
-        );
-      },
-      child: new Icon(
-        Icons.add,
-        color: Colors.white,
-      ),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.black),
-        shape: MaterialStateProperty.all<CircleBorder>(CircleBorder()),
       ),
     );
   }

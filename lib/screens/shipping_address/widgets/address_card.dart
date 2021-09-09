@@ -116,7 +116,7 @@ class _AddressCardState extends State<AddressCard> {
               context,
               PageRouteBuilder(
                 pageBuilder: (context, animation1, animation2) =>
-                    AddAddressScreen(),
+                    AddAddressScreen(address: widget.address),
                 transitionDuration: Duration(seconds: 0),
               ),
             );
