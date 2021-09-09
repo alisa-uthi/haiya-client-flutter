@@ -18,11 +18,12 @@ class NumItemsInCartNoti extends StatelessWidget {
           decoration:
               BoxDecoration(shape: BoxShape.circle, color: kSecondaryColor),
           child: Text(
-            cart.length.toString(),
+            cart.length > 9 ? "10+" : cart.length.toString(),
             style: TextStyle(
               color: Colors.white,
               fontSize: 14,
             ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),
