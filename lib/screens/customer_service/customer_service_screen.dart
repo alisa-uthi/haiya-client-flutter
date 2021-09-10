@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/shared/widgets/custom_btn.dart';
+
+import 'widgets/service_choices.dart';
 
 class CustomerServiceScreen extends StatelessWidget {
   static final routeName = '/customer-service';
@@ -19,6 +22,8 @@ class CustomerServiceScreen extends StatelessWidget {
                 "Customer Service",
                 style: Theme.of(context).textTheme.headline1,
               ),
+              SizedBox(height: kDefaultPadding * 2),
+              ServiceChoices(),
             ],
           ),
         ),
