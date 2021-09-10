@@ -112,7 +112,7 @@ class _SignUpFormState extends State<SignUpForm> {
         children: [
           // Title
           _formFields.buildTitleField(
-            "Title",
+            "Title*",
             _title,
             (value) => setState(() => {
                   _title = value,
@@ -123,7 +123,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // First Name
           _formFields.buildTextRequiredField(
-            "First Name",
+            "First Name*",
             _firstName,
             (value) => setState(() => {
                   _firstName = value,
@@ -134,7 +134,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // Last Name
           _formFields.buildTextRequiredField(
-            "Last Name",
+            "Last Name*",
             _lastName,
             (value) => setState(() => {
                   _lastName = value,
@@ -145,7 +145,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // Phone Number
           _formFields.buildPhoneField(
-            "Phone Number",
+            "Phone Number*",
             _phone,
             (value) => setState(() => {
                   _phone = value.toString(),
@@ -180,7 +180,7 @@ class _SignUpFormState extends State<SignUpForm> {
             children: [
               Expanded(
                 child: _formFields.buildWeightHeightField(
-                  "Weight",
+                  "Weight*",
                   _weight.toString(),
                   (value) => setState(() => {
                         _weight = int.parse(value!),
@@ -191,7 +191,7 @@ class _SignUpFormState extends State<SignUpForm> {
               SizedBox(width: kDefaultPadding / 1.5),
               Expanded(
                 child: _formFields.buildWeightHeightField(
-                  "Height",
+                  "Height*",
                   _height.toString(),
                   (value) => setState(() => {
                         _height = int.parse(value!),
@@ -213,7 +213,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // Email
           _formFields.buildEmailField(
-            "Email",
+            "Email*",
             _email,
             (value) => setState(() => {
                   _email = value,
@@ -224,7 +224,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // Password
           _formFields.buildPasswordField(
-              "Password",
+              "Password*",
               _password,
               (value) => setState(() => {
                     _password = value,
@@ -236,7 +236,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           // Confirm Password
           _formFields.buildConfirmPasswordField(
-              "Confirm Password",
+              "Confirm Password*",
               (value) => setState(() => _confirmPass = value),
               _password,
               _isConfirmPassHidden,

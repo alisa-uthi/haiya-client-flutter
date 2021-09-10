@@ -42,7 +42,8 @@ class CheckoutSuccessScreen extends StatelessWidget {
               text: "CONTINUE SHOPPING",
               boxColor: kPrimaryColor,
               onPressed: () {
-                Navigator.pop(context);
+                // TODO: Go to somewhere
+                // Navigator.pop(context);
               },
               textColor: Colors.white,
             ),

@@ -20,4 +20,14 @@ class ConstantService {
       "Heart conditions",
     ];
   }
+
+  static List<String> dummyIssueType() {
+    return [
+      "Application",
+      "Pharmacy or Product",
+      "Order",
+      "Delivery",
+      "Other",
+    ];
+  }
 }

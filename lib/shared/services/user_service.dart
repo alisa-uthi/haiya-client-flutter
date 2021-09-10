@@ -65,7 +65,7 @@ class UserService {
     );
 
     // Handle response
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 205) {
       return true;
     }
     return false;
@@ -107,7 +107,7 @@ class UserService {
         await http.get(Uri.parse('${basedUri}/address/user/${currentUser.id}'));
 
     // Handle response
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 205) {
       Map<String, dynamic> body = jsonDecode(response.body);
       userAddress =
           body['data'].map<Address>((json) => Address.fromJson(json)).toList();
@@ -131,7 +131,7 @@ class UserService {
     );
 
     // Handle response
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 205) {
       userAddress.firstWhere((addr) => addr.id == addressId).isDeliveryAddress =
           isShippingAddress ? 'Y' : 'N';
     }
@@ -268,7 +268,7 @@ class UserService {
     var response = await request.send();
 
     // Handle response
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 205) {
       return await getProfileImage();
     }
     return false;

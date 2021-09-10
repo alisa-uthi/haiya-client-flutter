@@ -110,7 +110,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
         children: [
           // Title
           _formFields.buildTitleField(
-            "Title",
+            "Title*",
             _title,
             (value) => setState(() => {
                   _title = value!,
@@ -121,7 +121,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
 
           // First Name
           _formFields.buildTextRequiredField(
-            "First Name",
+            "First Name*",
             _firstName,
             (value) => setState(() => {
                   _firstName = value!,
@@ -132,7 +132,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
 
           // Last Name
           _formFields.buildTextRequiredField(
-            "Last Name",
+            "Last Name*",
             _lastName,
             (value) => setState(() => {
                   _lastName = value!,
@@ -143,7 +143,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
 
           // Phone Number
           _formFields.buildPhoneField(
-            "Phone Number",
+            "Phone Number*",
             _phone,
             (value) => setState(() => {
                   _phone = value.toString(),
@@ -178,7 +178,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
             children: [
               Expanded(
                 child: _formFields.buildWeightHeightField(
-                  "Weight",
+                  "Weight*",
                   _weight.toString(),
                   (value) => setState(() => {
                         _weight = int.parse(value!),
@@ -189,7 +189,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
               SizedBox(width: kDefaultPadding / 1.5),
               Expanded(
                 child: _formFields.buildWeightHeightField(
-                  "Height",
+                  "Height*",
                   _height.toString(),
                   (value) => setState(() => {
                         _height = int.parse(value!),
@@ -203,7 +203,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
 
           // Email
           _formFields.buildEmailField(
-            "Email",
+            "Email*",
             _email,
             (value) => setState(() => {
                   _email = value!,
@@ -224,7 +224,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
 
           // Congenital Disease
           _formFields.buildCongenitalDiseaseField(context),
-          SizedBox(height: kDefaultPadding),
+          SizedBox(height: kDefaultPadding * 1.5),
 
           // Submit Button
           CustomBtn(

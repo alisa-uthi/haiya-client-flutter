@@ -79,6 +79,7 @@ class _AddressMapState extends State<AddressMap> {
 
   @override
   void dispose() {
+    _controller.complete();
     super.dispose();
   }
 

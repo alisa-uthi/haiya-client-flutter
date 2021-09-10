@@ -43,7 +43,7 @@ class OrderService {
     );
 
     // Handle response
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 205) {
       cart.clear();
       return true;
     }
