@@ -21,6 +21,7 @@ import 'screens/profile_navigation/profile_navigation_screen.dart';
 import 'screens/purchase_history/purchase_history_screen.dart';
 import 'screens/purchase_history_detail/purchase_history_detail_screen.dart';
 import 'screens/report_issue/report_issue_screen.dart';
+import 'screens/send_issue_success/send_issue_success_screen.dart';
 import 'screens/settings/setting_screen.dart';
 import 'screens/shipping_address/shipping_address_screen.dart';
 import 'screens/signin/signin_screen.dart';
@@ -67,4 +68,5 @@ final Map<String, WidgetBuilder> routes = {
       PurchaseHistoryDetailScreen(orderId: 0),
   FaqScreen.routeName: (context) => FaqScreen(),
   ReportIssueScreen.routeName: (context) => ReportIssueScreen(),
+  SendIssueSuccessScreen.routeName: (context) => SendIssueSuccessScreen(),
 };
