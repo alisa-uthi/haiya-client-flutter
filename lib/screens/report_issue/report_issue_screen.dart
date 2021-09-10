@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
-import 'package:haiya_client/shared/widgets/custom_btn.dart';
 
-import 'widgets/service_choices.dart';
+import '../../constants.dart';
+import 'widgets/issue_form.dart';
 
-class CustomerServiceScreen extends StatelessWidget {
-  static final routeName = '/customer-service';
-  const CustomerServiceScreen({Key? key}) : super(key: key);
+class ReportIssueScreen extends StatelessWidget {
+  static final routeName = '/report-issue';
+
+  const ReportIssueScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,13 @@ class CustomerServiceScreen extends StatelessWidget {
                 "Customer Service",
                 style: Theme.of(context).textTheme.headline1,
               ),
-              SizedBox(height: kDefaultPadding * 2),
-              ServiceChoices(),
+              SizedBox(height: kDefaultPadding),
+              Text(
+                "Report Issues",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              SizedBox(height: kDefaultPadding),
+              IssueForm(),
             ],
           ),
         ),

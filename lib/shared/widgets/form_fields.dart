@@ -136,9 +136,11 @@ class FormFields {
 
   Widget buildWeightHeightField(
       String label, String? variable, Function(String?)? onChange) {
+    var initialVal = variable != 'null' ? variable : '';
+
     return CustomCard(
       child: TextFormField(
-        initialValue: variable,
+        initialValue: initialVal.toString(),
         keyboardType: TextInputType.number,
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(

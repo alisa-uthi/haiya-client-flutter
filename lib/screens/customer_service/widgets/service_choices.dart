@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/faq/faq_screen.dart';
+import 'package:haiya_client/screens/report_issue/report_issue_screen.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 
 import '../../../constants.dart';
@@ -20,9 +22,9 @@ class ServiceChoices extends StatelessWidget {
           "Frequently Asked Questions",
           style: Theme.of(context).textTheme.headline1,
         ),
-        SizedBox(height: kDefaultPadding * 1.5),
-        _buildNavigateButton(() {}),
-        SizedBox(height: kDefaultPadding * 3),
+        SizedBox(height: kDefaultPadding * 1.2),
+        _buildNavigateButton(context, FaqScreen()),
+        SizedBox(height: kDefaultPadding * 2.5),
 
         // Report Issue
         HugeIcon(icon: Icons.flag),
@@ -31,18 +33,28 @@ class ServiceChoices extends StatelessWidget {
           "Report Issues",
           style: Theme.of(context).textTheme.headline1,
         ),
-        SizedBox(height: kDefaultPadding * 1.5),
-        _buildNavigateButton(() {}),
+        SizedBox(height: kDefaultPadding * 1.2),
+        _buildNavigateButton(context, ReportIssueScreen()),
       ],
     );
   }
 
-  CustomBtn _buildNavigateButton(Function onPressed) {
+  CustomBtn _buildNavigateButton(BuildContext context, Widget screen) {
     return CustomBtn(
       text: "TAB HERE",
       boxColor: kPrimaryColor,
-      onPressed: onPressed,
+      onPressed: () => _navigateTo(context, screen),
       textColor: Colors.white,
+    );
+  }
+
+  void _navigateTo(BuildContext context, Widget screen) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => screen,
+        transitionDuration: Duration(seconds: 0),
+      ),
     );
   }
 }
