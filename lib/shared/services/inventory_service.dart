@@ -37,6 +37,26 @@ class InventoryService {
     return false;
   }
 
+  Future<Pharmacy?> getPharmacyById(int pharmacyId) async {
+    Pharmacy? result = null;
+
+    // Call Api
+    var response = await http.get(
+      Uri.parse('${basedUri}/pharmacy/${pharmacyId}'),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    );
+
+    // Handle response
+    if (response.statusCode == 200) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      result = Pharmacy.fromJson(body['data']);
+    }
+
+    return result;
+  }
+
   Future<void> getAllPharmacies() async {
     // Get current location coordinates
     UserService userService = new UserService();
@@ -128,6 +148,24 @@ class InventoryService {
     var response = await http.get(
       Uri.parse(
           '${basedUri}/product/catalog/${pharmacyId}/category/${categoryId}'),
+    );
+
+    // Handle response
+    if (response.statusCode == 200) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      List<Product> products =
+          body['data'].map<Product>((json) => Product.fromJson(json)).toList();
+
+      return products;
+    }
+
+    return [];
+  }
+
+  Future<List<Product>> getProductByPharmacy(int pharmacyId) async {
+    // Call Api
+    var response = await http.get(
+      Uri.parse('${basedUri}/product/catalog/${pharmacyId}'),
     );
 
     // Handle response

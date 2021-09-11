@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/pharmacy/pharmacy_screen.dart';
 import 'package:haiya_client/screens/product_detail/widgets/order_form.dart';
 import 'package:haiya_client/screens/product_detail/widgets/row_detail.dart';
 import 'package:haiya_client/shared/models/product.dart';
@@ -24,30 +25,42 @@ class ProductDetail extends StatelessWidget {
           overflow: TextOverflow.clip,
         ),
         SizedBox(height: kDefaultPadding / 2),
-        product!.pharmacyName != null
-            ? Text(
-                product!.pharmacyName!,
-                style: Theme.of(context).textTheme.bodyText1,
-              )
-            : Container(),
+        if (product!.pharmacyName != null)
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) =>
+                      PharmacyScreen(pharmacyId: product!.pharmacyId!),
+                  transitionDuration: Duration(seconds: 0),
+                ),
+              );
+            },
+            child: Text(
+              product!.pharmacyName!,
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: kPrimaryColor,
+                    decoration: TextDecoration.underline,
+                  ),
+            ),
+          ),
 
         // Generic Name
         SizedBox(height: kDefaultPadding * 2),
-        product!.genericName != null
-            ? RowDetail(
-                title: "Generic Name",
-                detail: product!.genericName!,
-              )
-            : Container(),
+        if (product!.genericName != null)
+          RowDetail(
+            title: "Generic Name",
+            detail: product!.genericName!,
+          ),
         SizedBox(height: kDefaultPadding / 1.3),
 
         // Company Name
-        product!.companyName != null
-            ? RowDetail(
-                title: "Company",
-                detail: product!.companyName ?? '',
-              )
-            : Container(),
+        if (product!.companyName != null)
+          RowDetail(
+            title: "Company",
+            detail: product!.companyName ?? '',
+          ),
         SizedBox(height: kDefaultPadding / 1.3),
 
         // Detail
@@ -55,9 +68,11 @@ class ProductDetail extends StatelessWidget {
         SizedBox(height: kDefaultPadding / 1.3),
 
         // Generic Advice
-        product!.genericAdvice != null
-            ? RowDetail(title: "Advice", detail: product!.genericAdvice ?? '')
-            : Container(),
+        if (product!.genericAdvice != null)
+          RowDetail(
+            title: "Advice",
+            detail: product!.genericAdvice ?? '',
+          ),
         SizedBox(height: kDefaultPadding * 3),
 
         OrderForm(product: product!),

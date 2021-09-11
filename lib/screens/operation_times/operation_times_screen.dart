@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
+import 'package:haiya_client/shared/widgets/opt_list.dart';
 
 import '../../constants.dart';
 import 'widgets/contact_section.dart';
-import 'widgets/opt_list.dart';
 
 class OperationTimesScreen extends StatelessWidget {
   static final routeName = '/operation-time';
