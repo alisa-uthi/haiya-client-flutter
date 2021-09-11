@@ -284,4 +284,27 @@ class UserService {
     }
     return false;
   }
+
+  Future<bool> updatePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    // Call Api
+    var response = await http.patch(
+      Uri.parse('${basedUri}/profile/${currentUser.id}/password'),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonEncode({
+        'oldPassword': oldPassword,
+        'newPassword': newPassword,
+      }),
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      return true;
+    }
+    return false;
+  }
 }

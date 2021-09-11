@@ -40,6 +40,7 @@ dependencies:
   flutter_search_bar: ^2.1.0
   intl: ^0.17.0
   enum_to_string: ^2.0.1
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:

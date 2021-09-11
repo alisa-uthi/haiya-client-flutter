@@ -192,7 +192,6 @@ class FormFields {
         initialValue: variable,
         obscureText: _isHidden,
         keyboardType: TextInputType.visiblePassword,
-        textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(
           labelText: label,
           hintText: "Password must be at least 8 characters",

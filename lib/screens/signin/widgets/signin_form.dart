@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/forgot_password/forgot_password_screen.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
 import 'package:haiya_client/shared/services/auth_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
+import 'package:haiya_client/shared/widgets/forgot_password_text.dart';
 import 'package:haiya_client/shared/widgets/form_fields.dart';
 
 import '../../../constants.dart';
@@ -71,16 +71,7 @@ class _SignInFormState extends State<SignInForm> {
           SizedBox(height: kDefaultPadding),
 
           // Forgot password
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
-            },
-            child: Text(
-              "Forgot your password?",
-              textAlign: TextAlign.right,
-              style: TextStyle(decoration: TextDecoration.underline),
-            ),
-          ),
+          ForgotPasswordText(),
           SizedBox(height: kDefaultPadding * 3),
 
           // Login button

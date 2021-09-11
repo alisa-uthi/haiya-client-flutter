@@ -5,7 +5,10 @@ import '../../../constants.dart';
 class PasswordOption extends StatelessWidget {
   const PasswordOption({
     Key? key,
+    required this.onClickChangePass,
   }) : super(key: key);
+
+  final Function onClickChangePass;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class PasswordOption extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyText1,
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () => onClickChangePass(),
           child: Text(
             "Change",
             style: TextStyle(
