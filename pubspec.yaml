@@ -32,6 +32,7 @@ dependencies:
   cached_network_image: ^3.1.0
   shimmer: ^2.0.0
   google_maps_flutter: ^2.0.6
+  flutter_polyline_points: ^1.0.0
   geolocator: ^7.4.0 # To get the current location
   geocoding: ^2.0.0 # To translate the latitude, longtitude to address
   multi_select_flutter: ^4.0.0
@@ -42,6 +43,7 @@ dependencies:
   enum_to_string: ^2.0.1
   sliding_up_panel: ^2.0.0+1
   flutter_rating_bar: ^4.0.0
+  url_launcher: ^6.0.10
 
 dev_dependencies:
   flutter_test:

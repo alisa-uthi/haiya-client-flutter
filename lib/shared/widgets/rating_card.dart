@@ -50,7 +50,8 @@ class _RatingCardState extends State<RatingCard> {
 
   @override
   Widget build(BuildContext context) {
-    var ratingDetail = CustomCard(
+    return !_isLoading && _userDetail != null
+            ? CustomCard(
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: kDefaultPadding / 2,
@@ -97,13 +98,8 @@ class _RatingCardState extends State<RatingCard> {
           ],
         ),
       ),
-    );
-
-    return !_isLoading
-        ? _userDetail == null
-            ? Center(child: Text("No Result Found."))
-            : ratingDetail
-        : Loader();
+    )
+            : Center(child: Text("No Result Found."));
   }
 
   Widget _buildRatingScore() {

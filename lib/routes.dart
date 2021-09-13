@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/shared/models/address.dart';
 
 import 'screens/add_shipping_address/add_address_screen.dart';
 import 'screens/authOption/auth_option_screen.dart';
@@ -19,6 +20,7 @@ import 'screens/operation_times/operation_times_screen.dart';
 import 'screens/order_detail/order_detail_screen.dart';
 import 'screens/personal_information/personal_information_screen.dart';
 import 'screens/pharmacy/pharmacy_screen.dart';
+import 'screens/pharmacy_address_maps/pharmacy_address_maps_screen.dart';
 import 'screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'screens/product_detail/product_detail_screen.dart';
 import 'screens/product_list/product_list_screen.dart';
@@ -82,4 +84,13 @@ final Map<String, WidgetBuilder> routes = {
       RatePharmacyScreen(pharmacyName: ''),
   MyOrdersScreen.routeName: (context) => MyOrdersScreen(),
   NotificationScreen.routeName: (context) => NotificationScreen(),
+  PharmacyAddressMapsScreen.routeName: (context) => PharmacyAddressMapsScreen(
+        pharmacyName: '',
+        address: new Address(
+          id: 0,
+          name: '',
+          location: '',
+          isDeliveryAddress: '',
+        ),
+      ),
 };

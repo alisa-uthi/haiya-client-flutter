@@ -119,7 +119,10 @@ class _PharmacyScreenState extends State<PharmacyScreen> {
                     SizedBox(height: kDefaultPadding * 1.5),
 
                     // Address
-                    AddressSection(address: _pharmacy!.address!),
+                    AddressSection(
+                      address: _pharmacy!.address!,
+                      pharmacyName: _pharmacy!.name,
+                    ),
                     SizedBox(height: kDefaultPadding * 1.5),
 
                     // Operation Time
