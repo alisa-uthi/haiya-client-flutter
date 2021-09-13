@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/customer_service/customer_service_screen.dart';
+import 'package:haiya_client/screens/my_orders/my_orders_screen.dart';
 import 'package:haiya_client/screens/personal_information/personal_information_screen.dart';
-import 'package:haiya_client/screens/purchase_history/purchase_history_screen.dart';
 import 'package:haiya_client/screens/settings/setting_screen.dart';
 import 'package:haiya_client/shared/models/navigation_item.dart';
 
@@ -24,9 +24,9 @@ class NavigationList extends StatelessWidget {
       routeWidget: PersonalInformationScreen(),
     ),
     new NavigationItem(
-      title: 'Purchase History',
-      subTitle: 'View details of recently purchased',
-      routeWidget: PurchaseHistoryScreen(),
+      title: 'My Orders',
+      subTitle: 'View details of my orders',
+      routeWidget: MyOrdersScreen(),
     ),
   ];
 

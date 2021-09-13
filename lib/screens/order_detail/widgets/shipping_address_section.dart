@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/shipping_address/shipping_address_screen.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 
 import '../../../constants.dart';
@@ -32,7 +31,7 @@ class _ShippingAddressSectionState extends State<ShippingAddressSection> {
         SizedBox(height: kDefaultPadding / 2),
         CustomCard(
           child: Padding(
-            padding: const EdgeInsets.only(left: kDefaultPadding / 2),
+            padding: const EdgeInsets.all(kDefaultPadding / 2),
             child: Text(
               widget.deliveryAddress,
               overflow: TextOverflow.clip,

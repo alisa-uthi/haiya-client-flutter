@@ -25,7 +25,7 @@ class OrderItems extends StatelessWidget {
 
   Widget _buildCartItem(OrderLine orderLineItem, BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: kDefaultPadding / 1.5),
+      padding: const EdgeInsets.only(bottom: kDefaultPadding / 1.5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,16 +38,14 @@ class OrderItems extends StatelessWidget {
                   orderLineItem.productName,
                   overflow: TextOverflow.ellipsis,
                 ),
-                orderLineItem.comment != ''
-                    ? Padding(
-                        padding:
-                            const EdgeInsets.only(top: kDefaultPadding / 2.5),
-                        child: Text(
-                          orderLineItem.comment!,
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      )
-                    : Container(),
+                if (orderLineItem.comment != '')
+                  Padding(
+                    padding: const EdgeInsets.only(top: kDefaultPadding / 2.5),
+                    child: Text(
+                      orderLineItem.comment!,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  ),
               ],
             ),
           ),

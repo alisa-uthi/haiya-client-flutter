@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/shared/models/order.dart';
 
 import 'screens/add_shipping_address/add_address_screen.dart';
 import 'screens/authOption/auth_option_screen.dart';
@@ -14,15 +13,15 @@ import 'screens/edit_personal_info/edit_personal_info_screen.dart';
 import 'screens/faq/faq_screen.dart';
 import 'screens/forgot_password/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
+import 'screens/my_orders/my_orders_screen.dart';
 import 'screens/operation_times/operation_times_screen.dart';
+import 'screens/order_detail/order_detail_screen.dart';
 import 'screens/personal_information/personal_information_screen.dart';
 import 'screens/pharmacy/pharmacy_screen.dart';
 import 'screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'screens/product_detail/product_detail_screen.dart';
 import 'screens/product_list/product_list_screen.dart';
 import 'screens/profile_navigation/profile_navigation_screen.dart';
-import 'screens/purchase_history/purchase_history_screen.dart';
-import 'screens/purchase_history_detail/purchase_history_detail_screen.dart';
 import 'screens/rate_pharmacy/rate_pharmacy_screen.dart';
 import 'screens/ratings/rating_screen.dart';
 import 'screens/report_issue/report_issue_screen.dart';
@@ -69,9 +68,7 @@ final Map<String, WidgetBuilder> routes = {
   CustomerServiceScreen.routeName: (context) => CustomerServiceScreen(),
   PersonalInformationScreen.routeName: (context) => PersonalInformationScreen(),
   EditPersonalInfoScreen.routeName: (context) => EditPersonalInfoScreen(),
-  PurchaseHistoryScreen.routeName: (context) => PurchaseHistoryScreen(),
-  PurchaseHistoryDetailScreen.routeName: (context) =>
-      PurchaseHistoryDetailScreen(orderId: 0),
+  OrderDetailScreen.routeName: (context) => OrderDetailScreen(orderId: 0),
   FaqScreen.routeName: (context) => FaqScreen(),
   ReportIssueScreen.routeName: (context) => ReportIssueScreen(),
   SendIssueSuccessScreen.routeName: (context) => SendIssueSuccessScreen(),
@@ -82,4 +79,5 @@ final Map<String, WidgetBuilder> routes = {
   DeliveryTrackingScreen.routeName: (context) => DeliveryTrackingScreen(),
   RatePharmacyScreen.routeName: (context) =>
       RatePharmacyScreen(pharmacyName: ''),
+  MyOrdersScreen.routeName: (context) => MyOrdersScreen(),
 };

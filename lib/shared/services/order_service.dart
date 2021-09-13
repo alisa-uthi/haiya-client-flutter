@@ -64,7 +64,7 @@ class OrderService {
     return [];
   }
 
-  Future<Order?> getPurchaseHistoryById(int id) async {
+  Future<Order?> getOrderById(int id) async {
     // Call Api
     var response = await http.get(Uri.parse('${basedUri}/${id}'));
 
@@ -75,5 +75,19 @@ class OrderService {
     }
 
     return null;
+  }
+
+  Future<List<Order>> getOrdersByOrderStatus(String orderStatus) async {
+    // Call Api
+    var response = await http.get(Uri.parse(
+        '${basedUri}/user/${currentUser.id}/orderStatus/${orderStatus}'));
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      return body['data'].map<Order>((json) => Order.fromJson(json)).toList();
+    }
+
+    return [];
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
-
-import 'widgets/button_group.dart';
+import 'package:haiya_client/screens/home/home_screen.dart';
+import 'package:haiya_client/shared/widgets/custom_btn.dart';
 
 class CheckoutSuccessScreen extends StatelessWidget {
   static final routeName = '/checkout-success';
@@ -32,7 +32,29 @@ class CheckoutSuccessScreen extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           Spacer(),
-          ButtonGroup(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              kDefaultPadding,
+              0,
+              kDefaultPadding,
+              kDefaultPadding * 2,
+            ),
+            child: CustomBtn(
+              text: "CONTINUE SHOPPING",
+              boxColor: kPrimaryColor,
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        HomeScreen(),
+                    transitionDuration: Duration(seconds: 0),
+                  ),
+                );
+              },
+              textColor: Colors.white,
+            ),
+          ),
         ],
       ),
     );

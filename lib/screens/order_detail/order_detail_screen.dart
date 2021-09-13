@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/purchase_history_detail/widgets/order_summary_section.dart';
-import 'package:haiya_client/screens/purchase_history_detail/widgets/payment_method_section.dart';
-import 'package:haiya_client/screens/purchase_history_detail/widgets/shipping_address_section.dart';
+import 'package:haiya_client/screens/delivery_tracking/delivery_tracking_screen.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/services/order_service.dart';
+import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 
 import '../../constants.dart';
+import 'widgets/delivery_tracking_button.dart';
+import 'widgets/order_summary_section.dart';
+import 'widgets/payment_method_section.dart';
+import 'widgets/shipping_address_section.dart';
 
-class PurchaseHistoryDetailScreen extends StatefulWidget {
-  static final routeName = '/purchase-history-detail';
+class OrderDetailScreen extends StatefulWidget {
+  static final routeName = '/order-detail';
 
   final int orderId;
+  final bool isDelivering;
 
-  const PurchaseHistoryDetailScreen({
+  const OrderDetailScreen({
     Key? key,
     required this.orderId,
+    this.isDelivering = false,
   }) : super(key: key);
 
   @override
-  _PurchaseHistoryDetailScreenState createState() =>
-      _PurchaseHistoryDetailScreenState();
+  _OrderDetailScreenState createState() => _OrderDetailScreenState();
 }
 
-class _PurchaseHistoryDetailScreenState
-    extends State<PurchaseHistoryDetailScreen> {
+class _OrderDetailScreenState extends State<OrderDetailScreen> {
   OrderService _orderService = new OrderService();
   Order? _order;
   bool _isLoading = true;
@@ -36,7 +39,7 @@ class _PurchaseHistoryDetailScreenState
   }
 
   Future<dynamic> _fetchPurchaseHistory() async {
-    var order = await _orderService.getPurchaseHistoryById(widget.orderId);
+    var order = await _orderService.getOrderById(widget.orderId);
     setState(() => {_order = order, _isLoading = false});
   }
 
@@ -58,13 +61,14 @@ class _PurchaseHistoryDetailScreenState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Purchase History",
+                        "Order Details",
                         style: Theme.of(context).textTheme.headline1,
                       ),
                       SizedBox(height: kDefaultPadding * 1.3),
                       Text(
                         "${_order!.payTimestamp.split(' ')[0]}, ${_order!.pharmacyName}",
                         style: TextStyle(fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: kDefaultPadding * 1.3),
                       ShippingAddressSection(
@@ -76,6 +80,7 @@ class _PurchaseHistoryDetailScreenState
                       PaymentMethodSection(
                         paymentMethod: _order!.paymentMethod,
                       ),
+                      if (widget.isDelivering) DeliveryTrackingButton(),
                     ],
                   ),
                 )
