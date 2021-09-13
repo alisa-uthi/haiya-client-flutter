@@ -52,11 +52,6 @@ class _OrderFormState extends State<OrderForm> {
     // Get category of the product
     Category selectedCategory =
         allCategories.firstWhere((cat) => cat.name == product.category);
-    print(selectedCategory.name +
-        " " +
-        product.pharmacyId.toString() +
-        " " +
-        product.pharmacyName!);
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(
@@ -74,9 +69,9 @@ class _OrderFormState extends State<OrderForm> {
     // Users are allowed to order from one pharmacy at a time
     if (cart.length == 0) {
       // Set selected pharmacy for the order
-      selectedPharmacy = widget.product.pharmacyName!;
+      selectedPharmacy = widget.product.pharmacyName;
       _addToCart();
-    } else if (selectedPharmacy != widget.product.pharmacyName!) {
+    } else if (selectedPharmacy != widget.product.pharmacyName) {
       // Show dialog to warn user
       setState(() {});
       _showDialog();
@@ -93,7 +88,7 @@ class _OrderFormState extends State<OrderForm> {
             "If you want to order from different pharmacy, Items from the previous pharmacy will be cancelled.",
         callBack: () => {
           cart.clear(),
-          selectedPharmacy = widget.product.pharmacyName!,
+          selectedPharmacy = widget.product.pharmacyName,
           _addToCart(),
           Navigator.pop(context),
         },

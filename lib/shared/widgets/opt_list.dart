@@ -14,6 +14,7 @@ class OptList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: operationTime!.length,
       itemBuilder: (context, index) {

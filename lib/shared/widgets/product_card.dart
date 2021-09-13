@@ -46,13 +46,11 @@ class _ProductCardState extends State<ProductCard> {
             Spacer(),
 
             // Pharmacy Name
-            widget.product.pharmacyName != null
-                ? Text(
-                    widget.product.pharmacyName!,
-                    style: Theme.of(context).textTheme.caption,
-                    overflow: TextOverflow.ellipsis,
-                  )
-                : Container(),
+            Text(
+              widget.product.pharmacyName,
+              style: Theme.of(context).textTheme.caption,
+              overflow: TextOverflow.ellipsis,
+            ),
             SizedBox(height: kDefaultPadding / 2),
 
             // Product's Trade Name

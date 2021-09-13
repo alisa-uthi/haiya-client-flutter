@@ -269,20 +269,32 @@ class UserService {
 
     // Handle response
     if (response.statusCode >= 200 && response.statusCode < 205) {
-      return await getProfileImage();
+      String profileImage = await getProfileImage(currentUser.id);
+      if (profileImage != '') return true;
     }
     return false;
   }
 
-  Future<bool> getProfileImage() async {
-    var response = await http
-        .get(Uri.parse('${basedUri}/profile/${currentUser.id}/image'));
+  Future<String> getProfileImage(int userId) async {
+    var response =
+        await http.get(Uri.parse('${basedUri}/profile/${userId}/image'));
     if (response.statusCode >= 200 && response.statusCode < 205) {
       Map<String, dynamic> body = jsonDecode(response.body);
       currentUser.image = body['data']['Psn_Image'];
-      return true;
+      return body['data']['Psn_Image'];
     }
-    return false;
+    return '';
+  }
+
+  Future<UserDetail?> getUserById(int userId) async {
+    var response = await http.get(Uri.parse('${basedUri}/profile/${userId}'));
+
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      UserDetail user = UserDetail.fromJson(body['data']);
+      return user;
+    }
+    return null;
   }
 
   Future<bool> updatePassword({

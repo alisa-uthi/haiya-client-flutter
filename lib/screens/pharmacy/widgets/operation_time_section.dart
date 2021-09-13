@@ -26,7 +26,10 @@ class OperationTimeSection extends StatelessWidget {
         SizedBox(height: kDefaultPadding / 2),
         CustomCard(
           child: Padding(
-            padding: const EdgeInsets.all(kDefaultPadding / 2),
+            padding: const EdgeInsets.only(
+              left: kDefaultPadding / 2,
+              bottom: kDefaultPadding / 2,
+            ),
             child: OptList(operationTime: operationTime),
           ),
         ),

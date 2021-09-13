@@ -10,8 +10,8 @@ class Product {
   final String? category;
   final String image;
   final int qtyUnit;
-  final int? pharmacyId;
-  final String? pharmacyName;
+  final int pharmacyId;
+  final String pharmacyName;
   final int availableQty;
   final int price;
   final String expireDate;
@@ -28,8 +28,8 @@ class Product {
     required this.image,
     required this.qtyUnit,
     required this.detail,
-    this.pharmacyId,
-    this.pharmacyName,
+    required this.pharmacyId,
+    required this.pharmacyName,
     required this.availableQty,
     required this.price,
     required this.expireDate,

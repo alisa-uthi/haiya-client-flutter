@@ -10,12 +10,8 @@ class RatingService {
     List<Rating> result = [];
 
     // Call Api
-    var response = await http.get(
-      Uri.parse('${basedUri}/pharmacy/${pharmacyId}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-    );
+    var response =
+        await http.get(Uri.parse('${basedUri}/pharmacy/${pharmacyId}'));
 
     // Handle response
     if (response.statusCode == 200) {

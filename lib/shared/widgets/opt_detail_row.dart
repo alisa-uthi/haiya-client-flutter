@@ -21,7 +21,7 @@ class OptDetailRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: kDefaultPadding / 1.5),
+      padding: const EdgeInsets.only(top: kDefaultPadding / 1.5),
       child: Row(
         children: [
           Expanded(

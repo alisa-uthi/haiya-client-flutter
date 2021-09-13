@@ -25,26 +25,25 @@ class ProductDetail extends StatelessWidget {
           overflow: TextOverflow.clip,
         ),
         SizedBox(height: kDefaultPadding / 2),
-        if (product!.pharmacyName != null)
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) =>
-                      PharmacyScreen(pharmacyId: product!.pharmacyId!),
-                  transitionDuration: Duration(seconds: 0),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) =>
+                    PharmacyScreen(pharmacyId: product!.pharmacyId),
+                transitionDuration: Duration(seconds: 0),
+              ),
+            );
+          },
+          child: Text(
+            product!.pharmacyName,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: kPrimaryColor,
+                  decoration: TextDecoration.underline,
                 ),
-              );
-            },
-            child: Text(
-              product!.pharmacyName!,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: kPrimaryColor,
-                    decoration: TextDecoration.underline,
-                  ),
-            ),
           ),
+        ),
 
         // Generic Name
         SizedBox(height: kDefaultPadding * 2),

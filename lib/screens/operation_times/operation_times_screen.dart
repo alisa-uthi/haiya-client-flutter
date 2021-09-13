@@ -34,16 +34,13 @@ class OperationTimesScreen extends StatelessWidget {
                 children: [
                   Text(
                     pharmacy!.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.headline1,
                     overflow: TextOverflow.clip,
                     maxLines: 2,
                   ),
-                  SizedBox(height: kDefaultPadding),
-                  OptList(operationTime: pharmacy!.operationTime),
                   SizedBox(height: kDefaultPadding / 2),
+                  OptList(operationTime: pharmacy!.operationTime),
+                  SizedBox(height: kDefaultPadding),
                   ContactSection(phone: pharmacy!.phone)
                 ],
               ),

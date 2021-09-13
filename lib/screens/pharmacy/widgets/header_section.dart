@@ -18,7 +18,10 @@ class HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       child: Padding(
-        padding: const EdgeInsets.all(kDefaultPadding / 2),
+        padding: const EdgeInsets.symmetric(
+          horizontal: kDefaultPadding / 2,
+          vertical: 5,
+        ),
         child: Row(
           children: [
             Expanded(

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Rating {
   final int id;
   final String timestamp;
@@ -22,7 +24,9 @@ class Rating {
   factory Rating.fromJson(Map<String, dynamic> json) {
     return Rating(
       id: json['ID'],
-      timestamp: json['Rate_Timestamp'],
+      timestamp: DateFormat.yMMMMd('en_US')
+          .add_jm()
+          .format(DateTime.parse(json['Rate_Timestamp'])),
       pharmacyId: json['Rate_Pharmacy_ID'],
       pharmacyScore: json['Rate_Pharmacy_Score'],
       pharmacyFeedback: json['Rate_Pharmacy_Feedback'],
