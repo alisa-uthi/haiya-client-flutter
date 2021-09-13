@@ -14,6 +14,7 @@ import 'screens/faq/faq_screen.dart';
 import 'screens/forgot_password/forgot_password_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/my_orders/my_orders_screen.dart';
+import 'screens/notification/notification_screen.dart';
 import 'screens/operation_times/operation_times_screen.dart';
 import 'screens/order_detail/order_detail_screen.dart';
 import 'screens/personal_information/personal_information_screen.dart';
@@ -80,4 +81,5 @@ final Map<String, WidgetBuilder> routes = {
   RatePharmacyScreen.routeName: (context) =>
       RatePharmacyScreen(pharmacyName: ''),
   MyOrdersScreen.routeName: (context) => MyOrdersScreen(),
+  NotificationScreen.routeName: (context) => NotificationScreen(),
 };

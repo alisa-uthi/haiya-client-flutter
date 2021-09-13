@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/cart/cart_screen.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
+import 'package:haiya_client/screens/notification/notification_screen.dart';
 import 'package:haiya_client/screens/profile_navigation/profile_navigation_screen.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 
@@ -44,7 +45,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         gotoScreen = CartScreen();
         break;
       case 2:
-        gotoScreen = HomeScreen();
+        gotoScreen = NotificationScreen();
         break;
       case 3:
         gotoScreen = ProfileNavigationScreen();

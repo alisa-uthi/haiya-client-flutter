@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/shared/widgets/header_text.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'widgets/change_password_panel.dart';
@@ -71,11 +72,7 @@ class _SettingScreenState extends State<SettingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Settings",
-            style: Theme.of(context).textTheme.headline1,
-          ),
-          SizedBox(height: kDefaultPadding),
+          HeaderText(text: "Setting"),
           SettingOptions(onClickChangePass: () => _pc.open()),
         ],
       ),

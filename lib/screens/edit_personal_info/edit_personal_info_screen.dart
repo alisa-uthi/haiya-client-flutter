@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/edit_personal_info/widgets/personal_info_form.dart';
+import 'package:haiya_client/shared/widgets/header_text.dart';
 import 'package:haiya_client/shared/widgets/profile_header.dart';
 
 class EditPersonalInfoScreen extends StatelessWidget {
@@ -18,11 +19,7 @@ class EditPersonalInfoScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Personal Information",
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-                SizedBox(height: kDefaultPadding),
+                HeaderText(text: "Personal Information"),
                 ProfileHeader(isViewOnly: false),
                 SizedBox(height: kDefaultPadding / 2),
                 PersonalInfoForm(),
