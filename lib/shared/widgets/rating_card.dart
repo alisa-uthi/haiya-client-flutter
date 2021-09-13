@@ -63,7 +63,7 @@ class _RatingCardState extends State<RatingCard> {
             Row(
               children: [
                 _builProfileImage(),
-                SizedBox(width: kDefaultPadding),
+                SizedBox(width: kDefaultPadding / 2),
                 Text(
                   '${_userDetail!.firstname} ${_userDetail!.lastname}',
                   style: Theme.of(context).textTheme.bodyText1,
@@ -73,13 +73,15 @@ class _RatingCardState extends State<RatingCard> {
             SizedBox(height: kDefaultPadding / 1.5),
 
             // Feedback
-            Text(
-              widget.rating.pharmacyFeedback!,
-              style: Theme.of(context).textTheme.bodyText1,
-              overflow: TextOverflow.clip,
-              maxLines: 8,
-            ),
-            SizedBox(height: kDefaultPadding / 2),
+            if (widget.rating.pharmacyFeedback! != '')
+              Text(
+                widget.rating.pharmacyFeedback!,
+                style: Theme.of(context).textTheme.bodyText1,
+                overflow: TextOverflow.clip,
+                maxLines: 8,
+              ),
+            if (widget.rating.pharmacyFeedback! != '')
+              SizedBox(height: kDefaultPadding / 2),
 
             // Rating score and timestamp
             Row(

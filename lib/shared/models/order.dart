@@ -12,17 +12,18 @@ class Order {
   String pharmacyName;
   List<OrderLine>? orderLines;
 
-  Order(
-      {required this.id,
-      required this.deliveryAddress,
-      required this.deliveryPrice,
-      required this.paymentMethod,
-      required this.payTimestamp,
-      required this.userId,
-      required this.pharmacyName,
-      required this.orderStatus,
-      this.comment,
-      this.orderLines});
+  Order({
+    required this.id,
+    required this.deliveryAddress,
+    required this.deliveryPrice,
+    required this.paymentMethod,
+    required this.payTimestamp,
+    required this.userId,
+    required this.pharmacyName,
+    required this.orderStatus,
+    this.comment,
+    this.orderLines,
+  });
 
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(

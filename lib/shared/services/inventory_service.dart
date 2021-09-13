@@ -179,4 +179,20 @@ class InventoryService {
 
     return [];
   }
+
+  Future<Pharmacy?> getPharmacyByName(String pharmacyName) async {
+    // Call Api
+    var response = await http.get(
+      Uri.parse('${basedUri}/pharmacy?name=${pharmacyName}'),
+    );
+
+    // Handle response
+    if (response.statusCode == 200) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      Pharmacy pharmacy = Pharmacy.fromJson(body['data']);
+      return pharmacy;
+    }
+
+    return null;
+  }
 }

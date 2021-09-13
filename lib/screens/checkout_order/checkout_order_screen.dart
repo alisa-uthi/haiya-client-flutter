@@ -3,6 +3,7 @@ import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/checkout_success/checkout_success_screen.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
 import 'package:haiya_client/shared/models/address.dart';
+import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/services/order_service.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
@@ -68,6 +69,10 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
     );
 
     if (isSuccess) {
+      // Clear Order
+      cart = [];
+      selectedPharmacy = '';
+
       Navigator.pushAndRemoveUntil(
         context,
         PageRouteBuilder(

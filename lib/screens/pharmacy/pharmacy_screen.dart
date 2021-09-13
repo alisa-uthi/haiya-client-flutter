@@ -58,7 +58,7 @@ class _PharmacyScreenState extends State<PharmacyScreen> {
     } else {
       CustomSnackBar.buildSnackbar(
         context,
-        "Error occurred. Please try again.",
+        kGeneralError,
       );
     }
   }

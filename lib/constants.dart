@@ -59,3 +59,4 @@ const String kPassNullError = "Please Enter Your Password";
 const String kShortPassError = "Password must have at least 8 characters";
 const String kMatchPassError = "Password doesn't match";
 const String kFieldNullError = "Please Enter Your ";
+const String kGeneralError = "Error occurred. Please try again.";

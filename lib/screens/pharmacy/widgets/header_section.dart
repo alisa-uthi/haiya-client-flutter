@@ -43,11 +43,12 @@ class HeaderSection extends StatelessWidget {
                     overflow: TextOverflow.clip,
                     maxLines: 2,
                   ),
+                  SizedBox(height: 5),
                   Text(
                     'Tel: ${_pharmacy!.phone}',
                     style: TextStyle(color: kGreyColor),
                   ),
-                  if (_pharmacy!.email != null)
+                  if (_pharmacy!.email != null && _pharmacy!.email != '')
                     Text(
                       'Email: ${_pharmacy!.email}',
                       style: TextStyle(color: kGreyColor),

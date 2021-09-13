@@ -36,6 +36,7 @@ class _OrderFormState extends State<OrderForm> {
       int indexInCart = cart.indexOf(existingProductInCart);
       if (indexInCart != -1) {
         cart[indexInCart].quantity += _quantity;
+        cart[indexInCart].totalCost += product.price;
       }
     } else {
       cart.add(new OrderLine(

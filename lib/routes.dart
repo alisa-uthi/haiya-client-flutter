@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/shared/models/order.dart';
 
 import 'screens/add_shipping_address/add_address_screen.dart';
 import 'screens/authOption/auth_option_screen.dart';
@@ -7,6 +8,7 @@ import 'screens/checkout_order/checkout_order_screen.dart';
 import 'screens/checkout_success/checkout_success_screen.dart';
 import 'screens/congenital_form/congenital_form_screen.dart';
 import 'screens/customer_service/customer_service_screen.dart';
+import 'screens/delivery_tracking/delivery_tracking_screen.dart';
 import 'screens/drug_allery_form/drug_allergy_form_screen.dart';
 import 'screens/edit_personal_info/edit_personal_info_screen.dart';
 import 'screens/faq/faq_screen.dart';
@@ -21,6 +23,7 @@ import 'screens/product_list/product_list_screen.dart';
 import 'screens/profile_navigation/profile_navigation_screen.dart';
 import 'screens/purchase_history/purchase_history_screen.dart';
 import 'screens/purchase_history_detail/purchase_history_detail_screen.dart';
+import 'screens/rate_pharmacy/rate_pharmacy_screen.dart';
 import 'screens/ratings/rating_screen.dart';
 import 'screens/report_issue/report_issue_screen.dart';
 import 'screens/send_issue_success/send_issue_success_screen.dart';
@@ -76,4 +79,7 @@ final Map<String, WidgetBuilder> routes = {
         ratings: [],
         pharmacyName: '',
       ),
+  DeliveryTrackingScreen.routeName: (context) => DeliveryTrackingScreen(),
+  RatePharmacyScreen.routeName: (context) =>
+      RatePharmacyScreen(pharmacyName: ''),
 };
