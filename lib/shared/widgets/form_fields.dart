@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/screens/congenital_form/congenital_form_screen.dart';
 import 'package:haiya_client/screens/drug_allery_form/drug_allergy_form_screen.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../../constants.dart';
 
@@ -334,38 +333,6 @@ class FormFields {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget buildMultiSelectField(
-    String label,
-    List<MultiSelectItem<String>> items,
-    Function(List<String>) onConfirm,
-    Function(String) onChipRemove,
-  ) {
-    return CustomCard(
-      child: MultiSelectBottomSheetField<String>(
-        buttonIcon: Icon(
-          Icons.add_rounded,
-          color: kGreyColor,
-        ),
-        initialChildSize: 0.7,
-        maxChildSize: 0.95,
-        title: Padding(
-          padding: const EdgeInsets.only(left: kDefaultPadding / 2),
-          child: Text(label),
-        ),
-        buttonText: Text(label, style: TextStyle(color: kGreyColor)),
-        items: items,
-        selectedColor: kPrimaryColor,
-        searchable: true,
-        onConfirm: (value) => onConfirm(value),
-        chipDisplay: MultiSelectChipDisplay(
-          chipColor: kBackgroundColor,
-          textStyle: TextStyle(color: Colors.black),
-          onTap: (item) => onChipRemove(item),
-        ),
       ),
     );
   }

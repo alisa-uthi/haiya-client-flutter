@@ -25,25 +25,35 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  responsive_framework: ^0.0.15
-  google_fonts: ^2.1.0
+
+  # Date time
   flutter_datetime_picker: ^1.5.1
+  intl: ^0.17.0
+
+  # Image
   image_picker: ^0.8.2
   cached_network_image: ^3.1.0
-  shimmer: ^2.0.0
+
+  # Google maps and locations
   google_maps_flutter: ^2.0.6
   flutter_polyline_points: ^1.0.0
   geolocator: ^7.4.0 # To get the current location
   geocoding: ^2.0.0 # To translate the latitude, longtitude to address
-  multi_select_flutter: ^4.0.0
+
+  # Firebase
+  firebase_core: ^1.6.0
+  firebase_messaging: ^10.0.7
+
+  responsive_framework: ^0.0.15
+  google_fonts: ^2.1.0
   provider: ^5.0.0
   flutter_otp: ^0.3.2
   flutter_search_bar: ^2.1.0
-  intl: ^0.17.0
   enum_to_string: ^2.0.1
   sliding_up_panel: ^2.0.0+1
   flutter_rating_bar: ^4.0.0
   url_launcher: ^6.0.10
+  flutter_local_notifications: ^8.2.0
 
 dev_dependencies:
   flutter_test:

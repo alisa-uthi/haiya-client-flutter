@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "796262230418",
+    "project_id": "haiya-273b3",
+    "storage_bucket": "haiya-273b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796262230418:android:6bc33f7e3e567f3a83b94b",
+        "android_client_info": {
+          "package_name": "com.example.haiya_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796262230418-jcn4q9f7u1sa1edc0prjouj1lg6rkcov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP7-fgy6cuvlUa5M9K1Tp8V_WYypwxNy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796262230418-jcn4q9f7u1sa1edc0prjouj1lg6rkcov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
