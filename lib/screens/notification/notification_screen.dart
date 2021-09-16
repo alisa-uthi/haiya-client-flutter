@@ -32,7 +32,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.transparent),
-      bottomNavigationBar: BottomNavBar(index: 2),
+      bottomNavigationBar: ValueListenableBuilder(
+        valueListenable: _notifications,
+        builder: (context, value, child) {
+          return BottomNavBar(index: 2);
+        },
+      ),
       body: Container(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: SingleChildScrollView(
@@ -63,7 +68,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ValueListenableBuilder(
                 valueListenable: _notifications,
                 builder: (context, value, child) {
-                  return NotificationList();
+                  return NotificationList(
+                      onDeleteNoti: () => _notifications.notifyListeners());
                 },
               ),
             ],

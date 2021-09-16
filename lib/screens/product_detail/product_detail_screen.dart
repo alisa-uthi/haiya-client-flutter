@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/product.dart';
-import 'package:haiya_client/shared/widgets/num_items_in_cart_noti.dart';
+import 'package:haiya_client/shared/widgets/num_items_noti.dart';
 import 'package:haiya_client/shared/widgets/shopping_cart_icon.dart';
 
 import 'widgets/detail_container.dart';
@@ -31,7 +31,7 @@ class ProductDetailScreen extends StatelessWidget {
           child: Stack(
             children: [
               ShoppingCartBtn(),
-              if (cart.length != 0) NumItemsInCartNoti(),
+              if (cart.length != 0) NumItemsNoti(notiFor: cart),
             ],
           ),
         ),

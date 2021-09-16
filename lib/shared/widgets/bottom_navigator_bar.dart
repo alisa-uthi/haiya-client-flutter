@@ -4,9 +4,10 @@ import 'package:haiya_client/screens/cart/cart_screen.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
 import 'package:haiya_client/screens/notification/notification_screen.dart';
 import 'package:haiya_client/screens/profile_navigation/profile_navigation_screen.dart';
+import 'package:haiya_client/shared/models/notification.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 
-import 'num_items_in_cart_noti.dart';
+import 'num_items_noti.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
@@ -104,13 +105,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
           icon: Stack(
             children: [
               Icon(Icons.shopping_bag),
-              if (cart.length != 0) NumItemsInCartNoti(),
+              if (cart.length != 0) NumItemsNoti(notiFor: cart),
             ],
           ),
           label: 'Cart',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
+          icon: Stack(
+            children: [
+              Icon(Icons.notifications),
+              if (notifications.length != 0)
+                NumItemsNoti(notiFor: notifications),
+            ],
+          ),
           label: 'Notification',
         ),
         BottomNavigationBarItem(

@@ -8,7 +8,10 @@ import 'notification_item.dart';
 class NotificationList extends StatefulWidget {
   const NotificationList({
     Key? key,
+    required this.onDeleteNoti,
   }) : super(key: key);
+
+  final Function onDeleteNoti;
 
   @override
   _NotificationListState createState() => _NotificationListState();
@@ -56,7 +59,10 @@ class _NotificationListState extends State<NotificationList> {
                       var noti = notifications[index];
                       return NotificationItem(
                         notification: noti,
-                        onDeleteNoti: () => _notifications.notifyListeners(),
+                        onDeleteNoti: () => {
+                          _notifications.notifyListeners(),
+                          widget.onDeleteNoti(),
+                        },
                       );
                     },
                   );
