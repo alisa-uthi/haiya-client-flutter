@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/rate_pharmacy/rate_pharmacy_screen.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';
 
 import '../../constants.dart';
@@ -25,20 +24,6 @@ class _DeliveryTrackingScreenState extends State<DeliveryTrackingScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeaderText(text: "Delivery Tracking"),
-
-              // TODO: Change to map later
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          RatePharmacyScreen(pharmacyName: 'Fascino'),
-                    ),
-                  );
-                },
-                child: Text("Mock\nOrder Received\nRate Pharmacy (Fascino)"),
-              ),
             ],
           ),
         ),

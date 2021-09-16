@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/screens/delivery_tracking/delivery_tracking_screen.dart';
+import 'package:haiya_client/screens/order_detail/widgets/rate_pharmacy_button.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/services/order_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
@@ -16,11 +17,13 @@ class OrderDetailScreen extends StatefulWidget {
 
   final int orderId;
   final bool isDelivering;
+  final bool isCompleted;
 
   const OrderDetailScreen({
     Key? key,
     required this.orderId,
     this.isDelivering = false,
+    this.isCompleted = false,
   }) : super(key: key);
 
   @override
@@ -81,6 +84,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         paymentMethod: _order!.paymentMethod,
                       ),
                       if (widget.isDelivering) DeliveryTrackingButton(),
+                      if (widget.isCompleted)
+                        RatePharmacyButton(pharmacyName: _order!.pharmacyName),
                     ],
                   ),
                 )

@@ -3,6 +3,7 @@ import 'package:haiya_client/constants.dart';
 
 import 'widgets/approved_orders.dart';
 import 'widgets/delivering_orders.dart';
+import 'widgets/placed_orders.dart';
 import 'widgets/purchase_history.dart';
 
 class MyOrdersScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class MyOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
@@ -21,6 +22,7 @@ class MyOrdersScreen extends StatelessWidget {
             indicatorColor: kPrimaryColor,
             unselectedLabelColor: kGreyColor,
             tabs: [
+              Tab(text: "Placed"),
               Tab(text: "Approved"),
               Tab(text: "Delivering"),
               Tab(text: "Completed"),
@@ -34,6 +36,7 @@ class MyOrdersScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
+            PlacedOrders(),
             ApprovedOrders(),
             DeliveringOrders(),
             PurchaseHistory(),

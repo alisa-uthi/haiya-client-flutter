@@ -39,22 +39,6 @@ class _ManageNotificationsState extends State<ManageNotifications> {
             ),
           ],
         ),
-
-        // Product Expiration
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Product Expiration"),
-            Switch(
-              value: _productExpiration,
-              activeColor: kPrimaryColor,
-              activeTrackColor: kPrimaryColor.withOpacity(0.5),
-              onChanged: (value) {
-                setState(() => _productExpiration = !_productExpiration);
-              },
-            ),
-          ],
-        ),
       ],
     );
   }

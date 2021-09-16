@@ -27,6 +27,7 @@ class OrderItem extends StatelessWidget {
             pageBuilder: (context, animation1, animation2) => OrderDetailScreen(
               orderId: order.id,
               isDelivering: order.orderStatus == 'PICKED_UP' ? true : false,
+              isCompleted: order.orderStatus == 'DELIVERED' ? true : false,
             ),
             transitionDuration: Duration(seconds: 0),
           ),
