@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/models/notification.dart';
 import 'package:haiya_client/shared/services/notification_service.dart';
-import 'package:haiya_client/shared/widgets/custom_card.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 
 import 'notification_item.dart';

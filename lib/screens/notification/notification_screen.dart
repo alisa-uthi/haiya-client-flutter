@@ -17,11 +17,14 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   NotificationService _notificationService = new NotificationService();
+  ValueNotifier<List<Notifications>> _notifications =
+      ValueNotifier(notifications);
 
   Future<void> _clearAllNotifications() async {
     bool isDeleted = await _notificationService.deleteNotificationsByUserId();
     if (isDeleted) {
       notifications.clear();
+      _notifications.notifyListeners();
     }
   }
 
@@ -57,7 +60,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 ],
               ),
               SizedBox(height: kDefaultPadding),
-              NotificationList(),
+              ValueListenableBuilder(
+                valueListenable: _notifications,
+                builder: (context, value, child) {
+                  return NotificationList();
+                },
+              ),
             ],
           ),
         ),
