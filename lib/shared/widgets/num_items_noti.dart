@@ -3,10 +3,13 @@ import 'package:haiya_client/shared/models/order_line.dart';
 
 import '../../constants.dart';
 
-class NumItemsInCartNoti extends StatelessWidget {
-  const NumItemsInCartNoti({
+class NumItemsNoti extends StatelessWidget {
+  const NumItemsNoti({
     Key? key,
+    required this.notiFor,
   }) : super(key: key);
+
+  final List<dynamic> notiFor;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class NumItemsInCartNoti extends StatelessWidget {
           decoration:
               BoxDecoration(shape: BoxShape.circle, color: kSecondaryColor),
           child: Text(
-            cart.length > 9 ? "10+" : cart.length.toString(),
+            notiFor.length > 9 ? "10+" : notiFor.length.toString(),
             style: TextStyle(
               color: Colors.white,
               fontSize: 14,

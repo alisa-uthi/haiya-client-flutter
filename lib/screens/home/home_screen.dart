@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'package:haiya_client/shared/models/category.dart';
+import 'package:haiya_client/shared/models/notification.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
+import 'package:haiya_client/shared/services/notification_service.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
@@ -26,6 +28,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   UserService _userService = new UserService();
   InventoryService _inventoryService = new InventoryService();
+  NotificationService _notificationService = new NotificationService();
 
   bool _isLoading = true;
   String _location = '';
@@ -47,6 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
     if (allPharmacies.isEmpty) {
       await _getAllPharmacies();
     }
+    if (notifications.isEmpty) {
+      await _getNotifications();
+    }
     setState(() => _isLoading = false);
   }
 
@@ -65,6 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _getAllPharmacies() async {
     await _inventoryService.getAllPharmacies();
+  }
+
+  _getNotifications() async {
+    await _notificationService.getNotificationsByUserId();
   }
 
   @override
