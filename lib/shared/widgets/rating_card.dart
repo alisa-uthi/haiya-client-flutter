@@ -37,9 +37,12 @@ class _RatingCardState extends State<RatingCard> {
 
     if (mounted) {
       if (result != null) {
-        setState(() => _userDetail = result);
+        setState(() => {
+              _userDetail = result,
+              _isLoading = false,
+            });
       }
-      setState(() => _isLoading = false);
+      // setState(() => _isLoading = false);
     }
   }
 
@@ -51,55 +54,55 @@ class _RatingCardState extends State<RatingCard> {
   @override
   Widget build(BuildContext context) {
     return !_isLoading && _userDetail != null
-            ? CustomCard(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: kDefaultPadding / 2,
-          vertical: 5,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // User name and profile image
-            Row(
-              children: [
-                _builProfileImage(),
-                SizedBox(width: kDefaultPadding / 2),
-                Text(
-                  '${_userDetail!.firstname} ${_userDetail!.lastname}',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ],
-            ),
-            SizedBox(height: kDefaultPadding / 1.5),
-
-            // Feedback
-            if (widget.rating.pharmacyFeedback! != '')
-              Text(
-                widget.rating.pharmacyFeedback!,
-                style: Theme.of(context).textTheme.bodyText1,
-                overflow: TextOverflow.clip,
-                maxLines: 8,
+        ? CustomCard(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPadding / 2,
+                vertical: 5,
               ),
-            if (widget.rating.pharmacyFeedback! != '')
-              SizedBox(height: kDefaultPadding / 2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // User name and profile image
+                  Row(
+                    children: [
+                      _builProfileImage(),
+                      SizedBox(width: kDefaultPadding / 2),
+                      Text(
+                        '${_userDetail!.firstname} ${_userDetail!.lastname}',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: kDefaultPadding / 1.5),
 
-            // Rating score and timestamp
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildRatingScore(),
-                Text(
-                  widget.rating.timestamp,
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ],
+                  // Feedback
+                  if (widget.rating.pharmacyFeedback! != '')
+                    Text(
+                      widget.rating.pharmacyFeedback!,
+                      style: Theme.of(context).textTheme.bodyText1,
+                      overflow: TextOverflow.clip,
+                      maxLines: 8,
+                    ),
+                  if (widget.rating.pharmacyFeedback! != '')
+                    SizedBox(height: kDefaultPadding / 2),
+
+                  // Rating score and timestamp
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildRatingScore(),
+                      Text(
+                        widget.rating.timestamp,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    )
-            : Center(child: Text("No Result Found."));
+          )
+        : Container();
   }
 
   Widget _buildRatingScore() {

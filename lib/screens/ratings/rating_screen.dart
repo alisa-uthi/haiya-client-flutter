@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/shared/models/rating.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';
+import 'package:haiya_client/shared/widgets/loader.dart';
 import 'package:haiya_client/shared/widgets/rating_card.dart';
 
 class RatingScreen extends StatelessWidget {
@@ -32,17 +33,20 @@ class RatingScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(height: kDefaultPadding),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: ratings.length,
-                  itemBuilder: (context, index) {
-                    var rating = ratings[index];
-                    return Padding(
-                      padding:
-                          const EdgeInsets.only(bottom: kDefaultPadding / 2),
-                      child: RatingCard(rating: rating),
-                    );
-                  }),
+              if (ratings.isNotEmpty)
+                ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: ratings.length,
+                    itemBuilder: (context, index) {
+                      var rating = ratings[index];
+                      return Padding(
+                        padding:
+                            const EdgeInsets.only(bottom: kDefaultPadding / 2),
+                        child: RatingCard(rating: rating),
+                      );
+                    })
+              else
+                Loader()
             ],
           ),
         ),
