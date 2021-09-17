@@ -20,8 +20,6 @@ class SettingOptions extends StatelessWidget {
         PasswordOption(onClickChangePass: onClickChangePass),
         SizedBox(height: kDefaultPadding),
         ManageNotifications(),
-        SizedBox(height: kDefaultPadding),
-        AppThemeOption(),
       ],
     );
   }

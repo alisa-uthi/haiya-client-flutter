@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
+import 'package:haiya_client/shared/helper/firebase_messaging.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/notification.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
@@ -36,7 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _initializeFirebaseMessaging();
     _fetchData();
+  }
+
+  Future<void> _initializeFirebaseMessaging() async {
+    await FirebaseMessagingHelper().initilizeMessagingAndNotification();
   }
 
   Future<dynamic> _fetchData() async {

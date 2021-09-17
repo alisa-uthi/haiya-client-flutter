@@ -1,8 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:haiya_client/shared/models/notification_subscription.dart';
+import 'package:haiya_client/shared/services/notification_service.dart';
 
 class FirebaseMessagingHelper {
+  NotificationService _notificationService = new NotificationService();
+
   Future<void> initilizeMessagingAndNotification() async {
     await Firebase.initializeApp();
 
@@ -33,8 +37,18 @@ class FirebaseMessagingHelper {
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
+    // Get Registration token and subscribe it to notification
     String? token = await FirebaseMessaging.instance.getToken();
-    print("My Token $token");
+    if (token != null) {
+      NotificationSubscription? existingSubscription =
+          await _notificationService.getSubscriptionByToken(token);
+      if (existingSubscription == null) {
+        await _notificationService.subscribeToNotificationSubscription(
+          token,
+          "ORDER_ARRIVED",
+        );
+      }
+    }
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification!;

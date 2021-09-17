@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:haiya_client/shared/helper/firebase_messaging.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'constants.dart';
 import 'routes.dart';
 import 'screens/splash/splash_screen.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize Firebase Messaging and local notification
-  await FirebaseMessagingHelper().initilizeMessagingAndNotification();
-
+void main() {
   runApp(MyApp());
 }
 
