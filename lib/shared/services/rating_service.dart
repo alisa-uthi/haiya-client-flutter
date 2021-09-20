@@ -7,12 +7,20 @@ import 'package:http/http.dart' as http;
 class RatingService {
   var basedUri = 'http://10.0.2.2:8080/api/rating';
 
+  Map<String, String> requestHeaders = {
+    'Content-type': 'application/json; charset=utf-8',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${currentUser.token}',
+  };
+
   Future<List<Rating>> getPharmacyRatingByPharId(int pharmacyId) async {
     List<Rating> result = [];
 
     // Call Api
-    var response =
-        await http.get(Uri.parse('${basedUri}/pharmacy/${pharmacyId}'));
+    var response = await http.get(
+      Uri.parse('${basedUri}/pharmacy/${pharmacyId}'),
+      headers: requestHeaders,
+    );
 
     // Handle response
     if (response.statusCode == 200) {
@@ -32,9 +40,7 @@ class RatingService {
     // Call Api
     var response = await http.post(
       Uri.parse('${basedUri}/pharmacy'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'patientId': currentUser.id,
         'pharmacyId': pharmacyId,

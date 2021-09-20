@@ -5,6 +5,12 @@ import 'package:http/http.dart' as http;
 class AuthService {
   var basedUri = 'http://10.0.2.2:8080/api/user/auth';
 
+  Map<String, String> requestHeaders = {
+    'Content-type': 'application/json; charset=utf-8',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${currentUser.token}',
+  };
+
   Future<bool> signUp() async {
     var drugAllergy = [];
     var congenitalDisease = [];
@@ -104,6 +110,7 @@ class AuthService {
       // Convert response body to UserDetail object
       Map<String, dynamic> body = jsonDecode(response.body);
       currentUser = UserDetail.fromJson(body['user']);
+      currentUser.token = body['token'];
 
       return true;
     }
@@ -114,9 +121,7 @@ class AuthService {
     // Call Api
     var response = await http.post(
       Uri.parse('$basedUri/request-reset-password/'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({'email': email}),
     );
 

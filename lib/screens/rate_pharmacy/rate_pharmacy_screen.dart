@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/rate_pharmacy/widgets/rating_review_form.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
@@ -7,6 +6,7 @@ import 'package:haiya_client/shared/widgets/header_text.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 
 import '../../constants.dart';
+import 'widgets/rating_review_form.dart';
 
 class RatePharmacyScreen extends StatefulWidget {
   static final routeName = '/rate-pharmacy';
@@ -80,7 +80,6 @@ class _RatePharmacyScreenState extends State<RatePharmacyScreen> {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: false,
       title: Text(
         "Rate Pharmacy",
         style: Theme.of(context).textTheme.headline1,

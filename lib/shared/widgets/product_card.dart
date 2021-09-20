@@ -25,8 +25,10 @@ class _ProductCardState extends State<ProductCard> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (_) => ProductDetailScreen(product: widget.product),
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) =>
+                ProductDetailScreen(product: widget.product),
+            transitionDuration: Duration(seconds: 0),
           ),
         ).then((_) => setState(() {}));
       },

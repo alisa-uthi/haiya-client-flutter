@@ -16,6 +16,7 @@ class UserDetail {
   String image;
   List<CongenitalDisease> congenitalDisease;
   List<DrugAllergy> drugAllergy;
+  String token;
 
   UserDetail({
     required this.id,
@@ -32,6 +33,7 @@ class UserDetail {
     required this.image,
     required this.congenitalDisease,
     required this.drugAllergy,
+    this.token = '',
   });
 
   factory UserDetail.fromJson(Map<String, dynamic> json) {

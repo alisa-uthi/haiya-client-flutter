@@ -13,6 +13,12 @@ import 'package:haiya_client/shared/models/user_detail.dart';
 class UserService {
   var basedUri = 'http://10.0.2.2:8080/api/user';
 
+  Map<String, String> requestHeaders = {
+    'Content-type': 'application/json; charset=utf-8',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${currentUser.token}',
+  };
+
   Future<LatLng> getCurrentCoordinates() async {
     Position currentPosition = await Geolocator.getCurrentPosition();
     return LatLng(currentPosition.latitude, currentPosition.longitude);
@@ -51,9 +57,7 @@ class UserService {
     // Call Api
     var response = await http.post(
       Uri.parse('${basedUri}/address/user/${currentUser.id}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'name': name,
         'address': location,
@@ -81,9 +85,7 @@ class UserService {
     // Call Api
     var response = await http.put(
       Uri.parse('${basedUri}/address/${id}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'name': name,
         'address': location,
@@ -103,8 +105,10 @@ class UserService {
 
   Future<void> getAddressByUserId() async {
     // Call Api
-    var response =
-        await http.get(Uri.parse('${basedUri}/address/user/${currentUser.id}'));
+    var response = await http.get(
+      Uri.parse('${basedUri}/address/user/${currentUser.id}'),
+      headers: requestHeaders,
+    );
 
     // Handle response
     if (response.statusCode >= 200 && response.statusCode < 205) {
@@ -121,9 +125,7 @@ class UserService {
     // Call Api
     var response = await http.patch(
       Uri.parse('${basedUri}/address/${addressId}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'userId': currentUser.id,
         'isDeliveryAddress': isShippingAddress ? 'Y' : 'N',
@@ -144,9 +146,7 @@ class UserService {
 
     var response = await http.put(
       Uri.parse('$basedUri/profile/${currentUser.id}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'title': tempUser.title,
         'firstname': tempUser.firstname,
@@ -167,7 +167,10 @@ class UserService {
         isDiseaseAdded) {
       // Convert response body to UserDetail object
       Map<String, dynamic> body = jsonDecode(response.body);
+      // Reserve jwt token
+      String jwtToken = currentUser.token;
       currentUser = UserDetail.fromJson(body['data']);
+      currentUser.token = jwtToken;
 
       // Reset user info when sign up
       tempUser = new UserDetail(
@@ -204,9 +207,7 @@ class UserService {
         // Call Api
         var response = await http.post(
           Uri.parse('$basedUri/drug-allergy/user/${currentUser.id}'),
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-          },
+          headers: requestHeaders,
           body: jsonEncode(obj),
         );
 
@@ -231,9 +232,7 @@ class UserService {
         // Call Api
         var response = await http.post(
           Uri.parse('$basedUri/congenital-disease/user/${currentUser.id}'),
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-          },
+          headers: requestHeaders,
           body: jsonEncode(obj),
         );
 
@@ -263,6 +262,7 @@ class UserService {
         contentType: MediaType('image', 'jpeg'),
       ),
     );
+    request.headers.addAll(requestHeaders);
 
     // Call Api
     var response = await request.send();
@@ -276,8 +276,10 @@ class UserService {
   }
 
   Future<String> getProfileImage(int userId) async {
-    var response =
-        await http.get(Uri.parse('${basedUri}/profile/${userId}/image'));
+    var response = await http.get(
+      Uri.parse('${basedUri}/profile/${userId}/image'),
+      headers: requestHeaders,
+    );
     if (response.statusCode >= 200 && response.statusCode < 205) {
       Map<String, dynamic> body = jsonDecode(response.body);
       currentUser.image = body['data']['Psn_Image'];
@@ -287,7 +289,10 @@ class UserService {
   }
 
   Future<UserDetail?> getUserById(int userId) async {
-    var response = await http.get(Uri.parse('${basedUri}/profile/${userId}'));
+    var response = await http.get(
+      Uri.parse('${basedUri}/profile/${userId}'),
+      headers: requestHeaders,
+    );
 
     if (response.statusCode >= 200 && response.statusCode < 205) {
       Map<String, dynamic> body = jsonDecode(response.body);
@@ -304,9 +309,7 @@ class UserService {
     // Call Api
     var response = await http.patch(
       Uri.parse('${basedUri}/profile/${currentUser.id}/password'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'oldPassword': oldPassword,
         'newPassword': newPassword,

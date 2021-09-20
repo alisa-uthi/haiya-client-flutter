@@ -7,9 +7,16 @@ import 'dart:convert';
 class NotificationService {
   var basedUri = 'http://10.0.2.2:8080/api/notification';
 
+  Map<String, String> requestHeaders = {
+    'Content-type': 'application/json; charset=utf-8',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${currentUser.token}',
+  };
+
   Future<void> getNotificationsByUserId() async {
     var response = await http.get(
       Uri.parse('$basedUri/user/${currentUser.id}'),
+      headers: requestHeaders,
     );
 
     // Handle response
@@ -24,6 +31,7 @@ class NotificationService {
   Future<bool> deleteNotificationsByUserId() async {
     var response = await http.delete(
       Uri.parse('$basedUri/user/${currentUser.id}'),
+      headers: requestHeaders,
     );
 
     // Handle response
@@ -38,6 +46,7 @@ class NotificationService {
 
     var response = await http.get(
       Uri.parse('$basedUri/$id'),
+      headers: requestHeaders,
     );
 
     // Handle response
@@ -51,6 +60,7 @@ class NotificationService {
   Future<bool> deleteNotificationById(int id) async {
     var response = await http.delete(
       Uri.parse('$basedUri/$id'),
+      headers: requestHeaders,
     );
 
     // Handle response
@@ -67,9 +77,7 @@ class NotificationService {
     // Call Api
     var response = await http.post(
       Uri.parse('${basedUri}/subscription/token'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'registrationToken': registrationToken,
       }),
@@ -88,6 +96,7 @@ class NotificationService {
     // Call Api
     var response = await http.get(
       Uri.parse('${basedUri}/subscription/user/${currentUser.id}'),
+      headers: requestHeaders,
     );
 
     if (response.statusCode >= 200 && response.statusCode < 205) {
@@ -104,9 +113,7 @@ class NotificationService {
     // Call Api
     await http.post(
       Uri.parse('${basedUri}/subscription/user/${currentUser.id}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'registrationToken': registrationToken,
         'notificationType': notificationType.toUpperCase(),
@@ -122,9 +129,7 @@ class NotificationService {
     // Call Api
     var response = await http.patch(
       Uri.parse('$basedUri/subscription/user/${currentUser.id}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'registrationToken': registrationToken,
         'notificationType': notificationType.toUpperCase(),

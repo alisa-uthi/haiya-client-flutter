@@ -34,17 +34,13 @@ class RatingScreen extends StatelessWidget {
               ),
               SizedBox(height: kDefaultPadding),
               if (ratings.isNotEmpty)
-                ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: ratings.length,
-                    itemBuilder: (context, index) {
-                      var rating = ratings[index];
-                      return Padding(
-                        padding:
-                            const EdgeInsets.only(bottom: kDefaultPadding / 2),
-                        child: RatingCard(rating: rating),
-                      );
-                    })
+                ...List.generate(ratings.length, (index) {
+                  var rating = ratings[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: kDefaultPadding / 2),
+                    child: RatingCard(rating: rating),
+                  );
+                })
               else
                 Loader()
             ],

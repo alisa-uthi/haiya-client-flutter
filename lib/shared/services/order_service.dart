@@ -9,6 +9,12 @@ import 'package:http/http.dart' as http;
 class OrderService {
   var basedUri = 'http://10.0.2.2:8080/api/order';
 
+  Map<String, String> requestHeaders = {
+    'Content-type': 'application/json; charset=utf-8',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${currentUser.token}',
+  };
+
   Future<bool> createOrder({
     required String deliveryAddress,
     required int deliveryPrice,
@@ -30,9 +36,7 @@ class OrderService {
     // Call Api
     var response = await http.post(
       Uri.parse('${basedUri}/user/${currentUser.id}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'deliveryAddress': deliveryAddress,
         'deliveryPrice': deliveryPrice,
@@ -52,8 +56,10 @@ class OrderService {
 
   Future<List<Order>> getPurchaseHistories() async {
     // Call Api
-    var response =
-        await http.get(Uri.parse('${basedUri}/user/${currentUser.id}'));
+    var response = await http.get(
+      Uri.parse('${basedUri}/user/${currentUser.id}'),
+      headers: requestHeaders,
+    );
 
     // Handle response
     if (response.statusCode >= 200 && response.statusCode < 205) {
@@ -66,7 +72,10 @@ class OrderService {
 
   Future<Order?> getOrderById(int id) async {
     // Call Api
-    var response = await http.get(Uri.parse('${basedUri}/${id}'));
+    var response = await http.get(
+      Uri.parse('${basedUri}/${id}'),
+      headers: requestHeaders,
+    );
 
     // Handle response
     if (response.statusCode >= 200 && response.statusCode < 205) {
@@ -79,8 +88,11 @@ class OrderService {
 
   Future<List<Order>> getOrdersByOrderStatus(String orderStatus) async {
     // Call Api
-    var response = await http.get(Uri.parse(
-        '${basedUri}/user/${currentUser.id}/orderStatus/${orderStatus}'));
+    var response = await http.get(
+      Uri.parse(
+          '${basedUri}/user/${currentUser.id}/orderStatus/${orderStatus}'),
+      headers: requestHeaders,
+    );
 
     // Handle response
     if (response.statusCode >= 200 && response.statusCode < 205) {

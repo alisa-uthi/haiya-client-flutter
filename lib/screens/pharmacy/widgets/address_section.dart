@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:haiya_client/shared/models/address.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
-import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
 import 'package:haiya_client/shared/widgets/title_section.dart';
 
 import '../../../constants.dart';

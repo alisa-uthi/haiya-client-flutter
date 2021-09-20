@@ -6,11 +6,18 @@ import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/operation_time.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
+import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:http/http.dart' as http;
 
 class InventoryService {
   var basedUri = 'http://10.0.2.2:8080/api/inventory';
+
+  Map<String, String> requestHeaders = {
+    'Content-type': 'application/json; charset=utf-8',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${currentUser.token}',
+  };
 
   bool isPharmacyOpen(OperationTime opt) {
     String openHr = opt.openHr.substring(0, 2);
@@ -43,9 +50,7 @@ class InventoryService {
     // Call Api
     var response = await http.get(
       Uri.parse('${basedUri}/pharmacy/${pharmacyId}'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
     );
 
     // Handle response
@@ -65,9 +70,7 @@ class InventoryService {
     // Call Api
     var response = await http.post(
       Uri.parse('${basedUri}/pharmacy'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'latitude': latlng.latitude,
         'longitude': latlng.longitude,
@@ -91,9 +94,7 @@ class InventoryService {
     // Call Api
     var response = await http.post(
       Uri.parse('${basedUri}/pharmacy/nearest'),
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
+      headers: requestHeaders,
       body: jsonEncode({
         'latitude': latlng.latitude,
         'longitude': latlng.longitude,
@@ -111,7 +112,10 @@ class InventoryService {
 
   Future<void> getAllProductCategories() async {
     // Call Api
-    var response = await http.get(Uri.parse('${basedUri}/category'));
+    var response = await http.get(
+      Uri.parse('${basedUri}/category'),
+      headers: requestHeaders,
+    );
 
     // Handle response
     if (response.statusCode == 200) {
@@ -126,6 +130,7 @@ class InventoryService {
     // Call Api
     var response = await http.get(
       Uri.parse('${basedUri}/product/category/${categoryId}'),
+      headers: requestHeaders,
     );
 
     // Handle response
@@ -148,6 +153,7 @@ class InventoryService {
     var response = await http.get(
       Uri.parse(
           '${basedUri}/product/catalog/${pharmacyId}/category/${categoryId}'),
+      headers: requestHeaders,
     );
 
     // Handle response
@@ -166,6 +172,7 @@ class InventoryService {
     // Call Api
     var response = await http.get(
       Uri.parse('${basedUri}/product/catalog/${pharmacyId}'),
+      headers: requestHeaders,
     );
 
     // Handle response
@@ -184,6 +191,7 @@ class InventoryService {
     // Call Api
     var response = await http.get(
       Uri.parse('${basedUri}/pharmacy?name=${pharmacyName}'),
+      headers: requestHeaders,
     );
 
     // Handle response

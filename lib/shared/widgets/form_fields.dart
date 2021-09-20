@@ -233,7 +233,7 @@ class FormFields {
       child: TextFormField(
         obscureText: _isHidden,
         keyboardType: TextInputType.visiblePassword,
-        textInputAction: TextInputAction.next,
+        textInputAction: TextInputAction.done,
         decoration: cardInputDecoration.copyWith(
           labelText: label,
           suffixIcon: IconButton(
