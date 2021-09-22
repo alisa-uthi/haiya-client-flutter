@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/delivery_tracking/delivery_tracking_screen.dart';
 import 'package:haiya_client/screens/order_detail/widgets/rate_pharmacy_button.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/services/order_service.dart';
-import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 
 import '../../constants.dart';
@@ -69,8 +67,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       ),
                       SizedBox(height: kDefaultPadding * 1.3),
                       Text(
-                        "${_order!.payTimestamp.split(' ')[0]}, ${_order!.pharmacyName}",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        "${_order!.pharmacyName}\n${_order!.payTimestamp}",
+                        style: TextStyle(fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: kDefaultPadding * 1.3),
@@ -83,7 +81,10 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       PaymentMethodSection(
                         paymentMethod: _order!.paymentMethod,
                       ),
-                      if (widget.isDelivering) DeliveryTrackingButton(),
+                      if (widget.isDelivering)
+                        DeliveryTrackingButton(
+                          orderId: widget.orderId,
+                        ),
                       if (widget.isCompleted)
                         RatePharmacyButton(pharmacyName: _order!.pharmacyName),
                     ],

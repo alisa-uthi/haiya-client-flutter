@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/forgot_password/forgot_password_screen.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_snackbar.dart';

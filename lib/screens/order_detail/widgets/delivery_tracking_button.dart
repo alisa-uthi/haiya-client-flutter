@@ -7,7 +7,10 @@ import '../../../constants.dart';
 class DeliveryTrackingButton extends StatelessWidget {
   const DeliveryTrackingButton({
     Key? key,
+    required this.orderId,
   }) : super(key: key);
+
+  final int orderId;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,9 @@ class DeliveryTrackingButton extends StatelessWidget {
               context,
               PageRouteBuilder(
                 pageBuilder: (context, animation1, animation2) =>
-                    DeliveryTrackingScreen(),
+                    DeliveryTrackingScreen(
+                  orderId: orderId,
+                ),
                 transitionDuration: Duration(seconds: 0),
               ),
             );

@@ -12,7 +12,7 @@ class OrderItem extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       title: Text(
-        "${order.payTimestamp.split(' ')[0]}, ${order.pharmacyName}",
+        "${order.payTimestamp}, ${order.pharmacyName}",
         style: Theme.of(context).textTheme.bodyText1,
         overflow: TextOverflow.ellipsis,
       ),

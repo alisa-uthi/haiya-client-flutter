@@ -79,7 +79,8 @@ final Map<String, WidgetBuilder> routes = {
         ratings: [],
         pharmacyName: '',
       ),
-  DeliveryTrackingScreen.routeName: (context) => DeliveryTrackingScreen(),
+  DeliveryTrackingScreen.routeName: (context) =>
+      DeliveryTrackingScreen(orderId: 0),
   RatePharmacyScreen.routeName: (context) =>
       RatePharmacyScreen(pharmacyName: ''),
   MyOrdersScreen.routeName: (context) => MyOrdersScreen(),

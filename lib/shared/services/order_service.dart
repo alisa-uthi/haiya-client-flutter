@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:haiya_client/shared/models/delivery.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
@@ -98,6 +99,24 @@ class OrderService {
     if (response.statusCode >= 200 && response.statusCode < 205) {
       Map<String, dynamic> body = jsonDecode(response.body);
       return body['data'].map<Order>((json) => Order.fromJson(json)).toList();
+    }
+
+    return [];
+  }
+
+  Future<List<Delivery>> getDeliveryByOrderId(int orderId) async {
+    // Call Api
+    var response = await http.get(
+      Uri.parse('${basedUri}/${orderId}/delivery'),
+      headers: requestHeaders,
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      return body['data']
+          .map<Delivery>((json) => Delivery.fromJson(json))
+          .toList();
     }
 
     return [];
