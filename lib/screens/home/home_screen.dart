@@ -37,12 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeFirebaseMessaging();
+    _getRegistrationTokenAndSubscribeToNotification();
     _fetchData();
   }
 
-  Future<void> _initializeFirebaseMessaging() async {
-    await FirebaseMessagingHelper().initilizeMessagingAndNotification();
+  Future<void> _getRegistrationTokenAndSubscribeToNotification() async {
+    await FirebaseMessagingHelper().getTokenAndSubscribe();
   }
 
   Future<dynamic> _fetchData() async {

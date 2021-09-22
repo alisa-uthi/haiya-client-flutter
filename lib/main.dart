@@ -5,8 +5,11 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'constants.dart';
 import 'routes.dart';
 import 'screens/splash/splash_screen.dart';
+import 'shared/helper/firebase_messaging.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FirebaseMessagingHelper().initilizeMessagingAndNotification();
   runApp(MyApp());
 }
 

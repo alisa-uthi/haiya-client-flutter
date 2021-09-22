@@ -38,17 +38,17 @@ class FirebaseMessagingHelper {
     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     // Get Registration token and subscribe it to notification
-    String? token = await FirebaseMessaging.instance.getToken();
-    if (token != null) {
-      NotificationSubscription? existingSubscription =
-          await _notificationService.getSubscriptionByToken(token);
-      if (existingSubscription == null) {
-        await _notificationService.subscribeToNotificationSubscription(
-          token,
-          "ORDER_ARRIVED",
-        );
-      }
-    }
+    // String? token = await FirebaseMessaging.instance.getToken();
+    // if (token != null) {
+    //   NotificationSubscription? existingSubscription =
+    //       await _notificationService.getSubscriptionByToken(token);
+    //   if (existingSubscription == null) {
+    //     await _notificationService.subscribeToNotificationSubscription(
+    //       token,
+    //       "ORDER_ARRIVED",
+    //     );
+    //   }
+    // }
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification!;
@@ -68,5 +68,19 @@ class FirebaseMessagingHelper {
         ),
       );
     });
+  }
+
+  Future<void> getTokenAndSubscribe() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    if (token != null) {
+      NotificationSubscription? existingSubscription =
+          await _notificationService.getSubscriptionByToken(token);
+      if (existingSubscription == null) {
+        await _notificationService.subscribeToNotificationSubscription(
+          token,
+          "ORDER_ARRIVED",
+        );
+      }
+    }
   }
 }

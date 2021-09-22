@@ -35,7 +35,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   @override
   void initState() {
     super.initState();
-    // _sendOtp();   //TODO: Remove this comment
+    // _sendOtp(); //TODO: Remove this comment
   }
 
   @override
