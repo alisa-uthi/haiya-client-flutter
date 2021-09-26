@@ -18,8 +18,7 @@ class PersonalInfoForm extends StatefulWidget {
 }
 
 class _PersonalInfoFormState extends State<PersonalInfoForm> {
-  String _email = currentUser.email,
-      _title = currentUser.title,
+  String _title = currentUser.title,
       _firstName = currentUser.firstname,
       _lastName = currentUser.lastname,
       _gender = currentUser.gender == 'M'
@@ -68,8 +67,7 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
         _dob.value != '' &&
         _height != 0 &&
         _weight != 0 &&
-        _phone != '' &&
-        _email != '') {
+        _phone != '') {
       return false;
     }
     return true;
@@ -200,17 +198,6 @@ class _PersonalInfoFormState extends State<PersonalInfoForm> {
             ],
           ),
           SizedBox(height: kDefaultPadding / 1.5),
-
-          // Email
-          _formFields.buildEmailField(
-            "Email*",
-            _email,
-            (value) => setState(() => {
-                  _email = value!,
-                  tempUser.email = _email,
-                }),
-          ),
-          SizedBox(height: kDefaultPadding * 1.5),
 
           Text(
             """Note: For the drug allergy and congenital disease, you can add it more. However, you cannot edit or delete it since we will keep the record as your medication information.""",

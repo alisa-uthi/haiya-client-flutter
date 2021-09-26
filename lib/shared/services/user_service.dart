@@ -155,7 +155,6 @@ class UserService {
         'gender': tempUser.gender,
         'height': tempUser.height,
         'weight': tempUser.weight,
-        'email': tempUser.email,
         'phone': tempUser.phone,
       }),
     );

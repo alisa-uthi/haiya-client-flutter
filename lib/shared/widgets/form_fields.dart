@@ -144,7 +144,7 @@ class FormFields {
         textInputAction: TextInputAction.next,
         decoration: cardInputDecoration.copyWith(
           labelText: label,
-          suffixText: label == 'Weight' ? "kg" : "cm",
+          suffixText: label.contains('Weight') ? "kg" : "cm",
         ),
         onChanged: onChange,
         validator: (value) {
