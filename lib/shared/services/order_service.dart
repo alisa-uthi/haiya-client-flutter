@@ -19,7 +19,6 @@ class OrderService {
   Future<bool> createOrder({
     required String deliveryAddress,
     required int deliveryPrice,
-    required String comment,
     required String pharmacy,
   }) async {
     // Convert List<OrderLine> to normal array of objects
@@ -41,7 +40,6 @@ class OrderService {
       body: jsonEncode({
         'deliveryAddress': deliveryAddress,
         'deliveryPrice': deliveryPrice,
-        'comment': comment,
         'pharmacy': pharmacy,
         'orderLines': orderLines,
       }),

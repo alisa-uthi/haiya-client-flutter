@@ -58,13 +58,12 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
         });
   }
 
-  Future<void> _submitOrder() async {
+  Future<void> _submitOrder(BuildContext context) async {
     setState(() => _isSubmitOrderLoading = true);
 
     bool isSuccess = await _orderService.createOrder(
       deliveryAddress: _location,
       deliveryPrice: 30,
-      comment: '',
       pharmacy: selectedPharmacy,
     );
 
@@ -120,7 +119,7 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
                     CustomBtn(
                       text: "CONFIRM",
                       boxColor: kPrimaryColor,
-                      onPressed: _submitOrder,
+                      onPressed: () => _submitOrder(context),
                       textColor: Colors.white,
                     ),
                     SizedBox(height: kDefaultPadding),
