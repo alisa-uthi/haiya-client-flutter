@@ -67,6 +67,7 @@ class AuthService {
       // Convert response body to UserDetail object
       Map<String, dynamic> body = jsonDecode(response.body);
       currentUser = UserDetail.fromJson(body['data']);
+      currentUser.token = body['data']['token'];
 
       // Reset user info when sign up
       tempUser = new UserDetail(
