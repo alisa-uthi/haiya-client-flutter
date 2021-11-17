@@ -67,7 +67,8 @@ class _ShippingAddressSectionState extends State<ShippingAddressSection> {
                 SizedBox(height: kDefaultPadding / 2),
                 Text(
                   widget.deliveryAddress,
-                  overflow: TextOverflow.clip,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
                 SizedBox(height: kDefaultPadding / 2),
               ],
