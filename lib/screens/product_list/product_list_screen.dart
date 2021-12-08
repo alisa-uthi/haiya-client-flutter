@@ -133,7 +133,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       pharmacyName: widget.pharmacyName,
                     ),
                     SizedBox(height: kDefaultPadding / 1.5),
-                    ConsultationBtn(),
+                    if (widget.pharmacyName != null &&
+                        widget.pharmacyName != "")
+                      ConsultationBtn(pharmacyName: widget.pharmacyName!),
                     Container(
                       padding: const EdgeInsets.all(kDefaultPadding),
                       child: Column(

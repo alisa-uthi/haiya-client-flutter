@@ -86,7 +86,8 @@ final Map<String, WidgetBuilder> routes = {
       RatePharmacyScreen(pharmacyName: ''),
   MyOrdersScreen.routeName: (context) => MyOrdersScreen(),
   NotificationScreen.routeName: (context) => NotificationScreen(),
-  ConsultationVideoScreen.routeName: (context) => ConsultationVideoScreen(),
+  ConsultationVideoScreen.routeName: (context) =>
+      ConsultationVideoScreen(pharmacyName: ""),
   PharmacyAddressMapsScreen.routeName: (context) => PharmacyAddressMapsScreen(
         pharmacyName: '',
         address: new Address(

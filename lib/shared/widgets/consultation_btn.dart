@@ -5,7 +5,10 @@ import 'package:haiya_client/screens/consultation/consultation_video_screen.dart
 class ConsultationBtn extends StatelessWidget {
   const ConsultationBtn({
     Key? key,
+    required this.pharmacyName,
   }) : super(key: key);
+
+  final String pharmacyName;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class ConsultationBtn extends StatelessWidget {
         context,
         PageRouteBuilder(
           pageBuilder: (context, animation1, animation2) =>
-              ConsultationVideoScreen(),
+              ConsultationVideoScreen(pharmacyName: pharmacyName),
           transitionDuration: Duration(seconds: 0),
         ),
       ),

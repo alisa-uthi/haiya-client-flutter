@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:jitsi_meet/feature_flag/feature_flag.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
 import 'package:jitsi_meet/room_name_constraint.dart';
@@ -10,7 +11,12 @@ import 'package:jitsi_meet/room_name_constraint_type.dart';
 
 class ConsultationVideoScreen extends StatefulWidget {
   static final routeName = '/consultation';
-  const ConsultationVideoScreen({Key? key}) : super(key: key);
+  const ConsultationVideoScreen({
+    Key? key,
+    required this.pharmacyName,
+  }) : super(key: key);
+
+  final String pharmacyName;
 
   @override
   _ConsultationVideoScreenState createState() =>
@@ -20,10 +26,10 @@ class ConsultationVideoScreen extends StatefulWidget {
 class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
   // You can use these to add more control over the meet
   String serverText = "";
-  String roomText = "demoroom";
-  String subjectText = "Meeting";
-  String nameText = "Alisa";
-  String emailText = "email@gmail.com";
+  String roomText = "Consultation";
+  String subjectText = "Consultation Meeting";
+  String nameText = currentUser.firstname + " " + currentUser.lastname;
+  String emailText = currentUser.email;
 
   // Self-explainable bools
   var isAudioOnly = true;
@@ -35,12 +41,13 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
     super.initState();
     // Adding a Listener
     JitsiMeet.addListener(JitsiMeetingListener(
-        onConferenceWillJoin: _onConferenceWillJoin,
-        onConferenceJoined: _onConferenceJoined,
-        onConferenceTerminated: _onConferenceTerminated,
-        onPictureInPictureWillEnter: _onPictureInPictureWillEnter,
-        onPictureInPictureTerminated: _onPictureInPictureTerminated,
-        onError: _onError));
+      onConferenceWillJoin: _onConferenceWillJoin,
+      onConferenceJoined: _onConferenceJoined,
+      onConferenceTerminated: _onConferenceTerminated,
+      onPictureInPictureWillEnter: _onPictureInPictureWillEnter,
+      onPictureInPictureTerminated: _onPictureInPictureTerminated,
+      onError: _onError,
+    ));
   }
 
   @override
@@ -80,7 +87,18 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                 ),
                 margin: EdgeInsets.fromLTRB(32, 0, 32, 0),
               ),
-              const Spacer(flex: 60),
+              const Spacer(flex: 50),
+              Text(
+                "Pharmacy: ${widget.pharmacyName}",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              const Spacer(flex: 30),
               Container(
                 width: 350,
                 height: 60,
@@ -122,7 +140,7 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                   "Meet Guidelines -\n1) For privacy reasons you may change your name if you want.\n2) By default your audio & video are muted.",
                   style: TextStyle(
                     fontSize: 14,
-                    color: Color(0xff898989),
+                    color: kGreyColor,
                   ),
                 ),
               ),
