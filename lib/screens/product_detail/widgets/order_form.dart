@@ -7,6 +7,7 @@ import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
+import 'package:haiya_client/shared/widgets/consultation_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_alert_dialog.dart';
 
 class OrderForm extends StatefulWidget {
@@ -107,24 +108,28 @@ class _OrderFormState extends State<OrderForm> {
       ),
     );
 
-    return Column(
-      children: [
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: "Additional Note",
-            labelStyle: Theme.of(context).textTheme.headline1,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            focusedBorder: outlineInputBorder,
-            enabledBorder: outlineInputBorder,
-          ),
-          onChanged: (value) => setState(() => _note = value),
-        ),
-        SizedBox(height: kDefaultPadding * 1.5),
-        _buildQuantitySection(context),
-        SizedBox(height: kDefaultPadding * 3),
-        _buildAddToCartBtn(),
-      ],
-    );
+    return widget.product.presReq == 'n' || widget.product.presReq == 'N'
+        ? Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Additional Note",
+                  labelStyle: Theme.of(context).textTheme.headline1,
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: outlineInputBorder,
+                  enabledBorder: outlineInputBorder,
+                ),
+                onChanged: (value) => setState(() => _note = value),
+              ),
+              SizedBox(height: kDefaultPadding * 1.5),
+              _buildQuantitySection(context),
+              SizedBox(height: kDefaultPadding * 3),
+              _buildAddToCartBtn(),
+            ],
+          )
+        : Center(
+            child: ConsultationBtn(pharmacyName: widget.product.pharmacyName),
+          );
   }
 
   Widget _buildAddToCartBtn() {
