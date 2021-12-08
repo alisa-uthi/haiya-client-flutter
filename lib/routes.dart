@@ -7,6 +7,7 @@ import 'screens/cart/cart_screen.dart';
 import 'screens/checkout_order/checkout_order_screen.dart';
 import 'screens/checkout_success/checkout_success_screen.dart';
 import 'screens/congenital_form/congenital_form_screen.dart';
+import 'screens/consultation/consultation_video_screen.dart';
 import 'screens/customer_service/customer_service_screen.dart';
 import 'screens/delivery_tracking/delivery_tracking_screen.dart';
 import 'screens/drug_allery_form/drug_allergy_form_screen.dart';
@@ -85,6 +86,7 @@ final Map<String, WidgetBuilder> routes = {
       RatePharmacyScreen(pharmacyName: ''),
   MyOrdersScreen.routeName: (context) => MyOrdersScreen(),
   NotificationScreen.routeName: (context) => NotificationScreen(),
+  ConsultationVideoScreen.routeName: (context) => ConsultationVideoScreen(),
   PharmacyAddressMapsScreen.routeName: (context) => PharmacyAddressMapsScreen(
         pharmacyName: '',
         address: new Address(
