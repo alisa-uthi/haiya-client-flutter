@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:haiya_client/constants.dart';
-import 'package:haiya_client/screens/consultation/consultation_video_screen.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
-import 'package:haiya_client/shared/widgets/custom_btn.dart';
+import 'package:haiya_client/shared/widgets/consultation_btn.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 import 'package:haiya_client/shared/widgets/product_list.dart';
 
@@ -134,43 +133,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       pharmacyName: widget.pharmacyName,
                     ),
                     SizedBox(height: kDefaultPadding / 1.5),
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                              ConsultationVideoScreen(),
-                          transitionDuration: Duration(seconds: 0),
-                        ),
-                      ),
-                      child: Container(
-                        height: 40,
-                        width: MediaQuery.of(context).size.width / 1.5,
-                        decoration: BoxDecoration(
-                          color: kSuccessColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.chat_bubble_rounded,
-                              size: 20,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              "Consult with pharmacist",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    ConsultationBtn(),
                     Container(
                       padding: const EdgeInsets.all(kDefaultPadding),
                       child: Column(
