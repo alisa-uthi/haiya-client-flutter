@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.haiya_client">
+    package="com.example.haiya_client"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <queries>
         <!-- Get images -->
@@ -32,7 +33,8 @@
 
    <application
         android:label="haiya_client"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        tools:replace="android:label">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCjCCx9JBxT6zubijMuKLkiHtBu4Co8kww"/>
@@ -80,7 +82,7 @@
             android:value="2" />
 
          <service
-            android:name="com.dexterous.flutterlocalnotifications.ForegroundService"        
+            android:name="com.dexterous.flutterlocalnotifications.ForegroundService"
             android:exported="false"
             android:stopWithTask="false"/>
 

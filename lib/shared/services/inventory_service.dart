@@ -111,19 +111,26 @@ class InventoryService {
   }
 
   Future<void> getAllProductCategories() async {
-    // Call Api
-    var response = await http.get(
-      Uri.parse('${basedUri}/category'),
-      headers: requestHeaders,
-    );
+    // // Call Api
+    // var response = await http.get(
+    //   Uri.parse('${basedUri}/category'),
+    //   headers: requestHeaders,
+    // );
 
-    // Handle response
-    if (response.statusCode == 200) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      allCategories = body['data']
-          .map<Category>((json) => Category.fromJson(json))
-          .toList();
-    }
+    // // Handle response
+    // if (response.statusCode == 200) {
+    //   Map<String, dynamic> body = jsonDecode(response.body);
+    //   allCategories = body['data']
+    //       .map<Category>((json) => Category.fromJson(json))
+    //       .toList();
+    // }
+
+    allCategories = [
+      Category(id: 1, name: "Drug"),
+      Category(id: 2, name: "Supplementary"),
+      Category(id: 3, name: "Medical Equipment"),
+      Category(id: 4, name: "Cosmeceutical"),
+    ];
   }
 
   Future<List<Product>> getProductByCategory(int categoryId) async {

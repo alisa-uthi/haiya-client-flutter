@@ -5,10 +5,12 @@ class RowDetail extends StatelessWidget {
     Key? key,
     required this.title,
     this.detail = '',
+    this.textColor = Colors.black,
   }) : super(key: key);
 
   final String title;
   final String detail;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class RowDetail extends StatelessWidget {
           child: Text(
             detail,
             overflow: TextOverflow.clip,
+            style: TextStyle(color: textColor),
           ),
         ),
       ],

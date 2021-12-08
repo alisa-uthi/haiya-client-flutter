@@ -36,8 +36,6 @@ class HeaderSection extends StatelessWidget {
             pharmacyId: pharmacyId,
             pharmacyName: pharmacyName,
           ),
-          // SizedBox(height: kDefaultPadding / 2),
-          // FilterSection(), TODO: Implement filter
         ],
       ),
     );
