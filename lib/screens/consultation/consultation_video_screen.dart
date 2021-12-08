@@ -72,10 +72,12 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.all(kDefaultPadding),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Spacer(flex: 80),
-              Container(
+              Center(
                 child: Text(
                   "Join the Meet",
                   style: TextStyle(
@@ -85,7 +87,6 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                margin: EdgeInsets.fromLTRB(32, 0, 32, 0),
               ),
               const Spacer(flex: 50),
               Text(
@@ -100,7 +101,6 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
               ),
               const Spacer(flex: 30),
               Container(
-                width: 350,
                 height: 60,
                 decoration: BoxDecoration(
                   color: Color(0xfff3f3f3),
@@ -133,9 +133,8 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                   ),
                 ),
               ),
-              const Spacer(flex: 58),
+              const Spacer(flex: 20),
               Container(
-                width: 350,
                 child: Text(
                   "Meet Guidelines -\n1) For privacy reasons you may change your name if you want.\n2) By default your audio & video are muted.",
                   style: TextStyle(
@@ -146,62 +145,67 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
               ),
               const Spacer(flex: 58),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const Spacer(flex: 32),
-                  GestureDetector(
-                    onTap: () {
-                      _onAudioMutedChanged(!isAudioMuted);
-                    },
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      decoration: BoxDecoration(
-                          color:
-                              isAudioMuted ? kPrimaryColor : Color(0xffffffff),
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.06),
-                                offset: Offset(0, 4)),
-                          ]),
-                      width: 72,
-                      height: 72,
-                      child: Icon(
-                        isAudioMuted
-                            ? Icons.mic_off_sharp
-                            : Icons.mic_none_sharp,
-                        color: isAudioMuted ? Colors.white : Colors.black,
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _onAudioMutedChanged(!isAudioMuted);
+                        },
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
+                          decoration: BoxDecoration(
+                              color: isAudioMuted
+                                  ? kPrimaryColor
+                                  : Color(0xffffffff),
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 10,
+                                    color: Colors.black.withOpacity(0.06),
+                                    offset: Offset(0, 4)),
+                              ]),
+                          width: 72,
+                          height: 72,
+                          child: Icon(
+                            isAudioMuted
+                                ? Icons.mic_off_sharp
+                                : Icons.mic_none_sharp,
+                            color: isAudioMuted ? Colors.white : Colors.black,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  const Spacer(flex: 16),
-                  GestureDetector(
-                    onTap: () {
-                      _onVideoMutedChanged(!isVideoMuted);
-                    },
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      decoration: BoxDecoration(
-                          color:
-                              isVideoMuted ? kPrimaryColor : Color(0xffffffff),
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.06),
-                                offset: Offset(0, 4)),
-                          ]),
-                      width: 72,
-                      height: 72,
-                      child: Icon(
-                        isVideoMuted
-                            ? Icons.videocam_off_sharp
-                            : Icons.videocam,
-                        color: isVideoMuted ? Colors.white : Colors.black,
+                      SizedBox(width: kDefaultPadding / 1.5),
+                      GestureDetector(
+                        onTap: () {
+                          _onVideoMutedChanged(!isVideoMuted);
+                        },
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
+                          decoration: BoxDecoration(
+                              color: isVideoMuted
+                                  ? kPrimaryColor
+                                  : Color(0xffffffff),
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 10,
+                                    color: Colors.black.withOpacity(0.06),
+                                    offset: Offset(0, 4)),
+                              ]),
+                          width: 72,
+                          height: 72,
+                          child: Icon(
+                            isVideoMuted
+                                ? Icons.videocam_off_sharp
+                                : Icons.videocam,
+                            color: isVideoMuted ? Colors.white : Colors.black,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  const Spacer(flex: 16),
                   GestureDetector(
                     onTap: () {
                       _joinMeeting(); // Join meet on tap
@@ -231,10 +235,9 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                           ),
                         )),
                   ),
-                  const Spacer(flex: 32),
                 ],
               ),
-              const Spacer(flex: 38),
+              const Spacer(flex: 20),
             ],
           ),
         ),
