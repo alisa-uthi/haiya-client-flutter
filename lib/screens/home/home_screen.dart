@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/home/widgets/all_pharmacies.dart';
 import 'package:haiya_client/screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'package:haiya_client/shared/helper/firebase_messaging.dart';
 import 'package:haiya_client/shared/models/category.dart';
@@ -50,12 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (allCategories.isEmpty) {
       await _getCategories();
     }
-    if (nearestPharmacies.isEmpty) {
-      await _getNearestPharmacies();
-    }
-    if (allPharmacies.isEmpty) {
-      await _getAllPharmacies();
-    }
+
     if (notifications.isEmpty) {
       await _getNotifications();
     }
@@ -69,14 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _getCategories() async {
     await _inventoryService.getAllProductCategories();
-  }
-
-  _getNearestPharmacies() async {
-    await _inventoryService.getNearestPharmacies();
-  }
-
-  _getAllPharmacies() async {
-    await _inventoryService.getAllPharmacies();
   }
 
   _getNotifications() async {
@@ -100,50 +88,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      // Current Location
                       CurrentLocationTap(location: _location),
                       SizedBox(height: kDefaultPadding),
+
+                      // Category
                       CategorySection(),
                       SizedBox(height: kDefaultPadding * 2),
-                      TitleSection(
-                        title: 'Nearest Pharmacy',
-                        moreText: "See more",
-                        onMoreTap: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation1, animation2) =>
-                                  PharmacyDetailListScreen(
-                                title: 'Nearest Pharmacy',
-                                pharmacies: nearestPharmacies,
-                              ),
-                              transitionDuration: Duration(seconds: 0),
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: kDefaultPadding),
+
+                      // Nearest Pharmacies
                       NearestPharmacyList(),
-                      SizedBox(height: kDefaultPadding * 2),
-                      TitleSection(
-                        title: 'Pharmacy',
-                        moreText: 'See more',
-                        onMoreTap: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation1, animation2) =>
-                                  PharmacyDetailListScreen(
-                                title: 'Pharmacy',
-                                pharmacies: allPharmacies,
-                              ),
-                              transitionDuration: Duration(seconds: 0),
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: kDefaultPadding),
-                      PharmacyList(pharmacies: allPharmacies, itemCount: 6),
-                      SizedBox(height: kDefaultPadding),
+
+                      // All Pharmacies
+                      AllPharmacies(),
                     ],
                   ),
                 ),

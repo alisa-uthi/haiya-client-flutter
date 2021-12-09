@@ -192,7 +192,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           errorBuilder: (context, object, stackTrace) {
                             return Material(
                               child: Image.asset(
-                                'images/img_not_available.jpeg',
+                                'assets/images/img_not_available.jpeg',
                                 width: 200,
                                 height: 200,
                                 fit: BoxFit.cover,
