@@ -95,7 +95,8 @@ class _DeliveryTrackingScreenState extends State<DeliveryTrackingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   HeaderText(text: "Delivery Tracking"),
-                  ChatCallDriver(driverId: 3), //TODO: Change to dynamic
+                  if (!_isLoading && _order!.driverId != null)
+                    ChatCallDriver(driverId: _order!.driverId!),
                 ],
               ),
               !_isLoading

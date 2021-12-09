@@ -11,6 +11,7 @@ class Order {
   String? comment;
   String orderStatus;
   int userId;
+  int? driverId;
   String pharmacyName;
   List<OrderLine>? orderLines;
 
@@ -26,6 +27,7 @@ class Order {
     required this.orderStatus,
     this.comment,
     this.orderLines,
+    this.driverId,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) {
@@ -49,6 +51,7 @@ class Order {
               .map((orderLine) => OrderLine.fromJson(orderLine))
               .toList()
           : null,
+      driverId: json['Ord_Driver_ID'],
     );
   }
 }
