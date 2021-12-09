@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/checkout_order/checkout_order_screen.dart';
 import 'package:haiya_client/shared/models/address.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 
@@ -54,7 +55,15 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                               text: "CONFIRM",
                               boxColor: kPrimaryColor,
                               onPressed: () {
-                                Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            CheckoutOrderScreen(),
+                                    transitionDuration: Duration(seconds: 0),
+                                  ),
+                                );
                               },
                               textColor: Colors.white,
                             ),

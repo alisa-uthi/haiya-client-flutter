@@ -20,7 +20,9 @@ class UserService {
   };
 
   Future<LatLng> getCurrentCoordinates() async {
-    Position currentPosition = await Geolocator.getCurrentPosition();
+    Position currentPosition = await Geolocator.getCurrentPosition(
+      forceAndroidLocationManager: true,
+    );
     return LatLng(currentPosition.latitude, currentPosition.longitude);
   }
 
