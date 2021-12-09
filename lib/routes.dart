@@ -4,6 +4,8 @@ import 'package:haiya_client/shared/models/address.dart';
 import 'screens/add_shipping_address/add_address_screen.dart';
 import 'screens/authOption/auth_option_screen.dart';
 import 'screens/cart/cart_screen.dart';
+import 'screens/chat/chat_screen.dart';
+import 'screens/chat/widgets/full_photo.dart';
 import 'screens/checkout_order/checkout_order_screen.dart';
 import 'screens/checkout_success/checkout_success_screen.dart';
 import 'screens/congenital_form/congenital_form_screen.dart';
@@ -97,4 +99,10 @@ final Map<String, WidgetBuilder> routes = {
           isDeliveryAddress: '',
         ),
       ),
+  ChatScreen.routeName: (context) => ChatScreen(
+        peerAvatar: '',
+        peerId: 0,
+        peerNickname: '',
+      ),
+  FullPhotoScreen.routeName: (context) => FullPhotoScreen(url: ''),
 };

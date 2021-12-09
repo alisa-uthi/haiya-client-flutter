@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/delivery_tracking/widgets/milestone_tracking.dart';
 import 'package:haiya_client/shared/models/delivery.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/models/track_order_status.dart';
+import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:haiya_client/shared/services/order_service.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 
 import '../../constants.dart';
+import 'widgets/chat_call_driver.dart';
+import 'widgets/milestone_tracking.dart';
 
 class DeliveryTrackingScreen extends StatefulWidget {
   static final routeName = '/delivery-tracking';
@@ -88,7 +90,15 @@ class _DeliveryTrackingScreenState extends State<DeliveryTrackingScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HeaderText(text: "Delivery Tracking"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HeaderText(text: "Delivery Tracking"),
+                  if (!_isLoading && _order!.driverId != null)
+                    ChatCallDriver(driverId: _order!.driverId!),
+                ],
+              ),
               !_isLoading
                   ? _order != null
                       ? Column(
