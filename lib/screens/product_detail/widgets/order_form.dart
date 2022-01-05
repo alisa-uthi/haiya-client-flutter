@@ -108,28 +108,24 @@ class _OrderFormState extends State<OrderForm> {
       ),
     );
 
-    return widget.product.presReq == 'n' || widget.product.presReq == 'N'
-        ? Column(
-            children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Additional Note",
-                  labelStyle: Theme.of(context).textTheme.headline1,
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  focusedBorder: outlineInputBorder,
-                  enabledBorder: outlineInputBorder,
-                ),
-                onChanged: (value) => setState(() => _note = value),
-              ),
-              SizedBox(height: kDefaultPadding * 1.5),
-              _buildQuantitySection(context),
-              SizedBox(height: kDefaultPadding * 3),
-              _buildAddToCartBtn(),
-            ],
-          )
-        : Center(
-            child: ConsultationBtn(pharmacyName: widget.product.pharmacyName),
-          );
+    return Column(
+      children: [
+        TextFormField(
+          decoration: InputDecoration(
+            labelText: "Additional Note",
+            labelStyle: Theme.of(context).textTheme.headline1,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            focusedBorder: outlineInputBorder,
+            enabledBorder: outlineInputBorder,
+          ),
+          onChanged: (value) => setState(() => _note = value),
+        ),
+        SizedBox(height: kDefaultPadding * 1.5),
+        _buildQuantitySection(context),
+        SizedBox(height: kDefaultPadding * 3),
+        _buildAddToCartBtn(),
+      ],
+    );
   }
 
   Widget _buildAddToCartBtn() {

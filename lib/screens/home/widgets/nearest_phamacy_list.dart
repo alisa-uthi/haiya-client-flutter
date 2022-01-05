@@ -71,7 +71,7 @@ class _NearestPharmacyListState extends State<NearestPharmacyList> {
                         return PharmacyCard(pharmacy: nearestPharmacies[index]);
                       },
                     )
-                  : !!_isLoading
+                  : !_isLoading
                       ? Center(
                           child: Text(
                               "There is no pharmacy within 10 kilometers."),

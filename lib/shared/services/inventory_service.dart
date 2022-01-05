@@ -145,7 +145,7 @@ class InventoryService {
       Map<String, dynamic> body = jsonDecode(response.body);
       List<Product> products =
           body['data'].map<Product>((json) => Product.fromJson(json)).toList();
-
+      products = products.where((product) => product.presReq == 'N').toList();
       return products;
     }
 
@@ -168,7 +168,7 @@ class InventoryService {
       Map<String, dynamic> body = jsonDecode(response.body);
       List<Product> products =
           body['data'].map<Product>((json) => Product.fromJson(json)).toList();
-
+      products = products.where((product) => product.presReq == 'N').toList();
       return products;
     }
 
@@ -187,7 +187,7 @@ class InventoryService {
       Map<String, dynamic> body = jsonDecode(response.body);
       List<Product> products =
           body['data'].map<Product>((json) => Product.fromJson(json)).toList();
-
+      products = products.where((product) => product.presReq == 'N').toList();
       return products;
     }
 

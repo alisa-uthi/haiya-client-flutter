@@ -76,25 +76,6 @@ class ProductDetail extends StatelessWidget {
             title: "Advice",
             detail: product!.genericAdvice ?? '',
           ),
-        SizedBox(height: kDefaultPadding / 1.3),
-
-        // Prescription Requirement
-        RowDetail(
-          title: "Prescription",
-          detail: _isPrescriptionRequired() ? 'Required' : 'Not Required',
-          textColor: _isPrescriptionRequired() ? kErrorColor : kSuccessColor,
-        ),
-        if (_isPrescriptionRequired())
-          Column(
-            children: [
-              SizedBox(height: kDefaultPadding / 2),
-              Text(
-                "Note: If prescription is required, please contact our pharmacist to continue ordering.",
-                style: Theme.of(context).textTheme.caption,
-                maxLines: 2,
-              ),
-            ],
-          ),
 
         SizedBox(height: kDefaultPadding * 2.5),
 
