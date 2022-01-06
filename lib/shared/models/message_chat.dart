@@ -6,6 +6,7 @@ class MessageChat {
   String timestamp;
   String content;
   int type;
+  String role;
 
   MessageChat({
     required this.idFrom,
@@ -13,6 +14,7 @@ class MessageChat {
     required this.timestamp,
     required this.content,
     required this.type,
+    required this.role,
   });
 
   Map<String, dynamic> toJson() {
@@ -22,6 +24,7 @@ class MessageChat {
       "timestamp": this.timestamp,
       "content": this.content,
       "type": this.type,
+      "role": this.role,
     };
   }
 
@@ -31,6 +34,7 @@ class MessageChat {
     int type = doc.get("type");
     String timestamp = doc.get("timestamp");
     String content = doc.get("content");
+    String role = doc.get("role");
 
     return MessageChat(
       idFrom: idFrom,
@@ -38,6 +42,7 @@ class MessageChat {
       timestamp: timestamp,
       content: content,
       type: type,
+      role: role,
     );
   }
 }

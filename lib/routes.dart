@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/ask_prescription/ask_prescription.dart';
 import 'package:haiya_client/shared/models/address.dart';
 
 import 'screens/add_shipping_address/add_address_screen.dart';
@@ -103,6 +104,11 @@ final Map<String, WidgetBuilder> routes = {
         peerAvatar: '',
         peerId: 0,
         peerNickname: '',
+        role: '',
       ),
   FullPhotoScreen.routeName: (context) => FullPhotoScreen(url: ''),
+  AskPrescriptionScreen.routeName: (context) => AskPrescriptionScreen(
+        pharmacyId: 0,
+        pharmacyName: '',
+      ),
 };

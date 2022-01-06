@@ -27,7 +27,8 @@ class ChatProvider {
         .update(dataNeedUpdate);
   }
 
-  Stream<QuerySnapshot> getChatStream(String groupChatId, int limit) {
+  Stream<QuerySnapshot> getChatStream(
+      String groupChatId, int limit, String role) {
     return firebaseFirestore
         .collection("messages")
         .doc(groupChatId)
@@ -43,6 +44,7 @@ class ChatProvider {
     String groupChatId,
     int currentUserId,
     int peerId,
+    String role,
   ) {
     DocumentReference documentReference = firebaseFirestore
         .collection("messages")
@@ -56,8 +58,9 @@ class ChatProvider {
       timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
       content: content,
       type: type,
+      role: role,
     );
-
+    print(messageChat.toJson());
     FirebaseFirestore.instance.runTransaction((transaction) async {
       transaction.set(
         documentReference,
