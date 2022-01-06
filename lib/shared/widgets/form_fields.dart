@@ -18,7 +18,7 @@ class FormFields {
             label,
             style: TextStyle(color: kGreyColor),
           ),
-          items: <String>['Mr.', 'Mrs.', 'Ms.', 'Miss.'].map((String value) {
+          items: <String>['Mr.', 'Mrs.', 'Miss'].map((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
