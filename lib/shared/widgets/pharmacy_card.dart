@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/ask_prescription/ask_prescription.dart';
 import 'package:haiya_client/screens/product_list/product_list_screen.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
@@ -19,11 +20,21 @@ class PharmacyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        // Navigator.push(
+        //   context,
+        //   PageRouteBuilder(
+        //     pageBuilder: (buider, animation1, animation2) => ProductListScreen(
+        //       category: allCategories[0],
+        //       pharmacyId: pharmacy.id,
+        //       pharmacyName: pharmacy.name,
+        //     ),
+        //   ),
+        // );
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (buider, animation1, animation2) => ProductListScreen(
-              category: allCategories[0],
+            pageBuilder: (buider, animation1, animation2) =>
+                AskPrescriptionScreen(
               pharmacyId: pharmacy.id,
               pharmacyName: pharmacy.name,
             ),

@@ -20,12 +20,14 @@ class ChatScreen extends StatefulWidget {
   final int peerId;
   final String peerAvatar;
   final String peerNickname;
+  final String role;
 
   const ChatScreen({
     Key? key,
     required this.peerId,
     required this.peerAvatar,
     required this.peerNickname,
+    required this.role,
   }) : super(key: key);
 
   @override
@@ -72,9 +74,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void readLocal() {
     if (currentUserId.compareTo(widget.peerId) > 0) {
-      groupChatId = '$currentUserId-$widget.peerId';
+      groupChatId = '$currentUserId-${widget.peerId}';
     } else {
-      groupChatId = '$widget.peerId-$currentUserId';
+      groupChatId = '${widget.peerId}-$currentUserId';
     }
   }
 
@@ -125,9 +127,12 @@ class _ChatScreenState extends State<ChatScreen> {
         groupChatId,
         currentUserId,
         widget.peerId,
+        widget.role,
       );
-      listScrollController.animateTo(0,
-          duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+      if (listScrollController.hasClients) {
+        listScrollController.animateTo(0,
+            duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+      }
     }
   }
 
@@ -510,7 +515,8 @@ class _ChatScreenState extends State<ChatScreen> {
     return Flexible(
       child: groupChatId.isNotEmpty
           ? StreamBuilder<QuerySnapshot>(
-              stream: chatProvider.getChatStream(groupChatId, _limit),
+              stream:
+                  chatProvider.getChatStream(groupChatId, _limit, widget.role),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
@@ -528,11 +534,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     return Center(child: Text("No message here yet..."));
                   }
                 } else {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: kPrimaryColor,
-                    ),
-                  );
+                  return Center(child: Text("No message here yet..."));
                 }
               },
             )

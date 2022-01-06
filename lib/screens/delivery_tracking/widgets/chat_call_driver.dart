@@ -66,11 +66,12 @@ class _ChatCallDriverState extends State<ChatCallDriver> {
                           peerId: _driver!.id,
                           peerAvatar: _driver!.image,
                           peerNickname: _driver!.firstname,
+                          role: "Driver",
                         ),
                         transitionDuration: Duration(seconds: 0),
                       ),
                     );
-                  }, //TODO: Change this
+                  },
                   icon: Icon(
                     Icons.chat_rounded,
                     size: 25,
