@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/ask_prescription/ask_prescription.dart';
 import 'package:haiya_client/shared/models/address.dart';
 
 import 'screens/add_shipping_address/add_address_screen.dart';
+import 'screens/ask_prescription/ask_prescription.dart';
 import 'screens/authOption/auth_option_screen.dart';
 import 'screens/cart/cart_screen.dart';
 import 'screens/chat/chat_screen.dart';
@@ -29,6 +29,8 @@ import 'screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'screens/product_detail/product_detail_screen.dart';
 import 'screens/product_list/product_list_screen.dart';
 import 'screens/profile_navigation/profile_navigation_screen.dart';
+import 'screens/rate_driver/rate_driver_screen.dart';
+import 'screens/rate_pharmacist/rate_pharmacist_screen.dart';
 import 'screens/rate_pharmacy/rate_pharmacy_screen.dart';
 import 'screens/ratings/rating_screen.dart';
 import 'screens/report_issue/report_issue_screen.dart';
@@ -87,6 +89,9 @@ final Map<String, WidgetBuilder> routes = {
       DeliveryTrackingScreen(orderId: 0),
   RatePharmacyScreen.routeName: (context) =>
       RatePharmacyScreen(pharmacyName: ''),
+  RateDriverScreen.routeName: (context) => RateDriverScreen(driverId: 0),
+  RatePharmacistScreen.routeName: (context) =>
+      RatePharmacistScreen(pharmacistId: 0),
   MyOrdersScreen.routeName: (context) => MyOrdersScreen(),
   NotificationScreen.routeName: (context) => NotificationScreen(),
   ConsultationVideoScreen.routeName: (context) =>

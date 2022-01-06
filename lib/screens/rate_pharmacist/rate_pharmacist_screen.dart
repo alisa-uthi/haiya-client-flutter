@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/shared/models/pharmacy.dart';
-import 'package:haiya_client/shared/services/inventory_service.dart';
+import 'package:haiya_client/shared/models/user_detail.dart';
+import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
@@ -8,42 +8,42 @@ import 'package:haiya_client/shared/widgets/loader.dart';
 import '../../constants.dart';
 import 'widgets/rating_review_form.dart';
 
-class RatePharmacyScreen extends StatefulWidget {
-  static final routeName = '/rate-pharmacy';
+class RatePharmacistScreen extends StatefulWidget {
+  static final routeName = '/rate-pharmacist';
 
-  final String pharmacyName;
+  final int pharmacistId;
 
-  const RatePharmacyScreen({
+  const RatePharmacistScreen({
     Key? key,
-    required this.pharmacyName,
+    required this.pharmacistId,
   }) : super(key: key);
 
   @override
-  _RatePharmacyScreenState createState() => _RatePharmacyScreenState();
+  _RatePharmacistScreenState createState() => _RatePharmacistScreenState();
 }
 
-class _RatePharmacyScreenState extends State<RatePharmacyScreen> {
-  InventoryService _inventoryService = new InventoryService();
-  Pharmacy? _pharmacy;
+class _RatePharmacistScreenState extends State<RatePharmacistScreen> {
+  UserService _userService = new UserService();
+  UserDetail? _pharmacist;
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchPharmacy();
+    _fetchPharmacistData();
   }
 
-  Future<void> _fetchPharmacy() async {
+  Future<void> _fetchPharmacistData() async {
     if (!mounted) return;
 
-    Pharmacy? result =
-        await _inventoryService.getPharmacyByName(widget.pharmacyName);
+    UserDetail? result = await _userService.getUserById(widget.pharmacistId);
 
     if (result != null) {
-      setState(() => _pharmacy = result);
+      setState(() => _pharmacist = result);
     } else {
       CustomSnackBar.buildSnackbar(context, kGeneralError);
     }
+
     setState(() => _isLoading = false);
   }
 
@@ -55,7 +55,7 @@ class _RatePharmacyScreenState extends State<RatePharmacyScreen> {
         width: double.infinity,
         padding: const EdgeInsets.all(kDefaultPadding),
         child: SingleChildScrollView(
-          child: !_isLoading && _pharmacy != null
+          child: !_isLoading && _pharmacist != null
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -66,10 +66,12 @@ class _RatePharmacyScreenState extends State<RatePharmacyScreen> {
                       size: 100,
                     ),
                     SizedBox(height: kDefaultPadding * 1.5),
-                    HeaderText(text: "Pharmacy"),
-                    HeaderText(text: widget.pharmacyName),
+                    HeaderText(text: "Pharmacist"),
+                    HeaderText(
+                        text:
+                            "${_pharmacist!.firstname} ${_pharmacist!.lastname}"),
                     SizedBox(height: kDefaultPadding * 2),
-                    RatingReviewForm(pharmacyId: _pharmacy!.id),
+                    RatingReviewForm(pharmacistId: _pharmacist!.id),
                   ],
                 )
               : Loader(),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/order_detail/widgets/rate_pharmacy_button.dart';
+import 'package:haiya_client/screens/rate_driver/rate_driver_screen.dart';
+import 'package:haiya_client/screens/rate_pharmacy/rate_pharmacy_screen.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/services/order_service.dart';
+import 'package:haiya_client/shared/widgets/custom_btn.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 
 import '../../constants.dart';
@@ -85,8 +87,58 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         DeliveryTrackingButton(
                           orderId: widget.orderId,
                         ),
-                      if (widget.isCompleted)
-                        RatePharmacyButton(pharmacyName: _order!.pharmacyName),
+                      widget.isCompleted
+                          ? Column(
+                              children: [
+                                SizedBox(height: kDefaultPadding * 1.5),
+                                CustomBtn(
+                                  text: "Rate Driver",
+                                  boxColor: kPrimaryColor,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, animation1,
+                                                animation2) =>
+                                            RateDriverScreen(
+                                                driverId: _order!.driverId!),
+                                        transitionDuration:
+                                            Duration(seconds: 0),
+                                      ),
+                                    );
+                                  },
+                                  textColor: Colors.white,
+                                ),
+                                SizedBox(height: kDefaultPadding / 2),
+                                CustomBtn(
+                                  text: "Rate Pharmacy",
+                                  boxColor: kPrimaryColor,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder:
+                                            (context, animation1, animation2) =>
+                                                RatePharmacyScreen(
+                                                    pharmacyName:
+                                                        _order!.pharmacyName),
+                                        transitionDuration:
+                                            Duration(seconds: 0),
+                                      ),
+                                    );
+                                  },
+                                  textColor: Colors.white,
+                                ),
+                                // SizedBox(height: kDefaultPadding / 2),
+                                // CustomBtn(
+                                //   text: "Rate Pharmacist",
+                                //   boxColor: kPrimaryColor,
+                                //   onPressed: () {},
+                                //   textColor: Colors.white,
+                                // ),
+                              ],
+                            )
+                          : Container(),
                     ],
                   ),
                 )

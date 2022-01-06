@@ -55,4 +55,52 @@ class RatingService {
     }
     return false;
   }
+
+  Future<bool> rateDriver({
+    required int driverId,
+    required int score,
+    required String feedback,
+  }) async {
+    // Call Api
+    var response = await http.post(
+      Uri.parse('${basedUri}/driver'),
+      headers: requestHeaders,
+      body: jsonEncode({
+        'patientId': currentUser.id,
+        'driverId': driverId,
+        'score': score,
+        'feedback': feedback,
+      }),
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> ratePharmacist({
+    required int pharmacistId,
+    required int score,
+    required String feedback,
+  }) async {
+    // Call Api
+    var response = await http.post(
+      Uri.parse('${basedUri}/pharmacistId'),
+      headers: requestHeaders,
+      body: jsonEncode({
+        'patientId': currentUser.id,
+        'pharmacistId': pharmacistId,
+        'score': score,
+        'feedback': feedback,
+      }),
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      return true;
+    }
+    return false;
+  }
 }
