@@ -3,7 +3,6 @@ import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
-import 'package:haiya_client/shared/widgets/loader.dart';
 import 'package:haiya_client/shared/widgets/pharmacy_list.dart';
 import 'package:haiya_client/shared/widgets/title_section.dart';
 

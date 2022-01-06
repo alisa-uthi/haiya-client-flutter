@@ -6,7 +6,6 @@ import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
 
 import 'custom_card.dart';
-import 'loader.dart';
 
 class RatingCard extends StatefulWidget {
   const RatingCard({

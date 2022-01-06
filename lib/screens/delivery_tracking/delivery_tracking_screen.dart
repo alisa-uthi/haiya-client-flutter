@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/shared/models/delivery.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/models/track_order_status.dart';
-import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/services/constant_service.dart';
 import 'package:haiya_client/shared/services/order_service.dart';
 import 'package:haiya_client/shared/widgets/header_text.dart';

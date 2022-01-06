@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:haiya_client/screens/ask_prescription/ask_prescription.dart';
-import 'package:haiya_client/screens/product_list/product_list_screen.dart';
-import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/widgets/custom_card.dart';
 

@@ -7,7 +7,6 @@ import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
-import 'package:haiya_client/shared/widgets/consultation_btn.dart';
 import 'package:haiya_client/shared/widgets/custom_alert_dialog.dart';
 
 class OrderForm extends StatefulWidget {

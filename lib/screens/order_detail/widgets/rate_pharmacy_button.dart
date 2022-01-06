@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haiya_client/screens/delivery_tracking/delivery_tracking_screen.dart';
 import 'package:haiya_client/screens/rate_pharmacy/rate_pharmacy_screen.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
 

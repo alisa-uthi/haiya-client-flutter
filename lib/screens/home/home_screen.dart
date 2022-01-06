@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/home/widgets/all_pharmacies.dart';
-import 'package:haiya_client/screens/pharmacy_detail_list/phamacy_detail_list_screen.dart';
 import 'package:haiya_client/shared/helper/firebase_messaging.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/notification.dart';
-import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/shared/services/notification_service.dart';
 import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
-import 'package:haiya_client/shared/widgets/pharmacy_list.dart';
-import 'package:haiya_client/shared/widgets/title_section.dart';
 
 import 'widgets/category_section.dart';
 import 'widgets/current_location_tap.dart';

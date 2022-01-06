@@ -14,10 +14,6 @@ class ProductDetail extends StatelessWidget {
 
   final Product? product;
 
-  bool _isPrescriptionRequired() {
-    return product!.presReq == 'y' || product!.presReq == 'Y';
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(

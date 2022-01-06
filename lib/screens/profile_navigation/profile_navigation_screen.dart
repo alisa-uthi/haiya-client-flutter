@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/signin/signin_screen.dart';
 import 'package:haiya_client/shared/models/address.dart';
-import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/notification.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
