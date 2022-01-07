@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:haiya_client/shared/provider/request_consult_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -27,6 +28,12 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<ChatProvider>(
           create: (_) => ChatProvider(
+            firebaseFirestore: this.firebaseFirestore,
+            firebaseStorage: this.firebaseStorage,
+          ),
+        ),
+        Provider<RequestConsulProvider>(
+          create: (_) => RequestConsulProvider(
             firebaseFirestore: this.firebaseFirestore,
             firebaseStorage: this.firebaseStorage,
           ),
