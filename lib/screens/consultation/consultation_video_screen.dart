@@ -13,6 +13,7 @@ import 'package:jitsi_meet/jitsi_meet.dart';
 import 'package:jitsi_meet/room_name_constraint.dart';
 import 'package:jitsi_meet/room_name_constraint_type.dart';
 import 'package:provider/src/provider.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class ConsultationVideoScreen extends StatefulWidget {
   static final routeName = '/consultation';
@@ -44,6 +45,8 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
 
   late RequestConsulProvider requestConsulProvider;
 
+  final StopWatchTimer _stopWatchTimer = StopWatchTimer();
+
   @override
   void initState() {
     super.initState();
@@ -60,9 +63,10 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
   }
 
   @override
-  void dispose() {
+  void dispose() async {
     super.dispose();
     JitsiMeet.removeAllListeners();
+    await _stopWatchTimer.dispose();
   }
 
   @override
@@ -86,7 +90,9 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
             if (listRequest.length > 0) {
               var request = listRequest[listRequest.length - 1];
               var requestStatus = request.get("requestStatus");
-              if (request.get("requestStatus") == "requested")
+              if (request.get("requestStatus") == "requested") {
+                _stopWatchTimer.onExecute.add(StopWatchExecute.start);
+
                 return Center(
                   child: Padding(
                       padding: EdgeInsets.all(kDefaultPadding),
@@ -105,6 +111,26 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                               fontSize: 18,
                               fontWeight: FontWeight.w400,
                             ),
+                          ),
+                          StreamBuilder<int>(
+                            stream: _stopWatchTimer.rawTime,
+                            initialData: 0,
+                            builder: (context, snap) {
+                              final value = snap.data;
+                              final displayTime =
+                                  StopWatchTimer.getDisplayTime(value!);
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.only(top: kDefaultPadding),
+                                child: Text(
+                                  "Time: $displayTime",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           Spacer(),
                           CustomBtn(
@@ -129,6 +155,7 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                         ],
                       )),
                 );
+              }
               if (requestStatus == "accepted") {
                 roomText = request.get("room");
                 return SingleChildScrollView(
