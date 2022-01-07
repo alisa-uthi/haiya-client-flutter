@@ -129,7 +129,8 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                         ],
                       )),
                 );
-              if (requestStatus == "accepted")
+              if (requestStatus == "accepted") {
+                roomText = request.get("room");
                 return SingleChildScrollView(
                   child: Container(
                     height: MediaQuery.of(context).size.height,
@@ -312,6 +313,7 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                     ),
                   ),
                 );
+              }
               if (requestStatus == "cancelled")
                 return Center(
                   child: Padding(
@@ -349,7 +351,7 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                     ),
                   ),
                 );
-              else
+              if (requestStatus == "declined")
                 return Center(
                   child: Padding(
                     padding: EdgeInsets.all(kDefaultPadding),
@@ -394,6 +396,8 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
                     ),
                   ),
                 );
+              else
+                return Loader();
             } else {
               return Container();
             }
