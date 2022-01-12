@@ -49,7 +49,7 @@ class RequestConsulProvider {
         "pharmacyId": pharmacyId,
         "room": "",
         "remark": "",
-        "timestamp": DateTime.now().millisecondsSinceEpoch.toString(),
+        "timestamp": DateTime.now().toString(),
       });
     });
   }
