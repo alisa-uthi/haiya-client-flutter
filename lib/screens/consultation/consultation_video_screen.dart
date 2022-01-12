@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
+import 'package:haiya_client/screens/product_list/product_list_screen.dart';
+import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/provider/request_consult_provider.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
@@ -517,8 +519,20 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
         //roomNameConstraints: customContraints, // to use your own constraint(s)
       );
       // I added a 50 minutes time limit, you can remove it if you want.
-      Future.delayed(const Duration(minutes: 50))
-          .then((value) => JitsiMeet.closeMeeting());
+      Future.delayed(const Duration(minutes: 50)).then((value) => {
+            JitsiMeet.closeMeeting(),
+            Navigator.pushReplacement(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) =>
+                    ProductListScreen(
+                  category: allCategories[0],
+                  pharmacyName: widget.pharmacyName,
+                ),
+                transitionDuration: Duration(seconds: 0),
+              ),
+            )
+          });
     } catch (error) {
       debugPrint("error: $error");
     }
@@ -546,6 +560,7 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
   }
 
   void _onConferenceTerminated(Map<dynamic, dynamic> message) {
+    Navigator.pop(context);
     debugPrint("_onConferenceTerminated broadcasted with message: $message");
   }
 
