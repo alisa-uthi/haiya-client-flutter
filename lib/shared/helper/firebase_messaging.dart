@@ -76,7 +76,7 @@ class FirebaseMessagingHelper {
       NotificationSubscription? existingSubscription =
           await _notificationService.getSubscriptionByToken(token);
       if (existingSubscription == null) {
-        await _notificationService.subscribeToNotificationSubscription(
+        _notificationService.subscribeToNotificationSubscription(
           token,
           "ORDER_ARRIVED",
         );

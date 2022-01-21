@@ -119,4 +119,22 @@ class OrderService {
 
     return [];
   }
+
+  Future<void> getCartFromPharmacy() async {
+    // Call Api
+    var response = await http.get(
+      Uri.parse('${basedUri}/cart/?userId=${currentUser.id}'),
+      headers: requestHeaders,
+    );
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      Map<String, dynamic> body = jsonDecode(response.body);
+      var tempCart = body['data']['cartItems']
+          .map<OrderLine>((json) => OrderLine.fromCartJson(json))
+          .toList();
+
+      cart.addAll(tempCart);
+    }
+  }
 }

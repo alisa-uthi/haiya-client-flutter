@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'congenital_disease.dart';
 import 'drug_allergy.dart';
 
@@ -105,3 +107,5 @@ UserDetail currentUser = new UserDetail(
   congenitalDisease: [],
   drugAllergy: [],
 );
+
+LatLng latlng = new LatLng(10.00, 10.00);

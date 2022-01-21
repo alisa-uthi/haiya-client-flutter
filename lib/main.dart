@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/provider/request_consult_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -11,10 +13,13 @@ import 'routes.dart';
 import 'screens/splash/splash_screen.dart';
 import 'shared/helper/firebase_messaging.dart';
 import 'shared/provider/chat_provider.dart';
+import 'shared/services/user_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseMessagingHelper().initilizeMessagingAndNotification();
+  UserService userService = new UserService();
+  latlng = await userService.getCurrentCoordinates();
   runApp(MyApp());
 }
 

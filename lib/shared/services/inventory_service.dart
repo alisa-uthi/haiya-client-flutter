@@ -64,8 +64,8 @@ class InventoryService {
 
   Future<void> getAllPharmacies() async {
     // Get current location coordinates
-    UserService userService = new UserService();
-    LatLng latlng = await userService.getCurrentCoordinates();
+    // UserService userService = new UserService();
+    // LatLng latlng = await userService.getCurrentCoordinates();
 
     // Call Api
     var response = await http.post(
@@ -88,8 +88,8 @@ class InventoryService {
 
   Future<void> getNearestPharmacies() async {
     // Get current location coordinates
-    UserService userService = new UserService();
-    LatLng latlng = await userService.getCurrentCoordinates();
+    // UserService userService = new UserService();
+    // LatLng latlng = await userService.getCurrentCoordinates();
 
     // Call Api
     var response = await http.post(
