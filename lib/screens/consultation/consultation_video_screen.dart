@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
+import 'package:haiya_client/screens/cart/wait_cart_from_pharmacy.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
 import 'package:haiya_client/screens/product_list/product_list_screen.dart';
 import 'package:haiya_client/shared/models/category.dart';
@@ -503,17 +504,11 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
       await JitsiMeet.joinMeeting(
         options,
         listener: JitsiMeetingListener(
-            onConferenceWillJoin: (Map<dynamic, dynamic> message) {
-          debugPrint("${options.room} will join with message: $message");
-        }, onConferenceJoined: (Map<dynamic, dynamic> message) {
-          debugPrint("${options.room} joined with message: $message");
-        }, onConferenceTerminated: (Map<dynamic, dynamic> message) {
-          debugPrint("${options.room} terminated with message: $message");
-        }, onPictureInPictureWillEnter: (Map<dynamic, dynamic> message) {
-          debugPrint("${options.room} entered PIP mode with message: $message");
-        }, onPictureInPictureTerminated: (Map<dynamic, dynamic> message) {
-          debugPrint("${options.room} exited PIP mode with message: $message");
-        }),
+            onConferenceWillJoin: (Map<dynamic, dynamic> message) {},
+            onConferenceJoined: (Map<dynamic, dynamic> message) {},
+            onConferenceTerminated: (Map<dynamic, dynamic> message) {},
+            onPictureInPictureWillEnter: (Map<dynamic, dynamic> message) {},
+            onPictureInPictureTerminated: (Map<dynamic, dynamic> message) {}),
         // by default, plugin default constraints are used
         //roomNameConstraints: new Map(), // to disable all constraints
         //roomNameConstraints: customContraints, // to use your own constraint(s)
@@ -521,17 +516,6 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
       // I added a 50 minutes time limit, you can remove it if you want.
       Future.delayed(const Duration(minutes: 50)).then((value) => {
             JitsiMeet.closeMeeting(),
-            Navigator.pushReplacement(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) =>
-                    ProductListScreen(
-                  category: allCategories[0],
-                  pharmacyName: widget.pharmacyName,
-                ),
-                transitionDuration: Duration(seconds: 0),
-              ),
-            )
           });
     } catch (error) {
       debugPrint("error: $error");
@@ -551,30 +535,25 @@ class _ConsultationVideoScreenState extends State<ConsultationVideoScreen> {
     }, "Currencies characters aren't allowed in room names."),
   };
 
-  void _onConferenceWillJoin(Map<dynamic, dynamic> message) {
-    debugPrint("_onConferenceWillJoin broadcasted with message: $message");
-  }
+  void _onConferenceWillJoin(Map<dynamic, dynamic> message) {}
 
-  void _onConferenceJoined(Map<dynamic, dynamic> message) {
-    debugPrint("_onConferenceJoined broadcasted with message: $message");
-  }
+  void _onConferenceJoined(Map<dynamic, dynamic> message) {}
 
   void _onConferenceTerminated(Map<dynamic, dynamic> message) {
-    Navigator.pop(context);
-    debugPrint("_onConferenceTerminated broadcasted with message: $message");
+    // Navigator.pop(context);
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) =>
+            WaitCartFromPharmacy(),
+        transitionDuration: Duration(seconds: 0),
+      ),
+    );
   }
 
-  void _onPictureInPictureWillEnter(Map<dynamic, dynamic> message) {
-    debugPrint(
-        "_onPictureInPictureWillEnter broadcasted with message: $message");
-  }
+  void _onPictureInPictureWillEnter(Map<dynamic, dynamic> message) {}
 
-  void _onPictureInPictureTerminated(Map<dynamic, dynamic> message) {
-    debugPrint(
-        "_onPictureInPictureTerminated broadcasted with message: $message");
-  }
+  void _onPictureInPictureTerminated(Map<dynamic, dynamic> message) {}
 
-  _onError(error) {
-    debugPrint("_onError broadcasted: $error");
-  }
+  _onError(error) {}
 }

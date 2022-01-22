@@ -120,7 +120,7 @@ class OrderService {
     return [];
   }
 
-  Future<void> getCartFromPharmacy() async {
+  Future<bool> getCartFromPharmacy() async {
     // Call Api
     var response = await http.get(
       Uri.parse('${basedUri}/cart/?userId=${currentUser.id}'),
@@ -130,11 +130,31 @@ class OrderService {
     // Handle response
     if (response.statusCode >= 200 && response.statusCode < 205) {
       Map<String, dynamic> body = jsonDecode(response.body);
-      var tempCart = body['data']['cartItems']
-          .map<OrderLine>((json) => OrderLine.fromCartJson(json))
-          .toList();
+      if (body['data']['cartItems'] != null) {
+        var tempCart = body['data']['cartItems']
+            .map<OrderLine>((json) => OrderLine.fromCartJson(json))
+            .toList();
+        cartId = body['data']['ID'];
+        cart.addAll(tempCart);
+        return true;
+      }
+    }
+    return false;
+  }
 
-      cart.addAll(tempCart);
+  Future<void> updateCartFromPharmacyStatus() async {
+    // Call Api
+    if (cartId != 0) {
+      var response = await http.patch(Uri.parse('${basedUri}/cart/${cartId}'),
+          headers: requestHeaders,
+          body: jsonEncode({
+            'flagDelete': true,
+          }));
+
+      // Handle response
+      if (response.statusCode >= 200 && response.statusCode < 205) {
+        cartId = 0;
+      }
     }
   }
 }
