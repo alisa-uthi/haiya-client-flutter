@@ -72,6 +72,8 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
       cart = [];
       selectedPharmacy = '';
 
+      _orderService.updateCartFromPharmacyStatus();
+
       Navigator.pushAndRemoveUntil(
         context,
         PageRouteBuilder(

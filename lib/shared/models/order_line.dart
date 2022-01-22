@@ -30,6 +30,19 @@ class OrderLine {
       comment: json['Comment'],
     );
   }
+
+  factory OrderLine.fromCartJson(Map<String, dynamic> json) {
+    return OrderLine(
+      productId: json['Prd_ID'],
+      productName: json['Prd_Name'],
+      productImage: json['Prd_Image'],
+      productPrice: (json['Total_Cost'] / json['Prd_Qty']).toInt(),
+      quantity: json['Prd_Qty'],
+      totalCost: json['Total_Cost'],
+      comment: json['Comment'],
+    );
+  }
 }
 
 List<OrderLine> cart = [];
+int cartId = 0;
