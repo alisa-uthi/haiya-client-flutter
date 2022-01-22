@@ -6,7 +6,7 @@ import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
 import 'package:haiya_client/shared/services/inventory_service.dart';
 import 'package:haiya_client/shared/widgets/bottom_navigator_bar.dart';
-import 'package:haiya_client/shared/widgets/consultation_btn.dart';
+import 'package:haiya_client/shared/widgets/interact_with_pharmacist.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 import 'package:haiya_client/shared/widgets/product_list.dart';
 
@@ -135,7 +135,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     SizedBox(height: kDefaultPadding / 1.5),
                     if (widget.pharmacyName != null &&
                         widget.pharmacyName != "")
-                      ConsultationBtn(
+                      InteractWithPharmacist(
                           pharmacyId: widget.pharmacyId!,
                           pharmacyName: widget.pharmacyName!),
                     Container(
