@@ -24,7 +24,12 @@ class _ApprovedOrdersState extends State<ApprovedOrders> {
   }
 
   Future<dynamic> _fetchApprovedOrders() async {
-    var orders = await _orderService.getOrdersByOrderStatus('approved');
+    var approvedOrders = await _orderService.getOrdersByOrderStatus('approved');
+    var readyForPickUpOrders =
+        await _orderService.getOrdersByOrderStatus('READY_FOR_PICKUP');
+    // List<Order> orders = new List.from(approvedOrders)
+    //   ..addAll(readyForPickUpOrders);
+    List<Order> orders = [...approvedOrders, ...readyForPickUpOrders];
     setState(() => {_orders = orders, _isLoading = false});
   }
 
