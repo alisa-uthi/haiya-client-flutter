@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class MessageChat {
   int idFrom;
   int idTo;
-  String timestamp;
+  String? timestamp;
   String content;
   int type;
   String role;
@@ -11,7 +11,7 @@ class MessageChat {
   MessageChat({
     required this.idFrom,
     required this.idTo,
-    required this.timestamp,
+    this.timestamp,
     required this.content,
     required this.type,
     required this.role,
@@ -32,14 +32,12 @@ class MessageChat {
     int idFrom = doc.get("idFrom");
     int idTo = doc.get("idTo");
     int type = doc.get("type");
-    String timestamp = doc.get("timestamp");
     String content = doc.get("content");
     String role = doc.get("role");
 
     return MessageChat(
       idFrom: idFrom,
       idTo: idTo,
-      timestamp: timestamp,
       content: content,
       type: type,
       role: role,

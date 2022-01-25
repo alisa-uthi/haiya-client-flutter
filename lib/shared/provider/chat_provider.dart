@@ -50,12 +50,12 @@ class ChatProvider {
         .collection("messages")
         .doc(groupChatId)
         .collection(groupChatId)
-        .doc(DateTime.now().toString());
+        .doc(DateTime.now().millisecondsSinceEpoch.toString());
 
     MessageChat messageChat = MessageChat(
       idFrom: currentUserId,
       idTo: peerId,
-      timestamp: DateTime.now().toString(),
+      timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
       content: content,
       type: type,
       role: role,

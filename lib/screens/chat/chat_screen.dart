@@ -371,21 +371,21 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
 
-              // Time
-              isLastMessageLeft(index)
-                  ? Container(
-                      child: Text(
-                        DateFormat('dd MMM kk:mm').format(
-                            DateTime.fromMillisecondsSinceEpoch(
-                                int.parse(messageChat.timestamp))),
-                        style: TextStyle(
-                            color: kGreyColor,
-                            fontSize: 12,
-                            fontStyle: FontStyle.italic),
-                      ),
-                      margin: EdgeInsets.only(left: 50, top: 5, bottom: 5),
-                    )
-                  : SizedBox.shrink()
+              // // Time
+              // isLastMessageLeft(index)
+              //     ? Container(
+              //         child: Text(
+              //           DateFormat('dd MMM kk:mm').format(
+              //               DateTime.fromMillisecondsSinceEpoch(
+              //                   int.parse(messageChat.timestamp))),
+              //           style: TextStyle(
+              //               color: kGreyColor,
+              //               fontSize: 12,
+              //               fontStyle: FontStyle.italic),
+              //         ),
+              //         margin: EdgeInsets.only(left: 50, top: 5, bottom: 5),
+              //       )
+              //     : SizedBox.shrink()
             ],
             crossAxisAlignment: CrossAxisAlignment.start,
           ),
