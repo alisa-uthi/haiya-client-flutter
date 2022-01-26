@@ -47,6 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 width: 270,
                 height: 270,
               ),
+              SizedBox(height: kDefaultPadding),
               Text(
                 "HAIYA",
                 style: TextStyle(
