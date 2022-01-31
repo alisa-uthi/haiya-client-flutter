@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:haiya_client/shared/models/delivery.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/models/order_line.dart';
+import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
 
 import 'package:http/http.dart' as http;
@@ -135,6 +136,10 @@ class OrderService {
             .map<OrderLine>((json) => OrderLine.fromCartJson(json))
             .toList();
         cartId = body['data']['ID'];
+        selectedPharmacy = allPharmacies
+            .where((pharmacy) => pharmacy.id == body['data']['Pcy_ID'])
+            .first
+            .name;
         cart.addAll(tempCart);
         return true;
       }
