@@ -26,13 +26,14 @@ class AuthOptionScreen extends StatelessWidget {
                 width: 200,
                 height: 200,
               ),
+              SizedBox(height: kDefaultPadding),
               Text(
                 'HAIYA',
                 style: Theme.of(context).textTheme.headline1,
               ),
               SizedBox(height: kDefaultPadding / 2),
               Text(
-                "Thailand's First Online Pharmacy",
+                "ONE STOP PHARMACEUTICAL SERVICE",
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               Spacer(),

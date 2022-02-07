@@ -73,11 +73,11 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void readLocal() {
-    if (currentUserId.compareTo(widget.peerId) > 0) {
-      groupChatId = '$currentUserId-${widget.peerId}';
-    } else {
+    //if (currentUserId.compareTo(widget.peerId) > 0) {
+    //  groupChatId = '$currentUserId-${widget.peerId}';
+    //} else {
       groupChatId = '${widget.peerId}-$currentUserId';
-    }
+    //}
   }
 
   Future getImage() async {
@@ -372,24 +372,25 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
 
               // // Time
-              // isLastMessageLeft(index)
-              //     ? Container(
-              //         child: Text(
-              //           DateFormat('dd MMM kk:mm').format(
-              //               DateTime.fromMillisecondsSinceEpoch(
-              //                   int.parse(messageChat.timestamp))),
-              //           style: TextStyle(
-              //               color: kGreyColor,
-              //               fontSize: 12,
-              //               fontStyle: FontStyle.italic),
-              //         ),
-              //         margin: EdgeInsets.only(left: 50, top: 5, bottom: 5),
-              //       )
-              //     : SizedBox.shrink()
+               /*isLastMessageLeft(index)
+                  ? Container(
+                      child: Text(
+                        DateFormat('dd MMM kk:mm').format(
+                            DateTime.fromMillisecondsSinceEpoch(
+                                int.parse(messageChat.timestamp!))),
+                        style: const TextStyle(
+                            color: kGreyColor,
+                            fontSize: 12,
+                            fontStyle: FontStyle.italic),
+                      ),
+                      margin:
+                          const EdgeInsets.only(left: 50, top: 5, bottom: 5),
+                    )
+                  : const SizedBox.shrink()*/
             ],
             crossAxisAlignment: CrossAxisAlignment.start,
           ),
-          margin: EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 10),
         );
       }
     } else {

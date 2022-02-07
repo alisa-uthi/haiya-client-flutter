@@ -80,6 +80,14 @@ class FirebaseMessagingHelper {
           token,
           "ORDER_ARRIVED",
         );
+        _notificationService.subscribeToNotificationSubscription(
+          token,
+          "ORDER_OTW_PHARMACY",
+        );
+        _notificationService.subscribeToNotificationSubscription(
+          token,
+          "ORDER_PICKEDUP",
+        );
       }
     }
   }
