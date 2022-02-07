@@ -82,7 +82,7 @@ class _RateDriverScreenState extends State<RateDriverScreen> {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       title: Text(
-        "Rate Pharmacy",
+        "Rate Driver",
         style: Theme.of(context).textTheme.headline1,
       ),
       centerTitle: true,

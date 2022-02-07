@@ -83,7 +83,7 @@ class _RatePharmacistScreenState extends State<RatePharmacistScreen> {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       title: Text(
-        "Rate Pharmacy",
+        "Rate Pharmacist",
         style: Theme.of(context).textTheme.headline1,
       ),
       centerTitle: true,
