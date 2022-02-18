@@ -25,7 +25,7 @@ class _AvartarImageState extends State<AvartarImage> {
   UserService _userService = new UserService();
 
   Future selectImage() async {
-    final pickedPhoto = await picker.pickImage(source: ImageSource.gallery); //camera
+    final pickedPhoto = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedPhoto != null) {
       setState(() {
