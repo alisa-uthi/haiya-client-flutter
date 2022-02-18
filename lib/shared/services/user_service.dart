@@ -47,7 +47,7 @@ class UserService {
     String? postalCode = placemarks[0].postalCode;
     String? country = placemarks[0].country;
 
-    return '${street}, ${name}, ${subLocality}, ${province}, ${postalCode}, ${country}';
+    return '$street, $name, $subLocality, $province, $postalCode, $country';
   }
 
   Future<bool> addNewAddress({
@@ -58,7 +58,7 @@ class UserService {
   }) async {
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/address/user/${currentUser.id}'),
+      Uri.parse('$basedUri/address/user/${currentUser.id}'),
       headers: requestHeaders,
       body: jsonEncode({
         'name': name,
@@ -86,7 +86,7 @@ class UserService {
       required String isDeliveryAddress}) async {
     // Call Api
     var response = await http.put(
-      Uri.parse('${basedUri}/address/${id}'),
+      Uri.parse('$basedUri/address/$id'),
       headers: requestHeaders,
       body: jsonEncode({
         'name': name,
@@ -108,7 +108,7 @@ class UserService {
   Future<void> getAddressByUserId() async {
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/address/user/${currentUser.id}'),
+      Uri.parse('$basedUri/address/user/${currentUser.id}'),
       headers: requestHeaders,
     );
 
@@ -126,7 +126,7 @@ class UserService {
   }) async {
     // Call Api
     var response = await http.patch(
-      Uri.parse('${basedUri}/address/${addressId}'),
+      Uri.parse('$basedUri/address/$addressId'),
       headers: requestHeaders,
       body: jsonEncode({
         'userId': currentUser.id,
@@ -248,7 +248,7 @@ class UserService {
 
   Future<bool> updateProfileImage(File imageFile) async {
     // Prepare image file
-    var uri = Uri.parse('${basedUri}/profile/${currentUser.id}/image');
+    var uri = Uri.parse('$basedUri/profile/${currentUser.id}/image');
     var request = new http.MultipartRequest("PATCH", uri);
     var stream = new http.ByteStream(imageFile.openRead());
     stream.cast();
@@ -278,7 +278,7 @@ class UserService {
 
   Future<String> getProfileImage(int userId) async {
     var response = await http.get(
-      Uri.parse('${basedUri}/profile/${userId}/image'),
+      Uri.parse('$basedUri/profile/$userId/image'),
       headers: requestHeaders,
     );
     if (response.statusCode >= 200 && response.statusCode < 205) {
@@ -291,7 +291,7 @@ class UserService {
 
   Future<UserDetail?> getUserById(int userId) async {
     var response = await http.get(
-      Uri.parse('${basedUri}/profile/${userId}'),
+      Uri.parse('$basedUri/profile/$userId'),
       headers: requestHeaders,
     );
 
@@ -309,7 +309,7 @@ class UserService {
   }) async {
     // Call Api
     var response = await http.patch(
-      Uri.parse('${basedUri}/profile/${currentUser.id}/password'),
+      Uri.parse('$basedUri/profile/${currentUser.id}/password'),
       headers: requestHeaders,
       body: jsonEncode({
         'oldPassword': oldPassword,

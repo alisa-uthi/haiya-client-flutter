@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/provider/request_consult_provider.dart';
 import 'package:provider/provider.dart';

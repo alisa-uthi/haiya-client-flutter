@@ -22,7 +22,7 @@ class TitleWithPrice extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyText1!.copyWith(color: color),
         ),
         Text(
-          "${price} THB",
+          "$price THB",
           style: Theme.of(context).textTheme.bodyText1!.copyWith(color: color),
         ),
       ],

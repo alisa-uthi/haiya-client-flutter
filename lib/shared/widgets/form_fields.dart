@@ -108,7 +108,7 @@ class FormFields {
                     top: kDefaultPadding / 2,
                   ),
                   child: Text(
-                    "Date of Birth",
+                    "Date of Birth*",
                     style: TextStyle(color: kGreyColor),
                   ),
                 ),

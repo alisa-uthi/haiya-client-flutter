@@ -21,7 +21,7 @@ class RatingCard extends StatefulWidget {
 
 class _RatingCardState extends State<RatingCard> {
   UserService _userService = new UserService();
-  UserDetail? _userDetail = null;
+  UserDetail? _userDetail;
   bool _isLoading = true;
 
   @override

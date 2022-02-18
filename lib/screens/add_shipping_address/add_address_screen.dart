@@ -51,7 +51,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
     setState(() {
       _location.value =
-          '${street}, ${name}, ${subLocality}, ${province}, ${postalCode}, ${country}';
+          '$street, $name, $subLocality, $province, $postalCode, $country';
       _isLoading = false;
     });
 

@@ -76,7 +76,7 @@ class NotificationService {
 
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/subscription/token'),
+      Uri.parse('$basedUri/subscription/token'),
       headers: requestHeaders,
       body: jsonEncode({
         'registrationToken': registrationToken,
@@ -95,7 +95,7 @@ class NotificationService {
     NotificationSubscription? subscription;
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/subscription/user/${currentUser.id}'),
+      Uri.parse('$basedUri/subscription/user/${currentUser.id}'),
       headers: requestHeaders,
     );
 
@@ -112,7 +112,7 @@ class NotificationService {
   ) async {
     // Call Api
     await http.post(
-      Uri.parse('${basedUri}/subscription/user/${currentUser.id}'),
+      Uri.parse('$basedUri/subscription/user/${currentUser.id}'),
       headers: requestHeaders,
       body: jsonEncode({
         'registrationToken': registrationToken,

@@ -11,7 +11,6 @@ import 'package:haiya_client/shared/provider/chat_provider.dart';
 import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {

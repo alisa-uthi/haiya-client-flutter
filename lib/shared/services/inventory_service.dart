@@ -1,13 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/operation_time.dart';
 import 'package:haiya_client/shared/models/pharmacy.dart';
 import 'package:haiya_client/shared/models/product.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
-import 'package:haiya_client/shared/services/user_service.dart';
 import 'package:http/http.dart' as http;
 
 class InventoryService {
@@ -45,11 +43,11 @@ class InventoryService {
   }
 
   Future<Pharmacy?> getPharmacyById(int pharmacyId) async {
-    Pharmacy? result = null;
+    Pharmacy? result;
 
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/pharmacy/${pharmacyId}'),
+      Uri.parse('$basedUri/pharmacy/$pharmacyId'),
       headers: requestHeaders,
     );
 
@@ -69,7 +67,7 @@ class InventoryService {
 
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/pharmacy'),
+      Uri.parse('$basedUri/pharmacy'),
       headers: requestHeaders,
       body: jsonEncode({
         'latitude': latlng.latitude,
@@ -93,7 +91,7 @@ class InventoryService {
 
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/pharmacy/nearest'),
+      Uri.parse('$basedUri/pharmacy/nearest'),
       headers: requestHeaders,
       body: jsonEncode({
         'latitude': latlng.latitude,
@@ -136,7 +134,7 @@ class InventoryService {
   Future<List<Product>> getProductByCategory(int categoryId) async {
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/product/category/${categoryId}'),
+      Uri.parse('$basedUri/product/category/$categoryId'),
       headers: requestHeaders,
     );
 
@@ -159,7 +157,7 @@ class InventoryService {
     // Call Api
     var response = await http.get(
       Uri.parse(
-          '${basedUri}/product/catalog/${pharmacyId}/category/${categoryId}'),
+          '$basedUri/product/catalog/$pharmacyId/category/$categoryId'),
       headers: requestHeaders,
     );
 
@@ -178,7 +176,7 @@ class InventoryService {
   Future<List<Product>> getProductByPharmacy(int pharmacyId) async {
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/product/catalog/${pharmacyId}'),
+      Uri.parse('$basedUri/product/catalog/$pharmacyId'),
       headers: requestHeaders,
     );
 
@@ -197,7 +195,7 @@ class InventoryService {
   Future<Pharmacy?> getPharmacyByName(String pharmacyName) async {
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/pharmacy?name=${pharmacyName}'),
+      Uri.parse('$basedUri/pharmacy?name=$pharmacyName'),
       headers: requestHeaders,
     );
 

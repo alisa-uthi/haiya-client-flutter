@@ -23,7 +23,7 @@ class OperationTime {
     time = time.substring(0, time.length - 3);
 
     if (time.substring(0, 2).endsWith(':')) {
-      time = '0${time}';
+      time = '0$time';
     }
 
     return time;

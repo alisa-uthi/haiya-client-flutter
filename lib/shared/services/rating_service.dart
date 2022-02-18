@@ -18,7 +18,7 @@ class RatingService {
 
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/pharmacy/${pharmacyId}'),
+      Uri.parse('$basedUri/pharmacy/$pharmacyId'),
       headers: requestHeaders,
     );
 
@@ -39,7 +39,7 @@ class RatingService {
   }) async {
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/pharmacy'),
+      Uri.parse('$basedUri/pharmacy'),
       headers: requestHeaders,
       body: jsonEncode({
         'patientId': currentUser.id,
@@ -63,7 +63,7 @@ class RatingService {
   }) async {
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/driver'),
+      Uri.parse('$basedUri/driver'),
       headers: requestHeaders,
       body: jsonEncode({
         'patientId': currentUser.id,
@@ -87,7 +87,7 @@ class RatingService {
   }) async {
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/pharmacistId'),
+      Uri.parse('$basedUri/pharmacistId'),
       headers: requestHeaders,
       body: jsonEncode({
         'patientId': currentUser.id,

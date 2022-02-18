@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:haiya_client/constants.dart';
 import 'package:haiya_client/screens/cart/wait_cart_from_pharmacy.dart';
 import 'package:haiya_client/screens/home/home_screen.dart';
-import 'package:haiya_client/screens/product_list/product_list_screen.dart';
-import 'package:haiya_client/shared/models/category.dart';
 import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:haiya_client/shared/provider/request_consult_provider.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';

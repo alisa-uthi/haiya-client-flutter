@@ -20,7 +20,7 @@ class IssueService {
   }) async {
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/user/${currentUser.id}'),
+      Uri.parse('$basedUri/user/${currentUser.id}'),
       headers: requestHeaders,
       body: jsonEncode({
         'title': issue,

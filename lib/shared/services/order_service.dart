@@ -36,7 +36,7 @@ class OrderService {
 
     // Call Api
     var response = await http.post(
-      Uri.parse('${basedUri}/user/${currentUser.id}'),
+      Uri.parse('$basedUri/user/${currentUser.id}'),
       headers: requestHeaders,
       body: jsonEncode({
         'deliveryAddress': deliveryAddress,
@@ -57,7 +57,7 @@ class OrderService {
   Future<List<Order>> getPurchaseHistories() async {
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/user/${currentUser.id}'),
+      Uri.parse('$basedUri/user/${currentUser.id}'),
       headers: requestHeaders,
     );
 
@@ -73,7 +73,7 @@ class OrderService {
   Future<Order?> getOrderById(int id) async {
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/${id}'),
+      Uri.parse('$basedUri/$id'),
       headers: requestHeaders,
     );
 
@@ -90,7 +90,7 @@ class OrderService {
     // Call Api
     var response = await http.get(
       Uri.parse(
-          '${basedUri}/user/${currentUser.id}/orderStatus/${orderStatus}'),
+          '$basedUri/user/${currentUser.id}/orderStatus/$orderStatus'),
       headers: requestHeaders,
     );
 
@@ -106,7 +106,7 @@ class OrderService {
   Future<List<Delivery>> getDeliveryByOrderId(int orderId) async {
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/${orderId}/delivery'),
+      Uri.parse('$basedUri/$orderId/delivery'),
       headers: requestHeaders,
     );
 
@@ -124,7 +124,7 @@ class OrderService {
   Future<bool> getCartFromPharmacy() async {
     // Call Api
     var response = await http.get(
-      Uri.parse('${basedUri}/cart/?userId=${currentUser.id}'),
+      Uri.parse('$basedUri/cart/?userId=${currentUser.id}'),
       headers: requestHeaders,
     );
 
@@ -150,7 +150,7 @@ class OrderService {
   Future<void> updateCartFromPharmacyStatus() async {
     // Call Api
     if (cartId != 0) {
-      var response = await http.patch(Uri.parse('${basedUri}/cart/${cartId}'),
+      var response = await http.patch(Uri.parse('$basedUri/cart/$cartId'),
           headers: requestHeaders,
           body: jsonEncode({
             'flagDelete': true,

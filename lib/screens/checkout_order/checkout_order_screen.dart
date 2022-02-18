@@ -47,7 +47,7 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
       location = await _userService.getCurrentLocation();
     } else {
       Address result =
-          await userAddress.firstWhere((addr) => addr.isDeliveryAddress == 'Y');
+          userAddress.firstWhere((addr) => addr.isDeliveryAddress == 'Y'); //await
       location = result.location;
       setState(() => _addressName = result.name);
     }

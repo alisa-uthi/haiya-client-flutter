@@ -49,7 +49,7 @@ class _GenderRadioState extends State<GenderRadio> {
               top: kDefaultPadding / 2,
             ),
             child: Text(
-              "Gender",
+              "Gender*",
               style: TextStyle(color: kGreyColor),
             ),
           ),
