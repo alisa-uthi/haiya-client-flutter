@@ -9,7 +9,7 @@ import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:http/http.dart' as http;
 
 class OrderService {
-  var basedUri = 'http://localhost:8080/api/order';
+  var basedUri = 'http://10.0.2.2:8080/api/order';
 
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json; charset=utf-8',
