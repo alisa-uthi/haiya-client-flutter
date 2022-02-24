@@ -26,6 +26,7 @@ class OrderItem extends StatelessWidget {
           PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => OrderDetailScreen(
               orderId: order.id,
+              isPlaced: order.orderStatus == 'CREATED' ? true : false,
               isDelivering: order.orderStatus == 'PICKED_UP' ? true : false,
               isCompleted: order.orderStatus == 'DELIVERED' ? true : false,
             ),

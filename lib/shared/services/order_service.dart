@@ -9,7 +9,7 @@ import 'package:haiya_client/shared/models/user_detail.dart';
 import 'package:http/http.dart' as http;
 
 class OrderService {
-  var basedUri = 'http://10.0.2.2:8080/api/order';
+  var basedUri = 'http://localhost:8080/api/order';
 
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json; charset=utf-8',
@@ -54,6 +54,19 @@ class OrderService {
     return false;
   }
 
+  Future<bool> cancelOrder(int id) async {
+    // Call Api
+    var response = await http.patch(Uri.parse('$basedUri/$id/status'),
+        headers: requestHeaders, body: jsonEncode({'status': 'CANCELLED'}));
+
+    // Handle response
+    if (response.statusCode >= 200 && response.statusCode < 205) {
+      return true;
+    }
+
+    return false;
+  }
+
   Future<List<Order>> getPurchaseHistories() async {
     // Call Api
     var response = await http.get(
@@ -89,8 +102,7 @@ class OrderService {
   Future<List<Order>> getOrdersByOrderStatus(String orderStatus) async {
     // Call Api
     var response = await http.get(
-      Uri.parse(
-          '$basedUri/user/${currentUser.id}/orderStatus/$orderStatus'),
+      Uri.parse('$basedUri/user/${currentUser.id}/orderStatus/$orderStatus'),
       headers: requestHeaders,
     );
 

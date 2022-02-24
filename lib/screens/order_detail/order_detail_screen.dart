@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:haiya_client/screens/my_orders/my_orders_screen.dart';
 import 'package:haiya_client/screens/rate_driver/rate_driver_screen.dart';
 import 'package:haiya_client/screens/rate_pharmacy/rate_pharmacy_screen.dart';
 import 'package:haiya_client/shared/models/order.dart';
 import 'package:haiya_client/shared/services/order_service.dart';
 import 'package:haiya_client/shared/widgets/custom_btn.dart';
+import 'package:haiya_client/shared/widgets/custom_snackbar.dart';
 import 'package:haiya_client/shared/widgets/loader.dart';
 
 import '../../constants.dart';
@@ -16,12 +18,14 @@ class OrderDetailScreen extends StatefulWidget {
   static final routeName = '/order-detail';
 
   final int orderId;
+  final bool isPlaced;
   final bool isDelivering;
   final bool isCompleted;
 
   const OrderDetailScreen({
     Key? key,
     required this.orderId,
+    this.isPlaced = false,
     this.isDelivering = false,
     this.isCompleted = false,
   }) : super(key: key);
@@ -44,6 +48,28 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   Future<dynamic> _fetchPurchaseHistory() async {
     var order = await _orderService.getOrderById(widget.orderId);
     setState(() => {_order = order, _isLoading = false});
+  }
+
+  Future<dynamic> _cancelOrder(BuildContext context) async {
+    bool isCancelSuccess = await _orderService.cancelOrder(widget.orderId);
+    if (isCancelSuccess) {
+      CustomSnackBar.buildSnackbar(
+        context,
+        'Your order is cancelled.',
+      );
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) => MyOrdersScreen(),
+          transitionDuration: Duration(seconds: 0),
+        ),
+      );
+    } else {
+      CustomSnackBar.buildSnackbar(
+        context,
+        'Unable to cancel your order. Please try again.',
+      );
+    }
   }
 
   @override
@@ -83,6 +109,20 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       PaymentMethodSection(
                         paymentMethod: _order!.paymentMethod,
                       ),
+                      if (widget.isPlaced)
+                        Column(
+                          children: [
+                            SizedBox(height: kDefaultPadding * 1.5),
+                            CustomBtn(
+                              text: "Cancel Order",
+                              boxColor: kPrimaryColor,
+                              onPressed: () {
+                                _cancelOrder(context);
+                              },
+                              textColor: Colors.white,
+                            ),
+                          ],
+                        ),
                       if (widget.isDelivering)
                         DeliveryTrackingButton(
                           orderId: widget.orderId,
